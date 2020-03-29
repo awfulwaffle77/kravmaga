@@ -1,0 +1,50 @@
+.loginBox{
+    margin-top:25%;
+    width: 50%;
+    position: relative;
+    margin-left: 25.5%;
+    margin-right: 25%;
+    margin-bottom: 25%;
+    align-content: center;
+}
+
+form.loginBox{
+    margin-left: 25%;
+}
+
+input[type=text],input[type=password]{
+    width: 100%;
+}
+
+div.intro{
+    margin-top: 4vh;
+    margin-left: 5.8vw;
+    margin-right: 5.8vw;
+}
+
+div.wrapper{
+    height: 1000px;
+    width: 100%;
+    clear: both;
+}
+
+h1{
+    color: #e25822;
+    font-family: "Muli";
+    text-shadow: 3px 3px #d2d2d2, -3px 3px #f2f2f2;
+    font-size: 5.9vh;
+}
+
+p{
+    font-size: 2.4vh;
+}
+
+.BeforeScroll
+{
+    display: none;
+}
+
+.AfterScroll
+{
+    visibility: visible;
+}

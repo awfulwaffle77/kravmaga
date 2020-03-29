@@ -1,0 +1,72 @@
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Krav Maga - Autoaparare si autocontrol</title>
+    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module" src="js/js-cookie/js.cookie.js"></script>
+    <script src="js/handler.js"></script>
+    <script src="js/windowChanges.js"></script>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/extended.css" />
+</head>
+
+<header>
+    <ul class="navbar sticky">
+        <li class="navbar"><a class="navbar" href="index.html">Home</a></li>
+        <li class="navbar"><a class="navbar active" href="login.html">Login</a></li>
+        <li><a class="navbar" href="index.html">
+            <span class="logo_text">Krav</span>
+            <img class="logo_img" src="img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
+            <span class="logo_text">Maga</span>
+        </a></li>
+        <li class="navbar"><a class="navbar" href="contact.asp">Contact</a></li>
+        <li class="navbar"><a class="navbar" href="about.asp">About</a></li>
+    </ul>
+</header>
+
+<body>
+
+<div class="loginBox">
+    <span> SIGN UP NOW</span>
+    <form class="loginBox" action="#" method="post">
+        <label for="uname">Nume:</label><br>
+        <input type="text" id="signup_nume" name="nume"><br>
+
+        <label for="passwd">Prenume:</label><br>
+        <input type="text" id="signup_prenume" name="prenume"><br><br>
+
+        <label for="date">Data inrolare:</label><br>
+        <input type="date" id="signup_data" name="data"><br><br>
+
+        <label for="passwd">Utilizator:</label><br>
+        <input type="text" id="signup_username" name="username"><br><br>
+        <label id="errMsg"></label>
+
+        <label for="passwd">Parola:</label><br>
+        <input type="password" id="signup_passwd" name="passwd"><br><br>
+        <label id="errMsg"></label>
+
+        <label for="passwd">Check Parola:</label><br>
+        <input type="password" name="passwd"><br><br>
+
+        // TODO: Aici se va face query pe baza de date ca sa se poata lua cate sali si ce centuri exista
+        <label for="passwd">ID Sala:</label><br>
+        <input type="number" name="passwd"><br><br>
+
+        <label for="passwd">Check Parola:</label><br>
+        <input type="password" name="passwd"><br><br>
+
+        <input type="button" value="Confirm" id="signupConfirm">
+    </form>
+</div>
+
+</body>
+</html>

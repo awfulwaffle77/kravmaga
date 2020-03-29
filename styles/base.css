@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+/* font-family: 'Muli', sans-serif; */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Muli&display=swap');
+/* font-family: 'Fira Sans', sans-serif; */
+
+body{
+    background-color: #f2f2f2;
+    padding: 0;
+}
+
+body.withVid{
+    margin-top:0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+header{
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    padding-bottom: 0px;
+}
+
+ul.navbar{
+    list-style-type: none;
+    font-size: 20px;
+    padding: 0;
+    margin-top: 0px;
+    flex: 1;
+    /*margin: auto !important; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+    transition: 0.5s;
+}
+
+ul.navbar:hover{
+    background: whitesmoke;
+}
+
+.sticky{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+
+li.navbar{
+    float: left;
+    display: block;
+    text-decoration: none;
+    color:white;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+a.navbar:visited{
+    text-decoration: none;
+}
+
+a.navbar,a.navbar:hover{
+    display: block;
+    padding: 0px;
+    text-decoration: none;
+    color: #b6333c;
+    margin-top: 0px;
+    margin-right: 8px;
+    font-family: "Muli";
+    position: relative;
+}
+
+a.active{
+    display: block;
+    padding: 0px;
+    border: 10px #99351a;
+    text-decoration: none;
+    margin-top: 0px;
+    margin-right: 8px;
+    color: #3c000e;
+    font-family: "Muli";
+    font-size: x-large;
+    font-weight: bold;
+}
+
+li.active{
+    display: block;
+    padding: 8px;
+    border: 10px #99351a;
+    text-decoration: none;
+    margin-top: 0px;
+    color: #3c000e;
+    font-family: "Muli";
+    font-size: x-large;
+    font-weight: bold;
+}
+
+div.logo{
+    margin: auto;
+    text-align: center;
+    vertical-align: center;
+    color: #f15025;
+    display: flex;
+    align-items:center;
+}
+
+.logo_text{
+    font-size: 40px;
+}
+
+a.logo:hover,a.logo:visited,a.logo:active,a.logo:link{
+    flex: 1;
+    text-decoration: none;
+    margin-top: 10px;
+    color: #99351a;
+    font-family: "Muli";
+}
+
+.logo_img{
+    width: 50px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+.motto_box{
+    font-family: "Fira Sans";
+    color: #99351a;
+    font-size: 150%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-column: 2/3;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.video{
+    position: relative;
+    margin-top: 0;
+    padding-top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+    transition: background 0.5s ease 0s;
+    object-fit: fill;
+}
