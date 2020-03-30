@@ -14,6 +14,7 @@ session_start();
     <script type="module" src="js/js-cookie/js.cookie.js"></script>
     <script src="js/handler.js"></script>
     <script src="js/windowChanges.js"></script>
+    <script src="js/fieldChecker.js"></script>
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/extended.css" />
 </head>
@@ -34,7 +35,7 @@ session_start();
 
 <body>
 
-<div class="loginBox">
+<div class="signupBox">
     <span> SIGN UP NOW</span>
     <form class="loginBox" action="#" method="post">
         <label for="uname">Nume:</label><br>
@@ -48,21 +49,24 @@ session_start();
 
         <label for="passwd">Utilizator:</label><br>
         <input type="text" id="signup_username" name="username"><br><br>
-        <label id="errMsg"></label>
+        <label id="signup_errMsg"></label>
 
         <label for="passwd">Parola:</label><br>
         <input type="password" id="signup_passwd" name="passwd"><br><br>
-        <label id="errMsg"></label>
 
         <label for="passwd">Check Parola:</label><br>
         <input type="password" name="passwd"><br><br>
 
         // TODO: Aici se va face query pe baza de date ca sa se poata lua cate sali si ce centuri exista
         <label for="passwd">ID Sala:</label><br>
-        <input type="number" name="passwd"><br><br>
+        <select id="signup_sala">
+           <option value="1">1</option>
+        </select><br><br>
 
-        <label for="passwd">Check Parola:</label><br>
-        <input type="password" name="passwd"><br><br>
+        <label for="passwd">ID Centura:</label><br>
+        <select id="signup_centura">
+            <option value="1">4</option>
+        </select><br><br>
 
         <input type="button" value="Confirm" id="signupConfirm">
     </form>
