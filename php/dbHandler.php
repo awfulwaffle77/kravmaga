@@ -86,8 +86,8 @@ function checkUsernameExists($username){
     $sqlcode = "SELECT id_utilizator from utilizatori WHERE utilizator='$username'";
     $result = mysqli_query($conn, $sqlcode);
     if($result->num_rows != 0)
-       return true;
-    return false;
+       return false;
+    return true;
 }
 
 class JSON_Response{
@@ -154,20 +154,25 @@ if(isset($_POST['checkPrivilege'])) {
                 echo(json_encode($resp));
             }
         }
-        else if(existsInHashArray($_COOKIE['currentHash'])){ // user is admin and got his hash as cookie
-            $resp = new JSON_Response();
-            $resp->message = "Utilizatorul este admin";
-            $resp->code = isAdmin;
+        else if(isset($_COOKIE['currentHash'])) {
+            if (existsInHashArray($_COOKIE['currentHash'])) { // user is admin and got his hash as cookie
+                $resp = new JSON_Response();
+                $resp->message = "Utilizatorul este admin";
+                $resp->code = isAdmin;
 
-            echo(json_encode($resp));
-        }
-        else{ // user is not admin
-            $resp = new JSON_Response();
-            $resp->message = "Utilizatorul nu este admin";
-            $resp->code = regularUser;
+                echo(json_encode($resp));
 
-            echo(json_encode($resp));
+            }
+        else{ // user is not admin // SOME MAD ERROR AT 157
+                $resp = new JSON_Response();
+                $resp->message = "Utilizatorul nu este admin";
+                $resp->code = regularUser;
+
+                echo(json_encode($resp));
+            }
         }
+        else
+            throw new Exception("$_COOKIE[currentHash] is not set. Please login??");
     }
     catch(Exception $e){
         echo(json_encode($e->getMessage()));
@@ -208,7 +213,7 @@ if(isset($_POST['signup'])) {
 }
 
 if(isset($_POST['checkUsernameAvailable'])){
-    if(checkUsernameExists($_POST['checkUsernameAvailable'])){
+    if(checkUsernameExists($_POST['username'])){
         $resp = new JSON_Response();
         $resp->code = usernameAvailable;
         $resp->message = msg_usernameAvailable;
