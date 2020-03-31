@@ -19,6 +19,8 @@ define("msg_userInsert_failed_userExists", "Utilizatorul exista deja");
 define("msg_usernameAvailable","Username poate fi folosit");
 define("msg_usernameUnavailable","Username-ul este deja in uz");
 
+define("msg_getSignupInfo_failed","Nu am putut gasi ID_SALA, ID_CENTURA");
+
 $dbServername = 'localhost';
 $dbAdmin = 'root';
 $dbPassword = '';
@@ -48,7 +50,7 @@ function initHashArray(){
     }
 }
 
-function existsInHashArray($userhash){
+function existsInHashArray($userhash){ // IF HASH REPRESENTS AN ADMIN
     global $adminHashArray;
 
     foreach($adminHashArray as $elem){
@@ -95,6 +97,11 @@ class JSON_Response{
     public $code = -1;
 }
 
+class centuriSali{
+    public $sali = array();
+    public $centuri = array();
+}
+
 initHashArray();
 // TODO: Add cookie hash when logging
 if(isset($_POST['login'])) { // if login property is set, try login
@@ -121,7 +128,7 @@ if(isset($_POST['login'])) { // if login property is set, try login
             if($_SESSION['privilege'] == SQLAdminCode)
                 $_SESSION['admin'] = $uname;
 
-            $_COOKIE['currentHash'] = mysqli_fetch_assoc($result)['hash'];
+            setcookie('currentHash',mysqli_fetch_assoc($result)['hash'],time() + 60 * 60 * 24 * 365, '/');
 
             echo(json_encode($resp));
         } else { // Utilizator inexistent
@@ -181,6 +188,8 @@ if(isset($_POST['checkPrivilege'])) {
 
 if(isset($_POST['signup'])) {
     try {
+        if(existsInHashArray($_POST['currentHash']))
+
         $nume = $_POST['nume'];
         $username = $_POST['username'];
         $prenume = $_POST['prenume'];
@@ -228,4 +237,31 @@ if(isset($_POST['checkUsernameAvailable'])){
         echo(json_encode($resp));
     }
 
+}
+
+if(isset($_GET['getSignupInfo'])){
+    try {
+        $resp = new centuriSali();
+
+        $sqlcode = "SELECT ID_CENTURA, CULOARE FROM centuri";
+        $result = mysqli_query($conn,$sqlcode);
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+            array_push($resp->centuri,$row);
+        }
+        if($result->num_rows == 0)
+            throw new Exception(msg_getSignupInfo_failed);
+
+        $sqlcode = "SELECT NUME, ADRESA FROM sali";
+        $result = mysqli_query($conn,$sqlcode);
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+            array_push($resp->sali,$row);
+        }
+        if($result->num_rows == 0)
+            throw new Exception(msg_getSignupInfo_failed);
+
+        echo(json_encode($resp));
+    }
+    catch (Exception $e){
+        echo(json_encode($e->getMessage()));
+    }
 }

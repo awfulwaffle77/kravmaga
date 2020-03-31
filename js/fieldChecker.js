@@ -1,29 +1,49 @@
-$(document).ready(function () {
+// IMPORT SOME FIELD CHECK FUNCTIONS FROM HERE. GOOD PRACTICE OR NOT?
 
-    const usernameAvailable = 300;
-    const usernameUnavailable = 301;
+export function signupBoxInfoAdd(jsonResponse) { // ADD ID_SALA AND ID_CENTURA
+    let parsed = JSON.parse(jsonResponse);
 
-    $("#signup_username").change(function () {
-        let username = $("#signup_username").val();
+    for(let i = 0; i < parsed['sali'].length; i++) {
+        let opt = new Option(parsed.sali[i].NUME+', '+parsed.sali[i].ADRESA,i);
+        $(opt).html(parsed.sali[i].NUME+', '+parsed.sali[i].ADRESA);
+        $("#signup_sala").append(opt);
+    }
+    for(let i = 0; i < parsed.centuri.length; i++){
+        let opt = new Option(parsed.centuri[i].CULOARE, i);
+        $(opt).html(parsed.centuri[i].CULOARE);
+        $("#signup_centura").append(opt);
+    }
+}
 
-        $.ajax({
-            url: 'php/dbHandler.php',
-            method: 'POST',
-            cahce:false,
-            data: {
-                checkUsernameAvailable: 1,
-                username: username
-            },
-            complete: function (response) { // success is not working; using complete as alternative
-                // TELL ME ABOUT THAT USERNAME. IS IT AVAILABLE?
-                parsedResponse = JSON.parse(response.responseText);
-                if(parsedResponse.code === usernameUnavailable)
-                    $("#signup_errMsg").text("Username deja existent");
-                else
-                    $("#signup_errMsg").text("");
-                // TODO: Daca signup_errMsg a fost setat, pune-l gol. Nu merge asta.
-            },
-            dataType: 'text'
-        });
-    })
-});
+export function handleUserUnavailable(){
+    $("#signup_username_err").text("Username deja existent");
+}
+
+export function handleUserAvailable() {
+    $("#signup_username_err").text("");
+}
+
+export function isFieldCompleted(fieldName){
+    let x = $(fieldName).val();
+   if($(fieldName).val() === "")
+       return false;
+   return true;
+}
+
+export function setFieldsToDefault() {
+    $("[id$='_err']").val(""); // ALL FIELDS ENDING IN "_err" WILL RESET
+}
+
+export function mustCompleteField(fieldName) { // APPEND "_err" AND SHOW THE ERROR MESSAGE
+    console.log("New field who dis" + fieldName);
+    // TODO: THIS FUNCTION
+    let errLabel = fieldName + "_err";
+    $(errLabel).text("Acest camp trebuie completat");
+}
+
+export function handlePasswordsNotMatch(){
+    // TODO: Handle passwords not matching by printing the appropiate message
+    $("#signup_passwdCheck_err").val("Parolele nu coincid");
+}
+
+

@@ -12,9 +12,8 @@ session_start();
     <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module" src="js/js-cookie/js.cookie.js"></script>
-    <script src="js/handler.js"></script>
-    <script src="js/windowChanges.js"></script>
-    <script src="js/fieldChecker.js"></script>
+    <script type="module" src="js/fieldChecker.js"></script>
+    <script type="module" src="js/handler.js"></script>
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/extended.css" />
 </head>
@@ -22,7 +21,7 @@ session_start();
 <header>
     <ul class="navbar sticky">
         <li class="navbar"><a class="navbar" href="index.html">Home</a></li>
-        <li class="navbar"><a class="navbar active" href="login.html">Login</a></li>
+        <li class="navbar"><a class="navbar active" href="login.html" id="loginProfile">Login</a></li>
         <li><a class="navbar" href="index.html">
             <span class="logo_text">Krav</span>
             <img class="logo_img" src="img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
@@ -35,37 +34,49 @@ session_start();
 
 <body>
 
-<div class="signupBox">
-    <span> SIGN UP NOW</span>
-    <form class="loginBox" action="#" method="post">
-        <label for="uname">Nume:</label><br>
-        <input type="text" id="signup_nume" name="nume"><br>
+<div id="signupBox">
+    <!-- User type="search" due to browsers not taking into account autocomplete-->
+    <form class="loginBox" action="#" method="post" autocomplete="off">
 
-        <label for="passwd">Prenume:</label><br>
-        <input type="text" id="signup_prenume" name="prenume"><br><br>
+        <span> SIGN UP NOW</span><br><br>
+        <label for="uname">Nume:</label><br>
+        <input type="search" id="signup_nume" name="nume" placeholder="Nume">
+        <label id="signup_nume_err"></label>
+        <br><br>
+
+        <label for="prenume">Prenume:</label><br>
+        <input type="search" id="signup_prenume" name="prenume" placeholder="Prenume">
+        <label id="signup_nume_err"></label>
+       <br><br>
 
         <label for="date">Data inrolare:</label><br>
-        <input type="date" id="signup_data" name="data"><br><br>
+        <input type="date" id="signup_data" name="data">
+        <label id="signup_nume_err"></label>
+        <br><br>
 
-        <label for="passwd">Utilizator:</label><br>
-        <input type="text" id="signup_username" name="username"><br><br>
-        <label id="signup_errMsg"></label>
+        <label for="username">Utilizator:</label><br>
+        <input type="search" id="signup_username" name="username" autocomplete="off" placeholder="Username">
+        <label id="signup_username_err"></label>
+        <br><br>
 
         <label for="passwd">Parola:</label><br>
-        <input type="password" id="signup_passwd" name="passwd"><br><br>
+        <input type="search" id="signup_passwd" name="passwd" autocomplete="new-password" placeholder="Parola">
+        <label id="signup_passwd_err"></label>
+        <br><br>
 
         <label for="passwd">Check Parola:</label><br>
-        <input type="password" name="passwd"><br><br>
+        <input type="search" id="signup_passwdCheck" name="passwd" placeholder="Reintroduceti parola">
+        <label id="signup_passwdCheck_err"></label>
+        <br><br>
 
-        // TODO: Aici se va face query pe baza de date ca sa se poata lua cate sali si ce centuri exista
         <label for="passwd">ID Sala:</label><br>
         <select id="signup_sala">
-           <option value="1">1</option>
+            <option>-- Alegeti o sala --</option>
         </select><br><br>
 
         <label for="passwd">ID Centura:</label><br>
         <select id="signup_centura">
-            <option value="1">4</option>
+            <option> -- Alegeti o centura --</option>
         </select><br><br>
 
         <input type="button" value="Confirm" id="signupConfirm">

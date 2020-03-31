@@ -1,10 +1,13 @@
+import {handleUserAvailable, handleUserUnavailable, signupBoxInfoAdd, mustCompleteField, isFieldCompleted, handlePasswordsNotMatch,
+setFieldsToDefault } from "./fieldChecker.js";
+
 $(document).ready(function(){
     // DECLARING VARIABLES
     const loginRedirectURL = "https://localhost/kravmaga_v2/";
     const adminProfileRedirect = "https://localhost/kravmaga_v2/signup.html";
     const regularProfileRedirect = "https://localhost/kravmaga_v2/profile.html"; // Better option would be to use default anchor option (in php?)
     const signupSuccessRedirect = "https://localhost/kravmaga_v2/signupSuccess.html";
-    // TODO: Check if it possible to use default anchor
+    // TODO: Check if it possible to use default anchor. It is. Change this to getting the page with php
 
     // DECLARING LOGIN CODES (class JSON_Response from dbHandler.php has message and code)
     const code_correctCredentials = 1;
@@ -12,6 +15,9 @@ $(document).ready(function(){
     const code_isAdmin = 100;
     const code_isRegularUser = 101;
     const code_userInsert_good = 200;
+
+    const usernameAvailable = 300;
+    const usernameUnavailable = 301;
 
     // FUNCTIONS
     function interpretResponse(response) {
@@ -38,8 +44,7 @@ $(document).ready(function(){
     // PROFILE ANCHOR HANDLING
     if (Cookies.get('logged') === '1') { // If the cookie shows that the user is logged, the Login button is updated
         // Changing the name and href accordingly
-        $("#loginProfile").text('Profil').attr('href', 'profile.html').on('click',function (e) {
-            e.preventDefault();
+        $("#loginProfile").text('Profil').attr('href', '#').on('click',function (e) {
             // Checking where to redirect
             $.ajax(
                 {
@@ -54,19 +59,55 @@ $(document).ready(function(){
                     },
                     dataType: 'text'
                 });
-            e.preventDefault();
         });
     }
     // SIGNUP CONFIRM BUTTON CLICK
     $("#signupConfirm").on('click',function (e) {
         e.preventDefault();
-        let nume=$("#signup_nume").val();
+        // CHECKING FIELDS TO BE COMPLTED
+        let nume, username, passwd, id_centura, id_sala;
+        setFieldsToDefault();
+
+        if(!isFieldCompleted("#signup_nume")) {
+            mustCompleteField("#signup_nume");
+            return;
+        }
+        else
+            nume = $("#signup_nume").val();
+
         let prenume= $("#signup_prenume").val();
-        let username = $("#signup_username").val();
-        let passwd = $("#signup_passwd").val();
+
+        if(!isFieldCompleted("#signup_username")) {
+            mustCompleteField("#signup_username");
+            return;
+        }
+        else
+           username = $("#signup_username").val();
+
+        if(!isFieldCompleted("#signup_passwd")) {
+            mustCompleteField("#signup_passwd");
+            return;
+        }
+        else
+            passwd = $("#signup_passwd").val();
+
         let data = $("#signup_data").val();
-        let id_sala = $("#signup_sala option:selected").text();
-        let id_centura = $("#signup_centura option:selected").text();
+
+        if($("#signup_sala").val === "-- Alegeti o sala --") {
+            mustCompleteField("#signup_sala");
+            return;
+        }
+        else
+            id_sala = $("#signup_sala option:selected").text();
+
+        if($("#signup_centura").val() === "-- Alegeti o centura --") {
+            mustCompleteField("#signup_centura");
+            return;
+        }
+        else
+            id_centura = $("#signup_centura option:selected").text();
+
+
         $.ajax(
             {
                 url: 'php/dbHandler.php',
@@ -79,11 +120,12 @@ $(document).ready(function(){
                     passwd: passwd,
                     date: data,
                     id_sala: id_sala,
-                    id_centura: id_centura
+                    id_centura: id_centura,
+                    currentHash: Cookies.get("currentHash")
                 },
                 complete: function (response) { // success is not working; using complete as alternative
-                    console.log(response.responseText);
-                    //interpretResponse(JSON.parse(response.responseText));
+                    //console.log(response.responseText);
+                    interpretResponse(JSON.parse(response.responseText));
                 },
                 dataType: 'text'
             })
@@ -114,6 +156,67 @@ $(document).ready(function(){
                 }
             );
         }
-    })
+    });
+    // SIGNUP
+    if($("#signupBox").length){ // If element exists on page; If I am on signup.html
+        // DO SQL FETCH OF ID_SALA AND ID_CENTURA
+        $.ajax({
+            url:'php/dbHandler.php',
+            method: 'GET',
+            data:{
+                getSignupInfo: 1
+            },
+            complete: function (response) {
+                signupBoxInfoAdd(response.responseText);
+            }
+        });
+
+        // SET MAX SIGNUP DATE TO TODAY
+        let dateToday = new Date();
+
+        let year = dateToday.getFullYear();
+        let month = dateToday.getMonth() + 1;
+        let day = dateToday.getDate();
+
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+
+        let minDate= year + '-' + month + '-' + day;
+
+        $("#signup_data").attr('max',minDate).val(minDate);
+    }
+    // CHECK IF USERNAME IS AVAILABLE
+    $("#signup_username").change(function () { // CHECK IF CURRENT USERNAME IS AVAILABLE
+        let username = $("#signup_username").val();
+
+        $.ajax({
+            url: 'php/dbHandler.php',
+            method: 'POST',
+            cahce:false,
+            data: {
+                checkUsernameAvailable: 1,
+                username: username
+            },
+            complete: function (response) { // success is not working; using complete as alternative
+                // TELL ME ABOUT THAT USERNAME. IS IT AVAILABLE?
+                let parsedResponse = JSON.parse(response.responseText);
+                if(parsedResponse.code === usernameUnavailable)
+                    handleUserUnavailable();
+                else if(parsedResponse.code === usernameAvailable)
+                    handleUserAvailable();
+                else{
+                    console.log(response.responseText);
+                }
+            },
+            dataType: 'text'
+        });
+    });
+    // CHECK IF PASSWORDS MATCH
+    $("#signup_passwdCheck").change(function () {
+        if($("#signup_passwd").val() !== $("#signup_passwdCheck").val())
+            handlePasswordsNotMatch();
+    });
 });
 
