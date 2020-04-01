@@ -7,8 +7,8 @@ Note: Currently, PHP does not return a webpage and redirects are handled in .js 
 **LOGIN**
  
  Checks the credentials with the database and sets a cookie named 'logged' to 1, to switch the Login text in 
- the menu. Sets a cookie named 'currentHash' to identify users. ~**SHOULD SWITCH THE 'logged' COOKIE TO USING 
- JUST THE HASH**.~
+ the menu. Sets a cookie named 'currentHash' to identify users. **SHOULD SWITCH THE 'logged' COOKIE TO USING 
+ JUST THE HASH**.
  
  **SIGNUP**
 
