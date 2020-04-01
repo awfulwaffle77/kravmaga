@@ -1,5 +1,5 @@
 import {handleUserAvailable, handleUserUnavailable, signupBoxInfoAdd, mustCompleteField, isFieldCompleted, handlePasswordsNotMatch,
-setFieldsToDefault } from "./fieldChecker.js";
+setFieldsToDefault, handlePasswordsMatch } from "./fieldChecker.js";
 
 $(document).ready(function(){
     // DECLARING VARIABLES
@@ -40,7 +40,25 @@ $(document).ready(function(){
         }
     }
 
+    function eventFire(el, etype){
+        if (el.fireEvent) {
+            el.fireEvent('on' + etype);
+        } else {
+            let evObj = document.createEvent('Events');
+            evObj.initEvent(etype, true, false);
+            el.dispatchEvent(evObj);
+        }
+    }
     // MAIN CODE
+    // HANDLE ENTER PRESS
+    $(document).on('keypress', function (e) {
+        // ON ENTER PRESS, DEPENDING ON PAGE, SUBMIT FORM
+        if($("#signupConfirm").length) // IF ELEMENT EXISTS
+        {
+            if(e.which == 13)
+                eventFire($("#signupConfirm"),'click');
+        }
+    });
     // PROFILE ANCHOR HANDLING
     if (Cookies.get('logged') === '1') { // If the cookie shows that the user is logged, the Login button is updated
         // Changing the name and href accordingly
@@ -213,10 +231,21 @@ $(document).ready(function(){
             dataType: 'text'
         });
     });
+    // CHECK IF PASSWORD HAS AT LEAST 4 CHARACTERS
+    $("#signup_passwd").change(function () {
+       let pattern = /[0-9a-bA-b]{4}/i;
+        let x = $(this).val();
+        if(!pattern.test($(this).val()))
+            $("#signup_passwd_err").text("Parola trebuie sa continta cel putin 4 caractere");
+        else
+            $("#signup_passwd_err").text("");
+    });
     // CHECK IF PASSWORDS MATCH
     $("#signup_passwdCheck").change(function () {
         if($("#signup_passwd").val() !== $("#signup_passwdCheck").val())
             handlePasswordsNotMatch();
+        else
+            handlePasswordsMatch();
     });
 });
 

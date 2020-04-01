@@ -42,8 +42,11 @@ export function mustCompleteField(fieldName) { // APPEND "_err" AND SHOW THE ERR
 }
 
 export function handlePasswordsNotMatch(){
-    // TODO: Handle passwords not matching by printing the appropiate message
-    $("#signup_passwdCheck_err").val("Parolele nu coincid");
+    $("#signup_passwdCheck_err").text("Parolele nu coincid");
+}
+
+export function handlePasswordsMatch() {
+    $("#signup_passwdCheck_err").text("");
 }
 
 

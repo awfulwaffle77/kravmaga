@@ -14,7 +14,7 @@ Note: Currently, PHP does not return a webpage and redirects are handled in .js 
 
 Has fields that must be completed(checked on submit), checks if passwords match, checks username to 
 be available, max date is today's date, fetches *centuri* and *sali* from the database and puts the elements
-available to select. **MUST ADD MININMUM PASSWORD REQUIREMENTS WITH REGEX.**
+available to select. ~MUST ADD MININMUM PASSWORD REQUIREMENTS WITH REGEX.~(added) 
 
 
 ## Communication between sever and client
