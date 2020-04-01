@@ -37,6 +37,8 @@ $(document).ready(function(){
             case code_userInsert_good:
                 window.location.replace(adminProfileRedirect);
                 break;
+            default:
+                break;
         }
     }
 
@@ -55,8 +57,8 @@ $(document).ready(function(){
         // ON ENTER PRESS, DEPENDING ON PAGE, SUBMIT FORM
         if($("#signupConfirm").length) // IF ELEMENT EXISTS
         {
-            if(e.which == 13)
-                eventFire($("#signupConfirm"),'click');
+            if(e.which == 13) // IF ENTER IS PRESSED
+                $("#signupConfirm").click(); // CLICK THE CONFIRM BUTTON
         }
     });
     // PROFILE ANCHOR HANDLING
@@ -137,8 +139,8 @@ $(document).ready(function(){
                     username: username,
                     passwd: passwd,
                     date: data,
-                    id_sala: id_sala,
-                    id_centura: id_centura,
+                    id_sala: id_sala.toString(),
+                    id_centura: id_centura.toString(),
                     currentHash: Cookies.get("currentHash")
                 },
                 complete: function (response) { // success is not working; using complete as alternative

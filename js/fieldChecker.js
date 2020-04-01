@@ -1,17 +1,22 @@
 // IMPORT SOME FIELD CHECK FUNCTIONS FROM HERE. GOOD PRACTICE OR NOT?
 
 export function signupBoxInfoAdd(jsonResponse) { // ADD ID_SALA AND ID_CENTURA
-    let parsed = JSON.parse(jsonResponse);
+    try {
+        let parsed = JSON.parse(jsonResponse);
 
-    for(let i = 0; i < parsed['sali'].length; i++) {
-        let opt = new Option(parsed.sali[i].NUME+', '+parsed.sali[i].ADRESA,i);
-        $(opt).html(parsed.sali[i].NUME+', '+parsed.sali[i].ADRESA);
-        $("#signup_sala").append(opt);
+        for (let i = 0; i < parsed['sali'].length; i++) {
+            let opt = new Option(parsed.sali[i].NUME + ', ' + parsed.sali[i].ADRESA, i);
+            $(opt).html(parsed.sali[i].NUME + ', ' + parsed.sali[i].ADRESA);
+            $("#signup_sala").append(opt);
+        }
+        for (let i = 0; i < parsed.centuri.length; i++) {
+            let opt = new Option(parsed.centuri[i].CULOARE, i);
+            $(opt).html(parsed.centuri[i].CULOARE);
+            $("#signup_centura").append(opt);
+        }
     }
-    for(let i = 0; i < parsed.centuri.length; i++){
-        let opt = new Option(parsed.centuri[i].CULOARE, i);
-        $(opt).html(parsed.centuri[i].CULOARE);
-        $("#signup_centura").append(opt);
+    catch(e){
+        console.log(e + "There was an error fetching info from the server");
     }
 }
 

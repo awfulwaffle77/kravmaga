@@ -37,11 +37,11 @@ function initHashArray(){
         $sql = "SELECT hash FROM utilizatori WHERE tip_utilizator=0";
         $result = mysqli_query($conn, $sql);
 
-        if ($result->num_rows > 1) {
+        if ($result->num_rows < 1) {
             throw new Exception("Nu a fost gasit niciun admin");
-        } else if ($result->num_rows > 1) {
+        } else {
             while ($row = mysqli_fetch_assoc($result)) {
-                array_push($adminHashArray, $row);
+                array_push($adminHashArray, $row['hash']);
             }
         }
     }
@@ -194,8 +194,8 @@ if(isset($_POST['signup'])) {
         $prenume = $_POST['prenume'];
         $passwd = hash("sha256", $_POST['passwd']);
         $date = $_POST['date'];
-        $id_sala = $_POST['id_sala'];
-        $id_centura = $_POST['id_centura'];
+        $id_sala = "'".$_POST['id_sala']."'";
+        $id_centura = "'".$_POST['id_centura']."'";
 
         $userHash = hash("sha256", $nume . $prenume . $username . $passwd);
 
@@ -215,6 +215,7 @@ if(isset($_POST['signup'])) {
 
     }
     catch (Exception $e){
+        $x = $e->getMessage();
         echo(json_encode($e->getMessage()));
     }
 

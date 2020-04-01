@@ -1,6 +1,7 @@
 # Kravmaga
 # ISSUES
-On Chrome, currentHash cookie modifies its value. Why?
+~On Chrome, currentHash cookie modifies its value. Why?~ It did not. Function `existsInHashArray` does not 
+populate the array.
 
 Note: Currently, PHP does not return a webpage and redirects are handled in .js files. Should be changed.
 # FEATURES
