@@ -103,7 +103,6 @@ class centuriSali{
 }
 
 initHashArray();
-// TODO: Add cookie hash when logging
 if(isset($_POST['login'])) { // if login property is set, try login
     $uname = $_POST['uname'];
     $passwd = hash("sha256",$_POST['passwd']);
@@ -245,7 +244,7 @@ if(isset($_GET['getSignupInfo'])){
 
         $sqlcode = "SELECT ID_CENTURA, CULOARE FROM centuri";
         $result = mysqli_query($conn,$sqlcode);
-        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){ // for every row fetched, push it into $resp->centuri
             array_push($resp->centuri,$row);
         }
         if($result->num_rows == 0)
