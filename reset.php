@@ -1,5 +1,6 @@
 <?php
-session_start();
+include 'php/mailAgent.php';
+resetPassword();
 ?>
 
 <!DOCTYPE html>
@@ -24,26 +25,13 @@ session_start();
         <li class="navbar"><a class="navbar" href="index.html">Home</a></li>
         <li class="navbar"><a class="navbar active" href="login.html">Login</a></li>
         <li><a class="navbar" href="index.html">
-            <span class="logo_text">Krav</span>
-            <img class="logo_img" src="img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
-            <span class="logo_text">Maga</span>
-        </a></li>
+                <span class="logo_text">Krav</span>
+                <img class="logo_img" src="img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
+                <span class="logo_text">Maga</span>
+            </a></li>
         <li class="navbar"><a class="navbar" href="contact.asp">Contact</a></li>
         <li class="navbar"><a class="navbar" href="about.asp">About</a></li>
     </ul>
 </header>
 
 <body>
-
-<div class="loginBox">
-    <form class="loginBox" action="#" method="post">
-        <input placeholder="Username" type="text" id="uname" name="uname"><br>
-        <input placeholder="Password" type="password" id="passwd" name="passwd"><br><br>
-
-        <label id="errMsg"></label>
-        <input type="button" value="Submit" id="loginSubmit">
-    </form>
-</div>
-
-</body>
-</html>

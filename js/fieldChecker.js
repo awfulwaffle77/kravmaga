@@ -20,6 +20,14 @@ export function signupBoxInfoAdd(jsonResponse) { // ADD ID_SALA AND ID_CENTURA
     }
 }
 
+export function profileBoxInfoAdd(jsonResponse) {
+    let parsedResp = JSON.parse(jsonResponse);
+    $("#profile_nume").text(parsedResp.informatii['nume']);
+    $("#profile_prenume").text(parsedResp.informatii['prenume']);
+    $("#profile_username").text(parsedResp.informatii['utilizator']);
+    $("#profile_passwd").text("Resetare parola").attr('href','passwordReset.html');
+}
+
 export function handleUserUnavailable(){
     $("#signup_username_err").text("Username deja existent");
 }

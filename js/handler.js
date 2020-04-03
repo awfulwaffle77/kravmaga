@@ -1,5 +1,5 @@
 import {handleUserAvailable, handleUserUnavailable, signupBoxInfoAdd, mustCompleteField, isFieldCompleted, handlePasswordsNotMatch,
-setFieldsToDefault, handlePasswordsMatch } from "./fieldChecker.js";
+setFieldsToDefault, handlePasswordsMatch, profileBoxInfoAdd } from "./fieldChecker.js";
 
 $(document).ready(function(){
     // DECLARING VARIABLES
@@ -85,7 +85,7 @@ $(document).ready(function(){
     $("#signupConfirm").on('click',function (e) {
         e.preventDefault();
         // CHECKING FIELDS TO BE COMPLTED
-        let nume, username, passwd, id_centura, id_sala;
+        let nume, username, email, passwd, id_centura, id_sala;
         setFieldsToDefault();
 
         if(!isFieldCompleted("#signup_nume")) {
@@ -103,6 +103,13 @@ $(document).ready(function(){
         }
         else
            username = $("#signup_username").val();
+
+        if(!isFieldCompleted("#signup_email")){
+            mustCompleteField("#signup_email");
+            return;
+        }
+        else
+            email = $("#signup_email").val();
 
         if(!isFieldCompleted("#signup_passwd")) {
             mustCompleteField("#signup_passwd");
@@ -137,6 +144,7 @@ $(document).ready(function(){
                     nume: nume,
                     prenume: prenume,
                     username: username,
+                    email: email,
                     passwd: passwd,
                     date: data,
                     id_sala: id_sala.toString(),
@@ -145,7 +153,12 @@ $(document).ready(function(){
                 },
                 complete: function (response) { // success is not working; using complete as alternative
                     //console.log(response.responseText);
-                    interpretResponse(JSON.parse(response.responseText));
+                    try {
+                        interpretResponse(JSON.parse(response.responseText));
+                    }
+                    catch(e) {
+                        console.log(response.responseText);
+                    }
                 },
                 dataType: 'text'
             })
@@ -170,7 +183,12 @@ $(document).ready(function(){
                     },
                     complete: function (response) { // success is not working; using complete as alternative
                         //console.log(response.responseText);
-                        interpretResponse(JSON.parse(response.responseText));
+                        try {
+                            interpretResponse(JSON.parse(response.responseText));
+                        }
+                        catch(e){
+                            console.log(response.responseText);
+                        }
                     },
                     dataType: 'text'
                 }
@@ -249,5 +267,38 @@ $(document).ready(function(){
         else
             handlePasswordsMatch();
     });
+    // PROFILE
+    if($("#profileBox").length){ // IF I AM ON PROFILE PAGE
+        // FETCH THE DATA REQUIRED TO SHOW
+        $.ajax({
+            url:'php/dbHandler.php',
+            method: 'GET',
+            data:{
+                getProfileInfo: 1,
+                currentHash: Cookies.get('currentHash')
+            },
+            complete: function (response) {
+                profileBoxInfoAdd(response.responseText);
+            }
+        });
+
+    }
+    if($("#emailBox").length){
+        $("#emailReset_confirm").on('click',function () {
+            let email = $("#email").val();
+            $.ajax({
+                url:'php/mailAgent.php',
+                method: 'POST',
+                data:{
+                    sendResetPasswordEmail: 1,
+                    email: email
+                },
+                complete: function (response) {
+                    console.log("Mail ok");
+                }
+            });
+        })
+
+    }
 });
 

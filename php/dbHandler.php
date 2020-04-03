@@ -1,30 +1,8 @@
 <?php
+include 'vars.php';
+include 'connection.php';
+
 session_start();
-
-// CODES
-define("isAdmin", 100);
-define("regularUser",101);
-
-define("SQLAdminCode", 0);
-define("userInsert_good",200);
-define("userInsert_failed",201);
-define("usernameAvailable",300);
-define("usernameUnavailable",301);
-
-// MESSAGES
-define("msg_userInsert_good","Utilizator inserat cu succes.");
-define("msg_userInsert_failed","Utilizatorul nu a putut fi adaugat. Eroare la query");
-define("msg_userInsert_failed_userExists", "Utilizatorul exista deja");
-
-define("msg_usernameAvailable","Username poate fi folosit");
-define("msg_usernameUnavailable","Username-ul este deja in uz");
-
-define("msg_getSignupInfo_failed","Nu am putut gasi ID_SALA, ID_CENTURA");
-
-$dbServername = 'localhost';
-$dbAdmin = 'root';
-$dbPassword = '';
-$dbName = 'kravmaga_accounts';
 
 $conn = mysqli_connect($dbServername,$dbAdmin,$dbPassword,$dbName);
 $adminHashArray = array();
@@ -92,23 +70,13 @@ function checkUsernameExists($username){
     return true;
 }
 
-class JSON_Response{
-    public $message = "Default message";
-    public $code = -1;
-}
-
-class centuriSali{
-    public $sali = array();
-    public $centuri = array();
-}
-
 initHashArray();
 if(isset($_POST['login'])) { // if login property is set, try login
     $uname = $_POST['uname'];
     $passwd = hash("sha256",$_POST['passwd']);
 
     try {
-        $sqlcode = "SELECT * FROM utilizatori WHERE utilizator='$uname' AND parola='$passwd';"; // !! PASSWORD IS NOT HASHED HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        $sqlcode = "SELECT * FROM utilizatori WHERE utilizator='$uname' AND parola='$passwd';";
         $result = mysqli_query($conn, $sqlcode);
 
         if ($result->num_rows > 1) {
@@ -186,11 +154,13 @@ if(isset($_POST['checkPrivilege'])) {
 }
 
 if(isset($_POST['signup'])) {
+    // TODO: PROBABLY ADD TO utilizatori_centuri too??
     try {
         if(existsInHashArray($_POST['currentHash']))
 
         $nume = $_POST['nume'];
         $username = $_POST['username'];
+        $email = $_POST['email'];
         $prenume = $_POST['prenume'];
         $passwd = hash("sha256", $_POST['passwd']);
         $date = $_POST['date'];
@@ -200,7 +170,7 @@ if(isset($_POST['signup'])) {
         $userHash = hash("sha256", $nume . $prenume . $username . $passwd);
 
         // tip_utilizator default is 1(regular user)
-        $sqlcode = "INSERT INTO utilizatori(`Nume`, `Prenume`, `Utilizator`, `Parola`, `Data_inrolare`, `ID_Sala`, `ID_Centura`, `Hash`) VALUES('$nume','$prenume','$username','$passwd','$date',$id_sala,$id_centura,'$userHash')";
+        $sqlcode = "INSERT INTO utilizatori(`Nume`, `Prenume`, `Utilizator`,`Email`,`Parola`, `Data_inrolare`, `ID_Sala`, `ID_Centura`, `Hash`) VALUES('$nume','$prenume','$username','$email','$passwd','$date',$id_sala,$id_centura,'$userHash')";
         $result = mysqli_query($conn, $sqlcode);
 
         if ($result == false) {
@@ -208,7 +178,7 @@ if(isset($_POST['signup'])) {
         }
         else{
             $resp = new JSON_Response();
-            $resp->message = msg_userInsert_good;
+            $resp->message = msg_userInsert_success;
             $resp->code = userInsert_good;
             echo(json_encode($resp));
         }
@@ -236,7 +206,6 @@ if(isset($_POST['checkUsernameAvailable'])){
 
         echo(json_encode($resp));
     }
-
 }
 
 if(isset($_GET['getSignupInfo'])){
@@ -265,3 +234,24 @@ if(isset($_GET['getSignupInfo'])){
         echo(json_encode($e->getMessage()));
     }
 }
+
+if(isset($_GET['getProfileInfo'])) {
+    try{
+        $currentHash = $_COOKIE['currentHash'];
+        $sql = "SELECT nume, prenume, utilizator FROM utilizatori WHERE hash='$currentHash'";
+        $result = mysqli_query($conn, $sql);
+
+        if($result->num_rows == 0)
+            throw new Exception(msg_getSignupInfo_failed);
+
+        $resp=new profileInfo();
+        $resp->informatii = $result->fetch_array(MYSQLI_ASSOC);
+        $resp->code = profileInfo_success;
+
+        echo(json_encode($resp));
+    }
+    catch (Exception $e){
+        echo(json_encode($e->getMessage()));
+    }
+}
+
