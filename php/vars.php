@@ -11,6 +11,8 @@ define("usernameUnavailable",301);
 define("profileInfo_success",302);
 define("resetURL_succes",303);
 define("resetURL_failed",304);
+define("passwordReset_success",305);
+define("passwordReset_failed",306);
 
 // MESSAGES
 define("msg_userInsert_success","Utilizator inserat cu succes.");
@@ -27,6 +29,9 @@ define("msg_profileInfo_success","Informatiile au fost fetchuite cu succes");
 
 define("msg_resetURL_success","URL a fost generat si trimis cu succes");
 define("msg_resetURL_failed", "Nu s-a putut trimite URL-ul");
+
+define("msg_updatedPassword_success","Parola a fost schimbata cu succes");
+define("msg_updatedPassword_failed","Parola nu s-a putut schimba");
 
 // CLASSES
 

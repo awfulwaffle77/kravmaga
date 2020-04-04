@@ -1,6 +1,5 @@
 <?php
 include 'php/mailAgent.php';
-resetPassword();
 ?>
 
 <!DOCTYPE html>
@@ -33,5 +32,13 @@ resetPassword();
         <li class="navbar"><a class="navbar" href="about.asp">About</a></li>
     </ul>
 </header>
+
+<div id="newPasswdBox">
+    <label for="passwd">Parola:</label><br>
+    <input type="password" id="newPasswd" name="passwd" autocomplete="new-password" placeholder="Parola" style="width: auto;">
+    <label id="reset_passwd_err"></label>
+    <input type="button" value="Confirm" id="newPasswdConfirm">
+    <br><br>
+</div>
 
 <body>

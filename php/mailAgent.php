@@ -1,9 +1,11 @@
 <?php
 
-include 'php/vars.php';
+require "../vendor/autoload.php"; // NEEDED FOR Hashids
+include 'vars.php';
 //include 'php/connection.php';
+use Hashids\Hashids;
 
-define("redirect","localhost/kravmaga_v2/reset.php");
+define("redirect","localhost/kravmaga_v2/reset.html");
 
 $dbServername = 'localhost';
 $dbAdmin = 'root';
@@ -14,20 +16,23 @@ function generateUpdateResetURL(){ // GENERATES A RESET URL AND UPDATES THE DATA
     try {
         global $conn;
 
-        //$hashids = new Hashids('salt');
-        //$id = $hashids->encode($_COOKIE['currentHash']);
-        $id = base64_encode($_COOKIE['currentHash']);
-        if ($id == "")
+        // AS HASHIDS ENCODES ONLY NUMBERS, WE GET THE USER'S ID FROM HIS HASH
+        $hashids = new Hashids();
+        $currentHash = $_COOKIE['currentHash'];
+        $url = $hashids->encodeHex($currentHash);
+        //
+        //$id = base64_encode($_COOKIE['currentHash']);
+        if ($url == "")
           throw new Exception("Could not generate hashid");
 
-        $currentHash = $_COOKIE['currentHash'];
-        $currentDate = date(0);
         // ADD PASSWORD THAT EXPIRES IN 1 HOUR
-        $sql = "INSERT INTO `parole_resetare`(`hash_requester`, `URL`, `Data_Expirare`) VALUES ('$currentHash','$id', DATE_ADD(now(),INTERVAL 1 HOUR ))";
+        // TODO: VERIFY IF LINK IS EXPIRED
+        $sql = "INSERT INTO `parole_resetare`(`hash_requester`, `URL`, `Data_Expirare`) VALUES ('$currentHash','$url', DATE_ADD(now(),INTERVAL 1 HOUR ))";
         $result = mysqli_query($conn, $sql);
 
+
         if ($result) {
-            return $id;
+            return $url;
         } else {
             throw new Exception(msg_resetURL_failed);
         }
@@ -53,23 +58,36 @@ function requestPasswordReset($email)
     }
 }
 
-function resetPassword(){
+function resetPassword($newPasswd){
     global $conn;
 
-    $tkn = $_GET['tkn'];
+    $tkn = $_POST['tkn'];
+    $updatedPasswd = hash("sha256",$newPasswd);
 
     $sql = "SELECT * FROM parole_resetare WHERE `URL`='$tkn'";
     $result = mysqli_query($conn,$sql);
 
     if($result){
-        //$hashids = new Hashids\Hashids();
+        $hashids = new Hashids();
         $row = $result->fetch_array(MYSQLI_ASSOC);
-        $dcodedTkn = base64_decode($row['URL']);
-        $sql = "SELECT * FROM utilizatori WHERE `hash`='$dcodedTkn'";
+        // dcodedTkn IS ID_utilizator
+        $dcodedTkn = $hashids->decodeHex($row['URL']);
+        $sql = "UPDATE `utilizatori` SET `parola`='$updatedPasswd' WHERE `hash`='$dcodedTkn'";
         $result = mysqli_query($conn,$sql);
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        $x = $row['Utilizator'];
-        // TODO: Schimba parola
+
+        $resp = new JSON_Response();
+        if($result){
+            $resp->message = msg_updatedPassword_success;
+            $resp->code = passwordReset_success;
+
+            echo(json_encode($resp));
+        }
+        else{
+            $resp->message = msg_updatedPassword_failed;
+            $resp->code = passwordReset_failed;
+
+            echo(json_encode($resp));
+        }
     }
     else{
         // TODO: Throw error
@@ -87,5 +105,9 @@ if(isset($_POST['sendResetPasswordEmail'])){
     catch (Exception $e){
 
     }
+}
+
+if(isset($_POST['sendPasswordReset'])){
+    resetPassword($_POST['newPasswd']);
 }
 
