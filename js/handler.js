@@ -1,6 +1,7 @@
 import {handleUserAvailable, handleUserUnavailable, signupBoxInfoAdd, mustCompleteField, isFieldCompleted, handlePasswordsNotMatch,
-setFieldsToDefault, handlePasswordsMatch, profileBoxInfoAdd } from "./fieldChecker.js";
+setFieldsToDefault, handlePasswordsMatch, profileBoxInfoAdd, checkEmailPattern } from "./fieldChecker.js";
 
+export const code_isAdmin = 100;
 $(document).ready(function(){
     // DECLARING VARIABLES
     const loginRedirectURL = "https://localhost/kravmaga_v2/";
@@ -12,7 +13,6 @@ $(document).ready(function(){
     // DECLARING LOGIN CODES (class JSON_Response from dbHandler.php has message and code)
     const code_correctCredentials = 1;
     const code_incorrectCredentials = 2;
-    const code_isAdmin = 100;
     const code_isRegularUser = 101;
     const code_userInsert_good = 200;
 
@@ -21,24 +21,29 @@ $(document).ready(function(){
 
     // FUNCTIONS
     function interpretResponse(response) {
-        switch (response.code) {
-            case code_correctCredentials:
-                window.location.replace(loginRedirectURL);
-                break;
-            case code_incorrectCredentials:
-                $("#errMsg").text("Username sau parola gresite.");
-                break;
-            case code_isAdmin:
-                window.location.replace(adminProfileRedirect);
-                break;
-            case code_isRegularUser:
-                window.location.replace(regularProfileRedirect);
-                break;
-            case code_userInsert_good:
-                window.location.replace(adminProfileRedirect);
-                break;
-            default:
-                break;
+        try {
+            switch (response.code) {
+                case code_correctCredentials:
+                    window.location.replace(loginRedirectURL);
+                    break;
+                case code_incorrectCredentials:
+                    $("#errMsg").text("Username sau parola gresite.");
+                    break;
+                case code_isAdmin:
+                    window.location.replace(adminProfileRedirect);
+                    break;
+                case code_isRegularUser:
+                    window.location.replace(regularProfileRedirect);
+                    break;
+                case code_userInsert_good:
+                    window.location.replace(adminProfileRedirect);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (e) {
+           console.log(e.message());
         }
     }
 
@@ -298,9 +303,14 @@ $(document).ready(function(){
         });
 
     }
+    // EMAIL RESET
     if($("#emailBox").length){
         $("#emailReset_confirm").on('click',function () {
             let email = $("#email").val();
+            if(!checkEmailPattern(email)) { // IF WE TRY TO SUBMIT A BAD EMAIL
+                $("#reset_email_err").text("Nu este o adresa de email valida");
+                return;
+            }
             $.ajax({
                 url:'php/mailAgent.php',
                 method: 'POST',
@@ -309,12 +319,22 @@ $(document).ready(function(){
                     email: email
                 },
                 complete: function (response) {
-                    console.log("Mail ok");
+                    $("#emailDone").text("Un email cu instructiuni a fost trimis la adresa " + email);
                 }
             });
+        });
+        $("#email").on('change',function () {
+            if(!checkEmailPattern($("#email").val())){
+                $("#reset_email_err").text("Nu este o adresa de email valida");
+            }
+            else{
+                $("#reset_email_err").text("");
+            }
+
         })
 
     }
+    // NEW PASSWORD IN EMAIL URL
     if($("#newPasswdBox").length){
         $("#newPasswdConfirm").on('click',function () {
             let newPasswd = $("#newPasswd").val();

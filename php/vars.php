@@ -13,6 +13,8 @@ define("resetURL_succes",303);
 define("resetURL_failed",304);
 define("passwordReset_success",305);
 define("passwordReset_failed",306);
+define("eventsInfo_success",307);
+define("eventsInfo_failed",308);
 
 // MESSAGES
 define("msg_userInsert_success","Utilizator inserat cu succes.");
@@ -33,6 +35,9 @@ define("msg_resetURL_failed", "Nu s-a putut trimite URL-ul");
 define("msg_updatedPassword_success","Parola a fost schimbata cu succes");
 define("msg_updatedPassword_failed","Parola nu s-a putut schimba");
 
+define("msg_eventsInfo_success","Info evenimente fetchuite cu succes");
+define("msg_eventsInfo_failure","Info evenimente nu au putut fii fetchuite");
+
 // CLASSES
 
 class JSON_Response{
@@ -43,6 +48,10 @@ class JSON_Response{
 class centuriSali{
     public $sali = array();
     public $centuri = array();
+}
+
+class eventsInfo extends JSON_Response{
+    public $informatii = array();
 }
 
 class profileInfo extends JSON_Response {

@@ -1,5 +1,7 @@
 # Kravmaga
 # ISSUES
+**!! On evenimente.html, Edit button does not work properly. Please also check hashArray in dbHandler.php**
+
 ~On Chrome, currentHash cookie modifies its value. Why?~ It did not. Function `existsInHashArray` does not 
 populate the array.
 

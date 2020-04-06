@@ -71,6 +71,7 @@ function checkUsernameExists($username){
 }
 
 initHashArray();
+
 if(isset($_POST['login'])) { // if login property is set, try login
     $uname = $_POST['uname'];
     $passwd = hash("sha256",$_POST['passwd']);
@@ -246,6 +247,7 @@ if(isset($_GET['getProfileInfo'])) {
 
         $resp=new profileInfo();
         $resp->informatii = $result->fetch_array(MYSQLI_ASSOC);
+        $resp->message = msg_profileInfo_success;
         $resp->code = profileInfo_success;
 
         echo(json_encode($resp));
@@ -253,5 +255,29 @@ if(isset($_GET['getProfileInfo'])) {
     catch (Exception $e){
         echo(json_encode($e->getMessage()));
     }
+}
+
+if(isset($_GET['getEventsInfo'])){
+    try {
+        $sql = "SELECT ID_eveniment, Nume, Locatie, Descriere, Tip_eveniment, Data_start_eveniment, Data_stop_eveniment FROM evenimente";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result->num_rows == 0)
+            throw new Exception(msg_eventsInfo_failure);
+
+        $resp = new eventsInfo();
+        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+            array_push($resp->informatii, $row);
+        }
+
+        $resp->message = msg_eventsInfo_success;
+        $resp->code = eventsInfo_success;
+
+        echo(json_encode($resp));
+    }
+    catch (Exception $e){
+        // TODO: A NEW JSON_RESPONSE SHOULD BE MADE AND INTERPRETED
+        echo(json_encode($e->getMessage()));
+        }
 }
 

@@ -1,0 +1,14 @@
+{
+    "require": {
+        "hashids/hashids": "^4.0",
+        "ext-json" : "*",
+        "ext-mysqli": "*",
+        "ext-mbstring":"*",
+        "ext-bcmath": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hashids\\": "hashids/hashids/src/"
+        }
+    }
+}
