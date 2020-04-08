@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     $.ajax(
         {
-            url: 'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'GET',
             data: {
                 getAntrenamenteInfo: 1,
@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     $.ajax(
         {
-            url: 'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'POST',
             data: {
                 checkPrivilege: 1,

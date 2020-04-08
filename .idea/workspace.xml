@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ed1af43-309c-4655-9a63-f6374e92e8d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/js/antrenamenteScript.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/antrenamente.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/popup.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evenimente.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/evenimente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/antrenamenteScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/antrenamenteScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/evenimenteScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/evenimenteScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/handler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/passwordReset.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/passwordReset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/dbHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/dbHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/vars.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/vars.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signupSuccess.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/signupSuccess.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +99,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\XAMPP\htdocs\kravmaga_v2\pages" />
       <recent name="G:\XAMPP\htdocs\kravmaga_v2\php" />
       <recent name="G:\XAMPP\htdocs\kravmaga_v2" />
       <recent name="G:\Sem 2\Tehn Web\kravamaga_v2" />
@@ -190,7 +178,7 @@
       <workItem from="1586114727010" duration="2472000" />
       <workItem from="1586168316951" duration="22646000" />
       <workItem from="1586327652384" duration="9356000" />
-      <workItem from="1586342033973" duration="3634000" />
+      <workItem from="1586342033973" duration="3903000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed some signup issues">
       <created>1585595426018</created>
@@ -255,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586207999534</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Popup window, antrenamente.html, moved pages to /pages">
+      <created>1586346708901</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586346708901</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +264,8 @@
     <MESSAGE value="Sending emails for password reset" />
     <MESSAGE value="Password reset functionality" />
     <MESSAGE value="Table on evenimente.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Table on evenimente.html" />
+    <MESSAGE value="Popup window, antrenamente.html, moved pages to /pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Popup window, antrenamente.html, moved pages to /pages" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2343" y="91" key="#CLI_Interpreters" timestamp="1585497735701">
@@ -316,10 +312,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2560" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1585424207147" />
-    <state x="2505" y="133" key="CommitChangelistDialog2" timestamp="1586207998285">
+    <state x="2505" y="133" key="CommitChangelistDialog2" timestamp="1586346707657">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2505" y="133" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586207998285" />
+    <state x="2505" y="133" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586346707657" />
     <state x="2012" y="92" width="1736" height="896" key="DiffContextDialog" timestamp="1585660204069">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -428,10 +424,10 @@
     <state x="275" y="63" key="SettingsEditor/0.0.1536.864/1920.0.1920.1080@0.0.1536.864" timestamp="1585077071582" />
     <state x="2806" y="36" key="SettingsEditor/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1585497741123" />
     <state x="344" y="79" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1583919320831" />
-    <state x="2472" y="273" key="Vcs.Push.Dialog.v2" timestamp="1586208002962">
+    <state x="2472" y="273" key="Vcs.Push.Dialog.v2" timestamp="1586346711871">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2472" y="273" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586208002962" />
+    <state x="2472" y="273" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586346711871" />
     <state x="2506" y="318" key="com.intellij.ide.util.TipDialog" timestamp="1586342047591">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

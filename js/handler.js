@@ -88,7 +88,7 @@ $(document).ready(function(){
             // Checking where to redirect
             $.ajax(
                 {
-                    url: 'php/dbHandler.php',
+                    url: '../php/dbHandler.php',
                     method: 'POST',
                     data: {
                         checkPrivilege: 1,
@@ -157,7 +157,7 @@ $(document).ready(function(){
 
         $.ajax(
             {
-                url: 'php/dbHandler.php',
+                url: '../php/dbHandler.php',
                 method: 'POST',
                 data: {
                     signup: 1,
@@ -194,7 +194,7 @@ $(document).ready(function(){
         else {
             $.ajax(
                 {
-                    url: 'php/dbHandler.php',
+                    url: '../php/dbHandler.php',
                     method: 'POST',
                     data: {
                         login: 1,
@@ -219,7 +219,7 @@ $(document).ready(function(){
     if($("#signupBox").length){ // If element exists on page; If I am on signup.html
         // DO SQL FETCH OF ID_SALA AND ID_CENTURA
         $.ajax({
-            url:'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'GET',
             data:{
                 getSignupInfo: 1
@@ -250,7 +250,7 @@ $(document).ready(function(){
         let username = $("#signup_username").val();
 
         $.ajax({
-            url: 'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'POST',
             cahce:false,
             data: {
@@ -291,7 +291,7 @@ $(document).ready(function(){
     if($("#profileBox").length){ // IF I AM ON PROFILE PAGE
         // FETCH THE DATA REQUIRED TO SHOW
         $.ajax({
-            url:'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'GET',
             data:{
                 getProfileInfo: 1,
@@ -312,7 +312,7 @@ $(document).ready(function(){
                 return;
             }
             $.ajax({
-                url:'php/mailAgent.php',
+                url: '../php/mailAgent.php',
                 method: 'POST',
                 data:{
                     sendResetPasswordEmail: 1,
@@ -341,7 +341,7 @@ $(document).ready(function(){
             let token = getUrlParameter('tkn');
 
             $.ajax({
-                url:'php/mailAgent.php',
+                url: '../php/mailAgent.php',
                 method: 'POST',
                 data:{
                     sendPasswordReset: 1,

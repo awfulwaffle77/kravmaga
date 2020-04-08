@@ -1,5 +1,5 @@
 import {code_isAdmin} from "./handler.js";
-import {isFieldCompleted, mustCompleteField} from "./fieldChecker";
+import {isFieldCompleted, mustCompleteField} from "./fieldChecker.js";
 
 $(document).ready(function () {
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     $.ajax(
         {
-            url: 'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'GET',
             data: {
                 getEventsInfo: 1,
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     $.ajax(
         {
-            url: 'php/dbHandler.php',
+            url: '../php/dbHandler.php',
             method: 'POST',
             data: {
                 checkPrivilege: 1,
