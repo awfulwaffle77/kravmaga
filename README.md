@@ -1,7 +1,5 @@
 # Kravmaga
 # ISSUES
-**!! On evenimente.html, Edit button does not work properly. Please also check hashArray in dbHandler.php**
-
 ~On Chrome, currentHash cookie modifies its value. Why?~ It did not. Function `existsInHashArray` does not 
 populate the array.
 
@@ -19,6 +17,9 @@ Has fields that must be completed(checked on submit), checks if passwords match,
 be available, max date is today's date, fetches *centuri* and *sali* from the database and puts the elements
 available to select. ~MUST ADD MININMUM PASSWORD REQUIREMENTS WITH REGEX.~(added) 
 
+**PASSWORD RESET**
+
+**EVENT & ANTRENAMENT ADD WITH POPUP**
 
 ## Communication between sever and client
 It is made always as JSON(using `class JSON_Response`) Even errors. Everything is wrapped in `json_encode` in PHP before it is sent to 

@@ -9,12 +9,16 @@ define("userInsert_failed",201);
 define("usernameAvailable",300);
 define("usernameUnavailable",301);
 define("profileInfo_success",302);
-define("resetURL_succes",303);
+define("resetURL_success",303);
 define("resetURL_failed",304);
 define("passwordReset_success",305);
 define("passwordReset_failed",306);
 define("eventsInfo_success",307);
 define("eventsInfo_failed",308);
+define("eventAdd_success",309);
+define("eventAdd_failed",310);
+define("antrntmnt_success",311);
+define("antrnmnt_failed",312);
 
 // MESSAGES
 define("msg_userInsert_success","Utilizator inserat cu succes.");
@@ -36,8 +40,15 @@ define("msg_updatedPassword_success","Parola a fost schimbata cu succes");
 define("msg_updatedPassword_failed","Parola nu s-a putut schimba");
 
 define("msg_eventsInfo_success","Info evenimente fetchuite cu succes");
-define("msg_eventsInfo_failure","Info evenimente nu au putut fii fetchuite");
+define("msg_eventsInfo_failed","Info evenimente nu au putut fii fetchuite");
 
+define("msg_eventAdd_success","Evenimentul a fost adaugat cu succes");
+define("msg_eventAdd_failed_insert","Nu s a putut insera evenimentul");
+define("msg_eventAdd_failed_privilege","Nu aveti privilegiile necesare pentru aceasta actiune");
+
+
+define("msg_antrnmntInfo_success","Info antrenamente fetchuite cu success");
+define("msg_antrnmntInfo_failed","Info antrenamente nu au putut fi fetchuit");
 // CLASSES
 
 class JSON_Response{

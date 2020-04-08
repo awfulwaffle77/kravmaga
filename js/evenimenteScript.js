@@ -1,7 +1,22 @@
 import {code_isAdmin} from "./handler.js";
+import {isFieldCompleted, mustCompleteField} from "./fieldChecker";
+
 $(document).ready(function () {
 
-$("#hiddenForm").hide();
+    const msg_eventAdd_success = "Eveniment adaugat cu succes";
+
+    const code_eventAdd_success = 309;
+    const code_eventAdd_failed = 310;
+
+    $("#hiddenForm").hide();
+    let counter = 0;
+    //$("#editButton_toggle").hide();
+    function showResult(response){
+        let parsedResp = JSON.parse(response.responseText);
+        if(parsedResp.code === code_eventAdd_success)
+            $("#eventAdd_label").text('Eveniment adaugat cu succes.');
+    }
+
     function handleEventsInfo(jsonResponse){
         // FACEM UN TABEL AICI
         console.log(jsonResponse.responseText);
@@ -45,15 +60,86 @@ $("#hiddenForm").hide();
             complete: function (response) { // success is not working; using complete as alternative
                 let x = JSON.parse(response.responseText);
                 if(x.code === code_isAdmin){
-                    $("#editButton_toggle").on('click',function () {
-                        if($("#hiddenForm").is(":visible"))
-                            $("#hiddenForm").show();
-                        else
-                            $("#hiddenForm").hide();
+                    //$("#editButton_toggle").show();
+                    $("#editButton_toggle").css('visibility','visible').on('click',function () {
+                        if(counter === 0){
+                            $("#hiddenForm").show().css('display','block');
+                            counter = 1;
+                        }
+                        else{
+                            $("#hiddenForm").hide().css('display','none');
+                            counter = 0;
+                        }
                     })
                 }
             },
             dataType: 'text'
         }
     );
+
+    $("#newEvent_submit").on('click',function () {
+        let nume = $("#eventAdd_nume");
+        let locatie = $("#eventAdd_locatie");
+        let descriere = $("#eventAdd_descriere");
+        let tip_event = $("#eventAdd_tipEvent");
+        let data_start = $("#eventAdd_dataStart");
+        let data_stop = $("#eventAdd_dataStop");
+
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+
+        if(isFieldCompleted(nume))
+            mustCompleteField(nume);
+        else
+            nume = nume.val();
+
+        if(isFieldCompleted(locatie))
+            mustCompleteField(locatie);
+        else
+            locatie = locatie.val();
+        if(isFieldCompleted(descriere))
+            mustCompleteField(descriere);
+        else
+            descriere = descriere.val();
+
+        if(isFieldCompleted(tip_event))
+            mustCompleteField(tip_event);
+        else
+            tip_event = tip_event.val();
+
+        if(data_start.val() < today)
+            mustCompleteField(data_start);
+        else
+            data_start = data_start.val();
+
+        if(data_stop.val() < today) {
+            mustCompleteField(data_stop);
+            return;
+        }
+        else
+            data_stop = data_stop.val();
+
+        $.ajax(
+            {
+                url: 'php/dbHandler.php',
+                method: 'POST',
+                data: {
+                    addEvent: 1,
+                    nume: nume,
+                    locatie: locatie,
+                    descriere: descriere,
+                    tip_event: tip_event,
+                    data_start: data_start,
+                    data_stop: data_stop
+                },
+                complete: function (response) { // success is not working; using complete as alternative
+                   showResult(response);
+                },
+                dataType: 'text'
+            }
+        );
+    })
 });

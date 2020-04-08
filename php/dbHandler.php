@@ -72,6 +72,8 @@ function checkUsernameExists($username){
 
 initHashArray();
 
+// POST METHODS
+
 if(isset($_POST['login'])) { // if login property is set, try login
     $uname = $_POST['uname'];
     $passwd = hash("sha256",$_POST['passwd']);
@@ -209,6 +211,42 @@ if(isset($_POST['checkUsernameAvailable'])){
     }
 }
 
+if(isset($_POST['addEvent'])){
+    try {
+        if (!existsInHashArray($_COOKIE['currentHash']))
+            throw new Exception(msg_eventAdd_failed_privilege);
+
+        $nume = $_POST['nume'];
+        $locatie = $_POST['locatie'];
+        $descriere = $_POST['descriere'];
+        $tip_event = $_POST['tip_event'];
+        $data_start = $_POST['data_start'];
+        $data_stop = $_POST['data_stop'];
+
+        $sql = "INSERT INTO `evenimente`(`ID_eveniment`, `Nume`, `Locatie`, `Descriere`, `Tip_eveniment`, `Data_start_eveniment`, `Data_stop_eveniment`) VALUES ('$nume','$locatie','$descriere','$tip_event','$data_start','$data_stop')";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result->num_rows != 1) {
+            throw new Exception(msg_eventAdd_failed_insert);
+        }
+
+        $resp = new JSON_Response();
+        $resp->message = msg_eventAdd_success;
+        $resp->code = eventAdd_success;
+
+        echo(json_encode($resp));
+    }
+    catch (Exception $e){
+        $resp = new JSON_Response();
+        $resp->message = $e->getMessage();
+        $resp->code = eventAdd_failed;
+
+        echo(json_encode($resp));
+    }
+}
+
+// GET METHODS
+
 if(isset($_GET['getSignupInfo'])){
     try {
         $resp = new centuriSali();
@@ -263,7 +301,7 @@ if(isset($_GET['getEventsInfo'])){
         $result = mysqli_query($conn, $sql);
 
         if ($result->num_rows == 0)
-            throw new Exception(msg_eventsInfo_failure);
+            throw new Exception(msg_eventsInfo_failed);
 
         $resp = new eventsInfo();
         while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -279,5 +317,31 @@ if(isset($_GET['getEventsInfo'])){
         // TODO: A NEW JSON_RESPONSE SHOULD BE MADE AND INTERPRETED
         echo(json_encode($e->getMessage()));
         }
+}
+
+if(isset($_GET['getAntrenamenteInfo'])){
+    try {
+        $sql = "SELECT an.id_antrenament as 'ID_Antrenament' , s.nume as 'Nume' , s.adresa as 'Adresa' , an.instructori as 'Instructori', an.Data_Antrenament as 'Data' FROM `antrenamente` as an INNER JOIN `sali` as s ON an.id_sala = s.id_sala ";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result->num_rows == 0)
+            throw new Exception(msg_antrnmntInfo_failed);
+
+        $resp = new eventsInfo();
+        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+            array_push($resp->informatii, $row);
+        }
+
+        $resp->message = msg_antrnmntInfo_success;
+        $resp->code = antrntmnt_success;
+
+        echo(json_encode($resp));
+    }
+    catch (Exception $e){
+        $resp = new JSON_Response();
+        $resp->message = $e->getMessage();
+        $resp->code = antrnmnt_failed;
+
+    }
 }
 

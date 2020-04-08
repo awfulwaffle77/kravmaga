@@ -5,9 +5,9 @@ export const code_isAdmin = 100;
 $(document).ready(function(){
     // DECLARING VARIABLES
     const loginRedirectURL = "https://localhost/kravmaga_v2/";
-    const adminProfileRedirect = "https://localhost/kravmaga_v2/signup.html";
-    const regularProfileRedirect = "https://localhost/kravmaga_v2/profile.html"; // Better option would be to use default anchor option (in php?)
-    const signupSuccessRedirect = "https://localhost/kravmaga_v2/signupSuccess.html";
+    const adminProfileRedirect = "https://localhost/kravmaga_v2/pages/signup.html";
+    const regularProfileRedirect = "https://localhost/kravmaga_v2/pages/profile.html"; // Better option would be to use default anchor option (in php?)
+    const signupSuccessRedirect = "https://localhost/kravmaga_v2/pages/signupSuccess.html";
     // TODO: Check if it possible to use default anchor. It is. Change this to getting the page with php
 
     // DECLARING LOGIN CODES (class JSON_Response from dbHandler.php has message and code)
