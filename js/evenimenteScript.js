@@ -1,5 +1,5 @@
 import {code_isAdmin} from "./handler.js";
-import {isFieldCompleted, mustCompleteField} from "./fieldChecker.js";
+import {isFieldCompleted, mustCompleteField, dragElement} from "./fieldChecker.js";
 
 $(document).ready(function () {
 
@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     const code_eventAdd_success = 309;
     const code_eventAdd_failed = 310;
+
 
     $("#hiddenForm").hide();
     let counter = 0;
@@ -35,6 +36,9 @@ $(document).ready(function () {
             $("#eventsTable tr:last").after(trInsert); // ADDS AFTER LAST TR
         }
     }
+
+
+    dragElement(document.getElementById("hiddenForm"));
 
     $.ajax(
         {

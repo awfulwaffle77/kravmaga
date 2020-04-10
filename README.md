@@ -1,4 +1,27 @@
 # Kravmaga
+
+# Configuration
+## Hashids
+[Hashids](https://github.com/vinkla/hashids) is used for generating unique links. Install requirements 
+with `php composer install` or `php composer update` or you can install this with composer by cd-ing to the project directory 
+and `composer require hashids/hashids`.
+
+## MySQL - phpmyadmin
+Using MySQL events with [this](https://stackoverflow.com/questions/6622301/can-i-set-a-mysql-event-schedule-using-phpmyadmin)
+StackOverflow link and [this](https://dev.mysql.com/doc/refman/8.0/en/events-privileges.html) MySQL doc.
+Created event to automatically DELETE outdated password links as such:
+
+    CREATE EVENT password_expiration
+        ON SCHEDULE
+          EVERY 10 SECOND
+        DO
+          DELETE FROM parole_resetare WHERE Id IN (
+        SELECT Id FROM (
+            SELECT * FROM `parole_resetare` GROUP BY Id HAVING(DAta_Expirare < CURRENT_TIMESTAMP)
+        ) AS P
+    )
+    
+
 # ISSUES
 ~On Chrome, currentHash cookie modifies its value. Why?~ It did not. Function `existsInHashArray` does not 
 populate the array.
@@ -17,9 +40,12 @@ Has fields that must be completed(checked on submit), checks if passwords match,
 be available, max date is today's date, fetches *centuri* and *sali* from the database and puts the elements
 available to select. ~MUST ADD MININMUM PASSWORD REQUIREMENTS WITH REGEX.~(added) 
 
-**PASSWORD RESET**
+**PASSWORD RESET WITH EXPIRING LINKS**
 
 **EVENT & ANTRENAMENT ADD WITH POPUP**
+
+**INDIVIDUAL ANTRENAMENT PAGE**
+Individual page where, depending on the GET Param `id`, you can see the users. 
 
 ## Communication between sever and client
 It is made always as JSON(using `class JSON_Response`) Even errors. Everything is wrapped in `json_encode` in PHP before it is sent to 

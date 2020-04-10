@@ -27,7 +27,7 @@ function generateUpdateResetURL(){ // GENERATES A RESET URL AND UPDATES THE DATA
 
         // ADD PASSWORD THAT EXPIRES IN 1 HOUR
         // TODO: VERIFY IF LINK IS EXPIRED
-        $sql = "INSERT INTO `parole_resetare`(`hash_requester`, `URL`, `Data_Expirare`) VALUES ('$currentHash','$url', DATE_ADD(now(),INTERVAL 1 HOUR ))";
+        $sql = "INSERT INTO `parole_resetare`(`hash_requester`, `URL`, `Data_Expirare`) VALUES ('$currentHash','$url', ADDDATE(now(),INTERVAL 1 HOUR ))";
         $result = mysqli_query($conn, $sql);
 
 
@@ -49,7 +49,7 @@ function requestPasswordReset($email)
     $to = $email;
     $resetURL = redirect."?tkn=".generateUpdateResetURL();
     $subject = 'KRAVMAGA - Password reset';
-    $message = 'Your password reset URL is: '.$resetURL;
+    $message = 'Your password reset URL is: '.$resetURL."\nThe link expires in 1 hour.";
     $headers = "From: beermoney234@gmail.com\r\n";
     if (mail($to, $subject, $message, $headers)) {
         echo "SUCCESS";

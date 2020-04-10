@@ -7,7 +7,8 @@ $(document).ready(function(){
     const loginRedirectURL = "https://localhost/kravmaga_v2/";
     const adminProfileRedirect = "https://localhost/kravmaga_v2/pages/signup.html";
     const regularProfileRedirect = "https://localhost/kravmaga_v2/pages/profile.html"; // Better option would be to use default anchor option (in php?)
-    const signupSuccessRedirect = "https://localhost/kravmaga_v2/pages/signupSuccess.html";
+    const signupSuccessRedirect = "https://localhost/kravmaga_v2/pages/success.html";
+    const successRedirect = "https://localhost/kravmaga_v2/pages/success.html";
     // TODO: Check if it possible to use default anchor. It is. Change this to getting the page with php
 
     // DECLARING LOGIN CODES (class JSON_Response from dbHandler.php has message and code)
@@ -47,7 +48,7 @@ $(document).ready(function(){
         }
     }
 
-    let getUrlParameter = function getUrlParameter(sParam) {
+    export let getUrlParameter = function getUrlParameter(sParam) {
         let sPageURL = window.location.search.substring(1),
             sURLVariables = sPageURL.split('&'),
             sParameterName,
@@ -320,6 +321,7 @@ $(document).ready(function(){
                 },
                 complete: function (response) {
                     $("#emailDone").text("Un email cu instructiuni a fost trimis la adresa " + email);
+                    window.location.replace()
                 }
             });
         });

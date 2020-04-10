@@ -19,6 +19,8 @@ define("eventAdd_success",309);
 define("eventAdd_failed",310);
 define("antrntmnt_success",311);
 define("antrnmnt_failed",312);
+define("antrnmntUserInfo_success",313);
+define("antnmntUserInfo_failed",314);
 
 // MESSAGES
 define("msg_userInsert_success","Utilizator inserat cu succes.");
@@ -47,8 +49,11 @@ define("msg_eventAdd_failed_insert","Nu s a putut insera evenimentul");
 define("msg_eventAdd_failed_privilege","Nu aveti privilegiile necesare pentru aceasta actiune");
 
 
-define("msg_antrnmntInfo_success","Info antrenamente fetchuite cu success");
-define("msg_antrnmntInfo_failed","Info antrenamente nu au putut fi fetchuit");
+define("msg_antrnmntInfo_success","Info antrenamente fetchuite cu succes");
+define("msg_antrnmntInfo_failed","Info antrenamente nu au putut fi fetchuite");
+
+define("msg_antrnmntUserInfo_success", "Info useri antrenamente fetchuite cu succes");
+define("msg_antrnmntUserInfo_failed","Info useri antrenamente nu au putut fi fetchuite");
 // CLASSES
 
 class JSON_Response{

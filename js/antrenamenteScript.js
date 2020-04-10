@@ -1,4 +1,5 @@
 import {code_isAdmin} from "./handler.js";
+import {dragElement} from "./fieldChecker.js";
 
 $(document).ready(function () {
 
@@ -9,16 +10,25 @@ $(document).ready(function () {
         let parsedResp = JSON.parse(jsonResponse.responseText);
 
         for(let i = 0;i < parsedResp.informatii.length; i++) {
+            let href = '"' + "https://localhost/kravmaga_v2/pages/antrenament.html";
             let id = parsedResp.informatii[i]['ID_Antrenament'];
+            href += "?id=" + id + '"';
             let nume = parsedResp.informatii[i]['Nume'];
             let adresa = parsedResp.informatii[i]['Adresa'];
             let instructori = parsedResp.informatii[i]['Instructori'];
             let data = parsedResp.informatii[i]['Data'];
 
-            let trInsert = '<tr><td>' + nume + '</td><td>' + adresa + '</td><td>'+ instructori + '</td><td>' + data + '</td></tr>';
+            let trInsert = '<tr><td><a href=' + href +'>'+ nume + '</a></td><td><a href=' + href + '>' + adresa + '</a></td><td><a href=' + href + '>' + instructori + '</a></td><td><a href=' + href + '>' + data + '</a></td></a></tr>';
+            //let trInsert = '<tr><a href=' + href + '><td>' + nume + '</td><td>' + adresa + '</td><td>' + instructori + '</td><td>' + data + '</td></a></tr>';
             $("#antrnmntTable tr:last").after(trInsert); // ADDS AFTER LAST TR
         }
     }
+
+    $("td > a").on("click",function(e){
+        e.stopPropagation();
+    });
+
+    dragElement(document.getElementById("hiddenForm"));
 
     $.ajax(
         {
