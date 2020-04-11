@@ -5,7 +5,7 @@ td a { /* Making a full row clickable */
     display:inline-block;
     min-height:100%;
     width:100%;
-    padding: 10px; /* add your padding here */
+    padding: 10px;
 }
 td {
     padding:0;

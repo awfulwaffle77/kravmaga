@@ -7,6 +7,24 @@ with `php composer install` or `php composer update` or you can install this wit
 and `composer require hashids/hashids`.
 
 ## MySQL - phpmyadmin
+Created new table `parole_resetare` as such:
+     
+    CREATE TABLE `parole_resetare` (
+      `Id` int(11) NOT NULL,
+      `hash_requester` varchar(255) NOT NULL,
+      `URL` varchar(255) NOT NULL,
+      `Data_Expirare` datetime NOT NULL DEFAULT current_timestamp()
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    
+    ALTER TABLE `parole_resetare`
+      ADD PRIMARY KEY (`Id`),
+      ADD UNIQUE KEY `URL` (`URL`);
+    
+    ALTER TABLE `parole_resetare`
+      MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+    COMMIT;
+     
+
 Using MySQL events with [this](https://stackoverflow.com/questions/6622301/can-i-set-a-mysql-event-schedule-using-phpmyadmin)
 StackOverflow link and [this](https://dev.mysql.com/doc/refman/8.0/en/events-privileges.html) MySQL doc.
 Created event to automatically DELETE outdated password links as such:
@@ -23,8 +41,16 @@ Created event to automatically DELETE outdated password links as such:
     
 
 # ISSUES
-~On Chrome, currentHash cookie modifies its value. Why?~ It did not. Function `existsInHashArray` does not 
-populate the array.
+TODO: Get antrenament.html in place
+
+PLEASE check updateEvent POST param & deleteRecord POST param
+
+Must test adding event and antrenament.
+
+~On Chrome, currentHash cookie modifies its value. Why? It did not. Function `existsInHashArray` does not 
+populate the array.~
+
+Note: handler.js has a lot of code in it and code for several pages. Might be good to separate code into other files.
 
 Note: Currently, PHP does not return a webpage and redirects are handled in .js files. Should be changed.
 # FEATURES
@@ -43,6 +69,7 @@ available to select. ~MUST ADD MININMUM PASSWORD REQUIREMENTS WITH REGEX.~(added
 **PASSWORD RESET WITH EXPIRING LINKS**
 
 **EVENT & ANTRENAMENT ADD WITH POPUP**
+Event also has the possibility to Delete and Edit
 
 **INDIVIDUAL ANTRENAMENT PAGE**
 Individual page where, depending on the GET Param `id`, you can see the users. 

@@ -8,22 +8,24 @@ $(document).ready(function () {
     const code_eventAdd_success = 309;
     const code_eventAdd_failed = 310;
 
+    const deleteMesage = "Vrei sa stergi acest eveniment?";
 
     $("#hiddenForm").hide();
     let counter = 0;
+
     //$("#editButton_toggle").hide();
-    function showResult(response){
+    function showResult(response) {
         let parsedResp = JSON.parse(response.responseText);
-        if(parsedResp.code === code_eventAdd_success)
+        if (parsedResp.code === code_eventAdd_success)
             $("#eventAdd_label").text('Eveniment adaugat cu succes.');
     }
 
-    function handleEventsInfo(jsonResponse){
+    function handleEventsInfo(jsonResponse) {
         // FACEM UN TABEL AICI
-        console.log(jsonResponse.responseText);
+        //console.log(jsonResponse.responseText);
         let parsedResp = JSON.parse(jsonResponse.responseText);
 
-        for(let i = 0;i < parsedResp.informatii.length; i++) {
+        for (let i = 0; i < parsedResp.informatii.length; i++) {
             let id = parsedResp.informatii[i]['ID_eveniment'];
             let nume = parsedResp.informatii[i]['Nume'];
             let locatie = parsedResp.informatii[i]['Locatie'];
@@ -32,7 +34,9 @@ $(document).ready(function () {
             let data_start = parsedResp.informatii[i]['Data_start_eveniment'];
             let data_stop = parsedResp.informatii[i]['Data_stop_eveniment'];
 
-            let trInsert = '<tr><td>' + nume + '</td><td>' + locatie + '</td><td>'+ descriere + '</td><td>' + tip_event + '</td><td>' + data_start + '</td><td>' + data_stop + '</td></tr>';
+            let buttonEdit = '<button id="editButton_' + id + '_edit" style="visibility: hidden; float: right; margin-top: 10px"> Edit</button>';
+            let buttonDel = '<button id="delButton_' + id + '_del" style="visibility: hidden; float: right; margin-top: 10px"> Delete</button>';
+            let trInsert = '<tr><td>' + nume + '</td><td>' + locatie + '</td><td>' + descriere + '</td><td>' + tip_event + '</td><td>' + data_start + '</td><td>' + data_stop + '</td><td>' + buttonEdit + '</td><td>' + buttonDel + '</td></tr>';
             $("#eventsTable tr:last").after(trInsert); // ADDS AFTER LAST TR
         }
     }
@@ -48,7 +52,7 @@ $(document).ready(function () {
                 getEventsInfo: 1,
             },
             complete: function (response) { // success is not working; using complete as alternative
-                    handleEventsInfo(response);
+                handleEventsInfo(response);
             },
             dataType: 'text'
         }
@@ -63,15 +67,69 @@ $(document).ready(function () {
             },
             complete: function (response) { // success is not working; using complete as alternative
                 let x = JSON.parse(response.responseText);
-                if(x.code === code_isAdmin){
-                    //$("#editButton_toggle").show();
-                    $("#editButton_toggle").css('visibility','visible').on('click',function () {
-                        if(counter === 0){
-                            $("#hiddenForm").show().css('display','block');
-                            counter = 1;
+                if (x.code === code_isAdmin) {
+                    $("button[id$='_del']").css('visibility', 'visible').on('click', function () {
+
+                        if (confirm(deleteMesage)){
+                            let id = $(this).attr('id').split("_")[1];
+                            $(this).parents('tr').remove();
+                            $.ajax(
+                                {
+                                    url: '../php/dbHandler.php',
+                                    method: 'POST',
+                                    data: {
+                                        deleteRecord: 1,
+                                        id: id
+                                    },
+                                    complete: function (response) { // success is not working; using complete as alternative
+                                        // TODO: DO SOMETHING HERE TOO
+                                        handleEventsInfo(response);
+                                    },
+                                    dataType: 'text'
+                                }
+                            );
+                            }
+                    });
+                    $("button[id$='_edit']").css('visibility', 'visible').on('click', function () {
+                        let currentTD = $(this).parents('tr').find('td');
+                        if ($(this).html() === 'Edit') {
+                            $.each(currentTD, function () {
+                                $(this).prop('contenteditable', true)
+                            });
+                        } else if ($(this).html() === 'Save') {
+                            let id = $(this).attr('id').split("_")[1];
+                            let updatedInfo = [];
+                            $.each(currentTD, function () {
+                                $(this).prop('contenteditable', false);
+                                updatedInfo.push($(this).html());
+                            });
+                            $.ajax(
+                                {
+                                    url: '../php/dbHandler.php',
+                                    method: 'POST',
+                                    data: {
+                                        updateEvent: id, // MUST BE ID OF EVENT
+                                        updatedInfo: updatedInfo
+                                    },
+                                    complete: function (response) { // success is not working; using complete as alternative
+                                        // TODO: DO SOMETHING HERE
+                                        handleEventsInfo(response);
+                                    },
+                                    dataType: 'text'
+                                }
+                            );
                         }
-                        else{
-                            $("#hiddenForm").hide().css('display','none');
+
+                        $(this).html($(this).html() === 'Edit' ? 'Save' : 'Edit')
+
+                    });
+                    //$("#editButton_toggle").show();
+                    $("#editButton_toggle").css('visibility', 'visible').on('click', function () {
+                        if (counter === 0) {
+                            $("#hiddenForm").show().css('display', 'block');
+                            counter = 1;
+                        } else {
+                            $("#hiddenForm").hide().css('display', 'none');
                             counter = 0;
                         }
                     })
@@ -81,7 +139,7 @@ $(document).ready(function () {
         }
     );
 
-    $("#newEvent_submit").on('click',function () {
+    $("#newEvent_submit").on('click', function () {
         let nume = $("#eventAdd_nume");
         let locatie = $("#eventAdd_locatie");
         let descriere = $("#eventAdd_descriere");
@@ -95,35 +153,34 @@ $(document).ready(function () {
         let yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
 
-        if(isFieldCompleted(nume))
+        if (isFieldCompleted(nume))
             mustCompleteField(nume);
         else
             nume = nume.val();
 
-        if(isFieldCompleted(locatie))
+        if (isFieldCompleted(locatie))
             mustCompleteField(locatie);
         else
             locatie = locatie.val();
-        if(isFieldCompleted(descriere))
+        if (isFieldCompleted(descriere))
             mustCompleteField(descriere);
         else
             descriere = descriere.val();
 
-        if(isFieldCompleted(tip_event))
+        if (isFieldCompleted(tip_event))
             mustCompleteField(tip_event);
         else
             tip_event = tip_event.val();
 
-        if(data_start.val() < today)
+        if (data_start.val() < today)
             mustCompleteField(data_start);
         else
             data_start = data_start.val();
 
-        if(data_stop.val() < today) {
+        if (data_stop.val() < today) {
             mustCompleteField(data_stop);
             return;
-        }
-        else
+        } else
             data_stop = data_stop.val();
 
         $.ajax(
@@ -140,7 +197,7 @@ $(document).ready(function () {
                     data_stop: data_stop
                 },
                 complete: function (response) { // success is not working; using complete as alternative
-                   showResult(response);
+                    showResult(response);
                 },
                 dataType: 'text'
             }

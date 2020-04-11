@@ -89,12 +89,34 @@ function getInfo($sqlcode, $successMsg, $successCode, $errMsg, $errCode)
 
         return (json_encode($resp));
     } catch (Exception $e) {
-// TODO: A NEW JSON_RESPONSE SHOULD BE MADE AND INTERPRETED
         $resp = new JSON_Response();
         $resp->message = $e->getMessage();
         $resp->code = $errCode;
 
         return json_encode($resp);
+    }
+}
+
+function basicUpdateDelete($sqlcode, $successMsg, $successCode, $errMsg, $errCode)
+{
+    try {
+        global $conn;
+        $result = mysqli_query($conn, $sqlcode);
+
+        $resp = new JSON_Response();
+        if ($result) {
+            $resp->message = $successMsg;
+            $resp->code = $successCode;
+        } else
+            throw new Exception($errMsg);
+
+        echo(json_encode($resp));
+    } catch (Exception $e) {
+        $resp = new JSON_Response();
+        $resp->message = $e->getMessage();
+        $resp->code = $errCode;
+
+        echo(json_encode($resp));
     }
 }
 
@@ -267,6 +289,27 @@ if (isset($_POST['addEvent'])) {
     }
 }
 
+if (isset($_POST['updateEvent'])) {
+    $id = $_POST['updateEvent'] + 2; // BECAUSE ID IS OFFSETed BY 2
+    $info = $_POST['updatedInfo'];
+    $nume = $info[0];
+    $locatie = $info[1];
+    $descriere = $info[2];
+    $tip_event = $info[3];
+    $data_start = $info[4];
+    $data_stop = $info[5];
+
+    $sql = "UPDATE `evenimente` SET `Nume`='$nume',`Locatie`='$locatie',`Descriere`='$descriere',`Tip_eveniment`='$tip_event',`Data_start_eveniment`='$data_start',`Data_stop_eveniment`='$data_stop' WHERE ID_eveniment = $id";
+   basicUpdateDelete($sql,msg_updateEvent_success,updateEvent_success,msg_updateEvent_failed,updateEvent_failed);
+}
+
+if (isset($_POST['deleteRecord'])) {
+    $id = $_POST['id'];
+    $sql = "DELETE FROM `evenimente` WHERE `id`='$id'";
+
+    basicUpdateDelete($sqlcode, msg_deleteRecord_success, deleteRecord_success, msg_deleteRecord_failed, deleteRecord_failed);
+}
+
 // GET METHODS
 
 if (isset($_GET['getSignupInfo'])) {
@@ -317,54 +360,54 @@ if (isset($_GET['getProfileInfo'])) {
 
 if (isset($_GET['getEventsInfo'])) {
 //    try {
-        $sql = "SELECT ID_eveniment, Nume, Locatie, Descriere, Tip_eveniment, Data_start_eveniment, Data_stop_eveniment FROM evenimente";
-        echo(getInfo($sql,msg_eventsInfo_success,eventsInfo_success,msg_eventsInfo_failed,eventsInfo_failed));
+    $sql = "SELECT ID_eveniment, Nume, Locatie, Descriere, Tip_eveniment, Data_start_eveniment, Data_stop_eveniment FROM evenimente";
+    echo(getInfo($sql, msg_eventsInfo_success, eventsInfo_success, msg_eventsInfo_failed, eventsInfo_failed));
 
-        /*$result = mysqli_query($conn, $sql);
+    /*$result = mysqli_query($conn, $sql);
 
-        if ($result->num_rows == 0)
-            throw new Exception(msg_eventsInfo_failed);
+    if ($result->num_rows == 0)
+        throw new Exception(msg_eventsInfo_failed);
 
-        $resp = new eventsInfo();
-        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-            array_push($resp->informatii, $row);
-        }
+    $resp = new eventsInfo();
+    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+        array_push($resp->informatii, $row);
+    }
 
-        $resp->message = msg_eventsInfo_success;
-        $resp->code = eventsInfo_success;
+    $resp->message = msg_eventsInfo_success;
+    $resp->code = eventsInfo_success;
 
-        echo(json_encode($resp));
-    } catch (Exception $e) {
-        // TODO: A NEW JSON_RESPONSE SHOULD BE MADE AND INTERPRETED
-        echo(json_encode($e->getMessage()));*/
+    echo(json_encode($resp));
+} catch (Exception $e) {
+    // TODO: A NEW JSON_RESPONSE SHOULD BE MADE AND INTERPRETED
+    echo(json_encode($e->getMessage()));*/
     //}
 }
 
 if (isset($_GET['getAntrenamenteInfo'])) {
     //try {
-        $sql = "SELECT an.id_antrenament as 'ID_Antrenament' , s.nume as 'Nume' , s.adresa as 'Adresa' , an.instructori as 'Instructori', an.Data_Antrenament as 'Data' FROM `antrenamente` as an INNER JOIN `sali` as s ON an.id_sala = s.id_sala ";
-        echo(getInfo($sql,msg_antrnmntInfo_success,antrntmnt_success,msg_antrnmntInfo_failed,antrnmnt_failed));
+    $sql = "SELECT an.id_antrenament as 'ID_Antrenament' , s.nume as 'Nume' , s.adresa as 'Adresa' , an.instructori as 'Instructori', an.Data_Antrenament as 'Data' FROM `antrenamente` as an INNER JOIN `sali` as s ON an.id_sala = s.id_sala ";
+    echo(getInfo($sql, msg_antrnmntInfo_success, antrntmnt_success, msg_antrnmntInfo_failed, antrnmnt_failed));
 
     //    $result = mysqli_query($conn, $sql);
 
-      /*  if ($result->num_rows == 0)
-            throw new Exception(msg_antrnmntInfo_failed);
+    /*  if ($result->num_rows == 0)
+          throw new Exception(msg_antrnmntInfo_failed);
 
-        $resp = new eventsInfo();
-        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-            array_push($resp->informatii, $row);
-        }
+      $resp = new eventsInfo();
+      while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+          array_push($resp->informatii, $row);
+      }
 
-        $resp->message = msg_antrnmntInfo_success;
-        $resp->code = antrntmnt_success;
+      $resp->message = msg_antrnmntInfo_success;
+      $resp->code = antrntmnt_success;
 
-        echo(json_encode($resp));
-    } catch (Exception $e) {
-        $resp = new JSON_Response();
-        $resp->message = $e->getMessage();
-        $resp->code = antrnmnt_failed;
+      echo(json_encode($resp));
+  } catch (Exception $e) {
+      $resp = new JSON_Response();
+      $resp->message = $e->getMessage();
+      $resp->code = antrnmnt_failed;
 
-    }*/
+  }*/
 
 }
 
@@ -372,6 +415,8 @@ if (isset($_GET['getAntrenament']) && isset($_GET['id'])) {
 
     $id = $_GET['id'];
     $sql = "SELECT u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament WHERE ";
-    echo(getInfo($sql,msg_antrnmntUserInfo_success,antrnmntUserInfo_success,msg_antrnmntUserInfo_failed,antnmntUserInfo_failed));
+    echo(getInfo($sql, msg_antrnmntUserInfo_success, antrnmntUserInfo_success, msg_antrnmntUserInfo_failed, antnmntUserInfo_failed));
 }
+
+
 

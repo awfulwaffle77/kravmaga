@@ -21,6 +21,10 @@ define("antrntmnt_success",311);
 define("antrnmnt_failed",312);
 define("antrnmntUserInfo_success",313);
 define("antnmntUserInfo_failed",314);
+define("updateEvent_success",315);
+define("updateEvent_failed",316);
+define("deleteRecord_success",317);
+define("deleteRecord_failed",318);
 
 // MESSAGES
 define("msg_userInsert_success","Utilizator inserat cu succes.");
@@ -54,6 +58,12 @@ define("msg_antrnmntInfo_failed","Info antrenamente nu au putut fi fetchuite");
 
 define("msg_antrnmntUserInfo_success", "Info useri antrenamente fetchuite cu succes");
 define("msg_antrnmntUserInfo_failed","Info useri antrenamente nu au putut fi fetchuite");
+
+define("msg_updateEvent_success","Eveniment updatat cu succes");
+define("msg_updateEvent_failed","Evenimentul nu a putut fi updatat");
+
+define("msg_deleteRecord_success","Rand sters cu success");
+define("msg_deleteRecord_failed","Randul nu a putut fi sters");
 // CLASSES
 
 class JSON_Response{
