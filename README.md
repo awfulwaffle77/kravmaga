@@ -7,6 +7,8 @@ with `php composer install` or `php composer update` or you can install this wit
 and `composer require hashids/hashids`.
 
 ## MySQL - phpmyadmin
+Table `antrenamente`, row `ID_sala` is UNIQUE. Is it intended? Changed from UNIQUE to INDEX.
+
 Created new table `parole_resetare` as such:
      
     CREATE TABLE `parole_resetare` (
@@ -41,18 +43,24 @@ Created event to automatically DELETE outdated password links as such:
     
 
 # ISSUES
-TODO: Get antrenament.html in place
+* ADD POSIBILITY TO ADD OR REMOVE IN ANTRENAMENT.HTML
 
-PLEASE check updateEvent POST param & deleteRecord POST param
+* TODO: Get antrenament.html in place
 
-Must test adding event and antrenament.
+* antrenamente/evenimente Script is a lot of duplicate code
 
-~On Chrome, currentHash cookie modifies its value. Why? It did not. Function `existsInHashArray` does not 
+* edit buttons have no cancel function. Save state and reset input.
+
+* PLEASE check updateEvent POST param & deleteRecord POST param
+
+* Must test adding event and antrenament.
+
+* ~On Chrome, currentHash cookie modifies its value. Why? It did not. Function `existsInHashArray` does not 
 populate the array.~
 
-Note: handler.js has a lot of code in it and code for several pages. Might be good to separate code into other files.
+* Note: handler.js has a lot of code in it and code for several pages. Might be good to separate code into other files.
 
-Note: Currently, PHP does not return a webpage and redirects are handled in .js files. Should be changed.
+* Note: Currently, PHP does not return a webpage and redirects are handled in .js files. Should be changed.
 # FEATURES
 **LOGIN**
  
@@ -69,9 +77,10 @@ available to select. ~MUST ADD MININMUM PASSWORD REQUIREMENTS WITH REGEX.~(added
 **PASSWORD RESET WITH EXPIRING LINKS**
 
 **EVENT & ANTRENAMENT ADD WITH POPUP**
-Event also has the possibility to Delete and Edit
+Event also has the possibility to Delete and Edit. Antrenament is implemented such that you can only update 
+Instructori and Data, but not the Location.
 
-**INDIVIDUAL ANTRENAMENT PAGE**
+**INDIVIDUAL ANTRENAMENT PAGE WITH SEARCH**
 Individual page where, depending on the GET Param `id`, you can see the users. 
 
 ## Communication between sever and client

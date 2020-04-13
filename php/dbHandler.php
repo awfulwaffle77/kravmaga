@@ -120,8 +120,6 @@ function basicUpdateDelete($sqlcode, $successMsg, $successCode, $errMsg, $errCod
     }
 }
 
-;
-
 initHashArray();
 
 // POST METHODS
@@ -290,7 +288,7 @@ if (isset($_POST['addEvent'])) {
 }
 
 if (isset($_POST['updateEvent'])) {
-    $id = $_POST['updateEvent'] + 2; // BECAUSE ID IS OFFSETed BY 2
+    $id = $_POST['updateEvent'] + 2; // BECAUSE ID IS OFFSETed BY 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BAD IMPLETMENTATION
     $info = $_POST['updatedInfo'];
     $nume = $info[0];
     $locatie = $info[1];
@@ -303,11 +301,38 @@ if (isset($_POST['updateEvent'])) {
    basicUpdateDelete($sql,msg_updateEvent_success,updateEvent_success,msg_updateEvent_failed,updateEvent_failed);
 }
 
-if (isset($_POST['deleteRecord'])) {
+if (isset($_POST['deleteRecordEvent'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM `evenimente` WHERE `id`='$id'";
 
     basicUpdateDelete($sqlcode, msg_deleteRecord_success, deleteRecord_success, msg_deleteRecord_failed, deleteRecord_failed);
+}
+
+if(isset($_POST['updateAntrenamente'])){
+    // IMPLEMENTATION: CAN ONLY CHANGE INSTURCTORI AND DATA, NOT THE LOCATION
+    $id = $_POST['updateAntrenamente'];
+    $nume = $_POST[0];
+    $adresa = $_POST[1];
+    $instructori = $_POST[2];
+    $data = $_POST[3];
+
+    // UPDATING ANTRENAMENTE
+    $sql = "UPDATE `antrenamente` SET `Data_antrenament`='$data',`Instructori`=$instructori WHERE `ID_antrenament`=$id";
+    basicUpdateDelete($sql,msg_updateAntrnmnt_success,updateAntrnmnt_success,msg_updateAntrnmnt_failed,updateAntrnmnt_failed);
+}
+
+if(isset($_POST['deleteRecordAntrenamente'])){
+    $id = $_POST['id'];
+    $sql = "DELETE FROM `antrenamente` WHERE `id_antrenament`='$id'";
+
+    basicUpdateDelete($sql,msg_deleteRecordAntrnmnt_success,deleteRecordAntrnmnt_success,msg_deleteRecordAntrnmnt_failed,deleteRecordAntrnmnt_failed);
+}
+
+if(isset($_POST['deleteRecordPresentUser'])){
+    $id = $_POST['id'];
+    $sql = "DELETE FROM `utilizatori_antrenamente` WHERE ID_utilizator_antrenament = '$id'";
+
+    basicUpdateDelete($sql,);
 }
 
 // GET METHODS
@@ -414,7 +439,7 @@ if (isset($_GET['getAntrenamenteInfo'])) {
 if (isset($_GET['getAntrenament']) && isset($_GET['id'])) {
 
     $id = $_GET['id'];
-    $sql = "SELECT u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament WHERE ";
+    $sql = "SELECT u.id_utilizator, u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament";
     echo(getInfo($sql, msg_antrnmntUserInfo_success, antrnmntUserInfo_success, msg_antrnmntUserInfo_failed, antnmntUserInfo_failed));
 }
 

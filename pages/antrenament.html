@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +16,30 @@
 </head>
 
 <body>
+<input type="text" id="search" placeholder=" live search">
 
+<div id="tableBox" style="padding-top: 20%"></div>
+<button id="editButton_toggle" style="visibility: hidden; float: right; margin-top: 10px"> Adaugare</button>
+<table id="eventsTable">
+    <tr>
+        <th>Nume</th>
+        <th>Prenume</th>
+    </tr>
+</table>
+
+<div class="form-popup" id="hiddenForm" style="display:none; position: absolute; z-index: 9">
+    <div id="hiddenFormHeader">Click here to move</div>
+    <form class="form-container">
+        <input id="eventAdd_nume" placeholder="Nume eveniment">
+        <input id="eventAdd_locatie" placeholder="Locatie">
+        <input id="eventAdd_descriere" placeholder="Descriere">
+        <input id="eventAdd_tipEvent" placeholder="Tip eveniment">
+        <input type="date" id="eventAdd_dataStart" placeholder="Tip eveniment">
+        <input type="date" id="eventAdd_dataStop" placeholder="Tip eveniment">
+
+        <label id="eventAdd_label"></label>
+        <button type="submit" id="newEvent_submit">Submit</button>
+    </form>
+</div>
 </body>
 </html>

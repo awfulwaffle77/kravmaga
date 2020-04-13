@@ -8,7 +8,7 @@ $(document).ready(function () {
     const code_eventAdd_success = 309;
     const code_eventAdd_failed = 310;
 
-    const deleteMesage = "Vrei sa stergi acest eveniment?";
+    const deleteMessage = "Vrei sa stergi acest eveniment?";
 
     $("#hiddenForm").hide();
     let counter = 0;
@@ -70,7 +70,7 @@ $(document).ready(function () {
                 if (x.code === code_isAdmin) {
                     $("button[id$='_del']").css('visibility', 'visible').on('click', function () {
 
-                        if (confirm(deleteMesage)){
+                        if (confirm(deleteMessage)){
                             let id = $(this).attr('id').split("_")[1];
                             $(this).parents('tr').remove();
                             $.ajax(
@@ -78,7 +78,8 @@ $(document).ready(function () {
                                     url: '../php/dbHandler.php',
                                     method: 'POST',
                                     data: {
-                                        deleteRecord: 1,
+                                        event:1,
+                                        deleteRecordEvent: 1,
                                         id: id
                                     },
                                     complete: function (response) { // success is not working; using complete as alternative
