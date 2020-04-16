@@ -35,7 +35,7 @@ session_start();
 <body>
 
 <div id="tableBox" style="padding-top: 20%"></div>
-<button id="editButton_toggle" style="visibility: hidden; float: right; margin-top: 10px"> Editare</button>
+<button id="editButton_toggle" style="visibility: hidden; float: right; margin-top: 10px"> Adaugare</button>
 <table id="antrnmntTable">
     <tr>
         <th>Nume</th>
@@ -45,8 +45,8 @@ session_start();
     </tr>
 </table>
 
-<div class="form-popup" id="hiddenForm" style="display:none; float:right; position: fixed; z-index: 9">
-<div id="hiddenFormHeader">Click here to move</div>
+<div class="form-popup" id="hiddenForm" style="display:none; position: absolute; z-index: 9">
+    <div id="hiddenFormHeader">Click here to move</div>
     <form class="form-container">
         <input id="eventAdd_nume" placeholder="Nume eveniment">
         <input id="eventAdd_locatie" placeholder="Locatie">
@@ -59,4 +59,7 @@ session_start();
         <button type="submit" id="newEvent_submit">Submit</button>
     </form>
 </div>
+
+</body>
+
 

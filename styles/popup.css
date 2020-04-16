@@ -1,7 +1,6 @@
 .form-popup {
     display: none;
     position: fixed;
-    border: 3px solid #f1f1f1;
     z-index: 9;
     bottom: 50%;
     right: 50%;
@@ -13,12 +12,21 @@
     min-width: 200px;
     padding: 10px;
     background-color: white;
+    margin-top: 3vh;
+    width: 30vw;
+    border-top: 0;
+    border: 0.25vw solid #000000;
 }
 
 #hiddenFormHeader {
-    margin-bottom: 10px;
+    border: 0.25vw solid #000000;
+    border-bottom: 0;
     cursor: move;
-    z-index: 10;
+    z-index: 9;
+    width: 30vw;
+    text-align: center;
+    display: flex;
+    align-items: stretch;
     position: fixed;
     background-color: #2196F3;
     color: #fff;

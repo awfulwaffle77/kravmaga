@@ -20,9 +20,9 @@ $(document).ready(function () {
             let instructori = parsedResp.informatii[i]['Instructori'];
             let data = parsedResp.informatii[i]['Data'];
 
-            let buttonEdit = '<button id="editButton_' + id + '_edit" style="visibility: hidden; float: right; margin-top: 10px"> Edit</button>';
-            let buttonDel = '<button id="delButton_' + id + '_del" style="visibility: hidden; float: right; margin-top: 10px"> Delete</button>';
-            let trInsert = '<tr><td><a href= ' + href + '>' + nume + '</a></td><td><a href=' + href + '>' + adresa + '</a></td><td><a href=' + href + '>' + instructori + '</td><td><a href=' + href + '>' + data + '</td><td>' + buttonEdit + '</td><td>' + buttonDel + '</td></tr>';
+            let buttonEdit = '<button id="editButton_' + id + '_edit" style="visibility: hidden; float: right; margin-top: 10px">Edit</button>';
+            let buttonDel = '<button id="delButton_' + id + '_del" style="visibility: hidden; float: right; margin-top: 10px">Delete</button>';
+            let trInsert = '<tr><td><a href= ' + href + '>' + nume + '</a></td><td><a href=' + href + '>' + adresa + '</a></td><td><a href=' + href + '>' + instructori + '</td><td><a href=' + href + '>' + data + '</a></td><td>' + buttonEdit + '</td><td>' + buttonDel + '</td></tr>';
             $("#antrnmntTable tr:last").after(trInsert); // ADDS AFTER LAST TR
         }
     }
@@ -59,7 +59,6 @@ $(document).ready(function () {
                 let x = JSON.parse(response.responseText);
                 if(x.code === code_isAdmin){
                     $("button[id$='_del']").css('visibility', 'visible').on('click', function () {
-
                         if (confirm(deleteMessage)){
                             let id = $(this).attr('id').split("_")[1];
                             $(this).parents('tr').remove();
@@ -81,9 +80,9 @@ $(document).ready(function () {
                         }
                     });
                     $("button[id$='_edit']").css('visibility', 'visible').on('click', function () {
-                        let currentTD = $(this).parents('tr').find('a');
+                        let currentTD = $(this).parents('tr').find('a').slice(2); // DUE TO THE IMPLEMENTATION OF updateAntrenamente, THE FIRST TWO ROWS ARE NOT EDITABLE
                         if ($(this).html() === 'Edit') {
-                            $.each(currentTD.slice(2), function () { // DUE TO THE IMPLEMENTATION OF updateAntrenamente, THE FIRST TWO ROWS ARE NOT EDITABLE
+                            $.each(currentTD, function () {
                                 $(this).prop('contenteditable', true)
                             });
                         } else if ($(this).html() === 'Save') {
@@ -114,6 +113,8 @@ $(document).ready(function () {
 
                     });
                     //$("#editButton_toggle").show();
+
+
                     $("#editButton_toggle").css('visibility','visible').on('click',function () {
                         if(counter === 0){
                             $("#hiddenForm").show().css('display','block');

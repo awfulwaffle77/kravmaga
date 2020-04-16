@@ -44,6 +44,30 @@ $(document).ready(function () {
 
     dragElement(document.getElementById("hiddenForm"));
 
+    $("#search").on("keyup", function () {
+        let value = $(this).val().toLowerCase();
+        let matched = Array();
+
+        $("table tr").each(function (index) {
+            if (index !== 0) {
+                let $row = $(this);
+
+                let $tdElement = $row.find("td:eq(0)");
+                let id = $tdElement.text().toLowerCase();
+                let matchedIndex = id.indexOf(value);
+
+                if (matchedIndex !== 0) {
+                    $row.hide();
+                } else {
+                    $row.show();
+                }
+
+                // TO UPDATE TO ALL ROWS, YOU CAN CHECK COLUMN BY COLUMN AND PUSH MATCHING FIELDS INTO AND ARRAY
+            }
+        });
+    });
+
+
     $.ajax(
         {
             url: '../php/dbHandler.php',

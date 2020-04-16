@@ -97,7 +97,7 @@ function getInfo($sqlcode, $successMsg, $successCode, $errMsg, $errCode)
     }
 }
 
-function basicUpdateDelete($sqlcode, $successMsg, $successCode, $errMsg, $errCode)
+function basicUpdateDeleteInsert($sqlcode, $successMsg, $successCode, $errMsg, $errCode)
 {
     try {
         global $conn;
@@ -205,32 +205,32 @@ if (isset($_POST['checkPrivilege'])) {
 if (isset($_POST['signup'])) {
     // TODO: PROBABLY ADD TO utilizatori_centuri too??
     try {
-        if (existsInHashArray($_POST['currentHash']))
+        if (existsInHashArray($_POST['currentHash'])) { // IF CURRENT USER IS ADMIN
 
             $nume = $_POST['nume'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $prenume = $_POST['prenume'];
-        $passwd = hash("sha256", $_POST['passwd']);
-        $date = $_POST['date'];
-        $id_sala = "'" . $_POST['id_sala'] . "'";
-        $id_centura = "'" . $_POST['id_centura'] . "'";
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $prenume = $_POST['prenume'];
+            $passwd = password_hash($_POST['passwd'], PASSWORD_DEFAULT);
+            $date = $_POST['date'];
+            $id_sala = "'" . $_POST['id_sala'] . "'";
+            $id_centura = "'" . $_POST['id_centura'] . "'";
 
-        $userHash = hash("sha256", $nume . $prenume . $username . $passwd);
+            $userHash = password_hash($nume . $prenume . $username . $passwd, PASSWORD_DEFAULT);
 
-        // tip_utilizator default is 1(regular user)
-        $sqlcode = "INSERT INTO utilizatori(`Nume`, `Prenume`, `Utilizator`,`Email`,`Parola`, `Data_inrolare`, `ID_Sala`, `ID_Centura`, `Hash`) VALUES('$nume','$prenume','$username','$email','$passwd','$date',$id_sala,$id_centura,'$userHash')";
-        $result = mysqli_query($conn, $sqlcode);
+            // tip_utilizator default is 1(regular user)
+            $sqlcode = "INSERT INTO utilizatori(`Nume`, `Prenume`, `Utilizator`,`Email`,`Parola`, `Data_inrolare`, `ID_Sala`, `ID_Centura`, `Hash`) VALUES('$nume','$prenume','$username','$email','$passwd','$date',$id_sala,$id_centura,'$userHash')";
+            $result = mysqli_query($conn, $sqlcode);
 
-        if ($result == false) {
-            throw new Exception(msg_userInsert_failed);
-        } else {
-            $resp = new JSON_Response();
-            $resp->message = msg_userInsert_success;
-            $resp->code = userInsert_good;
-            echo(json_encode($resp));
-        }
-
+            if ($result == false) {
+                throw new Exception(msg_userInsert_failed);
+            } else {
+                $resp = new JSON_Response();
+                $resp->message = msg_userInsert_success;
+                $resp->code = userInsert_good;
+                echo(json_encode($resp));
+            }
+        } else die("Not an admin");
     } catch (Exception $e) {
         $x = $e->getMessage();
         echo(json_encode($e->getMessage()));
@@ -298,41 +298,73 @@ if (isset($_POST['updateEvent'])) {
     $data_stop = $info[5];
 
     $sql = "UPDATE `evenimente` SET `Nume`='$nume',`Locatie`='$locatie',`Descriere`='$descriere',`Tip_eveniment`='$tip_event',`Data_start_eveniment`='$data_start',`Data_stop_eveniment`='$data_stop' WHERE ID_eveniment = $id";
-   basicUpdateDelete($sql,msg_updateEvent_success,updateEvent_success,msg_updateEvent_failed,updateEvent_failed);
+    basicUpdateDeleteInsert($sql, msg_updateEvent_success, updateEvent_success, msg_updateEvent_failed, updateEvent_failed);
 }
 
 if (isset($_POST['deleteRecordEvent'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM `evenimente` WHERE `id`='$id'";
 
-    basicUpdateDelete($sqlcode, msg_deleteRecord_success, deleteRecord_success, msg_deleteRecord_failed, deleteRecord_failed);
+    basicUpdateDeleteInsert($sqlcode, msg_deleteRecord_success, deleteRecord_success, msg_deleteRecord_failed, deleteRecord_failed);
 }
 
-if(isset($_POST['updateAntrenamente'])){
+if (isset($_POST['updateAntrenamente'])) {
     // IMPLEMENTATION: CAN ONLY CHANGE INSTURCTORI AND DATA, NOT THE LOCATION
     $id = $_POST['updateAntrenamente'];
-    $nume = $_POST[0];
-    $adresa = $_POST[1];
-    $instructori = $_POST[2];
-    $data = $_POST[3];
+    $instructori = $_POST['updatedInfo'][0];
+    $data = $_POST['updatedInfo'][1];
 
     // UPDATING ANTRENAMENTE
-    $sql = "UPDATE `antrenamente` SET `Data_antrenament`='$data',`Instructori`=$instructori WHERE `ID_antrenament`=$id";
-    basicUpdateDelete($sql,msg_updateAntrnmnt_success,updateAntrnmnt_success,msg_updateAntrnmnt_failed,updateAntrnmnt_failed);
+    $sql = "UPDATE `antrenamente` SET `Data_antrenament`='$data',`Instructori`='$instructori' WHERE `ID_antrenament`=$id";
+    basicUpdateDeleteInsert($sql, msg_updateAntrnmnt_success, updateAntrnmnt_success, msg_updateAntrnmnt_failed, updateAntrnmnt_failed);
 }
 
-if(isset($_POST['deleteRecordAntrenamente'])){
+if (isset($_POST['deleteRecordAntrenamente'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM `antrenamente` WHERE `id_antrenament`='$id'";
 
-    basicUpdateDelete($sql,msg_deleteRecordAntrnmnt_success,deleteRecordAntrnmnt_success,msg_deleteRecordAntrnmnt_failed,deleteRecordAntrnmnt_failed);
+    basicUpdateDeleteInsert($sql, msg_deleteRecordAntrnmnt_success, deleteRecordAntrnmnt_success, msg_deleteRecordAntrnmnt_failed, deleteRecordAntrnmnt_failed);
 }
 
-if(isset($_POST['deleteRecordPresentUser'])){
+if (isset($_POST['deleteRecordPresentUser'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM `utilizatori_antrenamente` WHERE ID_utilizator_antrenament = '$id'";
 
-    basicUpdateDelete($sql,);
+    basicUpdateDeleteInsert($sql, msg_deleteRecordPresentUser_success, deleteRecordPresentUser_success, msg_deleteRecordPresentUser_failed, deleteRecordPresentUser_failed);
+}
+
+if (isset($_POST['addUserAntrenament'])) {
+    try {
+    $nume = $_POST['nume'];
+    $prenume = $_POST['prenume'];
+    $id_antr = $_POST['id_antr'];
+
+    $sql = "INSERT INTO utilizatori_antrenamente(ID_user) SELECT ID_Utilizator FROM utilizatori WHERE nume='$nume' AND prenume='$prenume'";
+    $sql2 = "UPDATE utilizatori_antrenamente as a
+            INNER JOIN utilizatori as b ON a.ID_user = b.ID_utilizator
+            SET a.ID_antr = $id_antr
+            WHERE b.Nume='$nume' AND b.Prenume='$prenume'";
+
+    $result = mysqli_query($conn, $sql);
+    if (!$result)
+        throw new  Exception(msg_addUserAntrenament_failed);
+
+    $result = mysqli_query($conn, $sql2);
+     if (!$result)
+         throw new  Exception(msg_addUserAntrenament_failed);
+
+     $resp = new JSON_Response();
+     $resp->message = msg_addUserAntrenament_success;
+     $resp->code = addUserAntrenament_success;
+
+     echo(json_encode($resp));
+    }
+    catch (Exception $e) {
+        $resp = new JSON_Response();
+        $resp->code = addUserAntrenament_failed;
+        $resp->message = $e->getMessage();
+        echo(json_encode($resp));
+    }
 }
 
 // GET METHODS
@@ -439,8 +471,26 @@ if (isset($_GET['getAntrenamenteInfo'])) {
 if (isset($_GET['getAntrenament']) && isset($_GET['id'])) {
 
     $id = $_GET['id'];
-    $sql = "SELECT u.id_utilizator, u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament";
+    $sql = "SELECT ua.id_utilizator_antrenament, u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament";
     echo(getInfo($sql, msg_antrnmntUserInfo_success, antrnmntUserInfo_success, msg_antrnmntUserInfo_failed, antnmntUserInfo_failed));
+}
+
+if (isset($_GET['getAntrenamentTitlu'])) {
+    $id = $_GET['id'];
+
+    $sql = "SELECT an.id_antrenament as 'ID_Antrenament' , s.nume as 'Nume' , s.adresa as 'Adresa' , an.instructori as 'Instructori', an.Data_Antrenament as 'Data' FROM `antrenamente` as an INNER JOIN `sali` as s ON an.id_sala = s.id_sala WHERE `id_antrenament`='$id'";
+    echo(getInfo($sql, "", "", "", ""));
+}
+
+if (isset($_GET['getAntrenamentInfo'])) { // INFO FOR A SINGLE TRAINING SESSION
+    $id = $_GET['id'];
+
+    $sql = "SELECT u.Nume, u.Prenume
+            FROM utilizatori as u
+            WHERE u.ID_utilizator NOT IN (SELECT ua.ID_user
+            FROM utilizatori_antrenamente as ua
+            WHERE ua.ID_antr = $id)"; // SELECT USERS THAT ARE NOT IN THIS TRAINING SES
+    echo(getInfo($sql, msg_getAntrenamentInfo_succes, getAntrenamentInfo_succes, msg_getAntrenamentInfo_failed, getAntrenamentInfo_failed));
 }
 
 

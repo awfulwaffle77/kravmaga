@@ -29,7 +29,12 @@ define("updateAntrnmnt_success",319);
 define("updateAntrnmnt_failed",320);
 define("deleteRecordAntrnmnt_success",321);
 define("deleteRecordAntrnmnt_failed",322);
-
+define("deleteRecordPresentUser_success",323);
+define("deleteRecordPresentUser_failed",324);
+define("getAntrenamentInfo_succes",325);
+define("getAntrenamentInfo_failed",326);
+define("addUserAntrenament_success",327);
+define("addUserAntrenament_failed",328);
 // MESSAGES
 define("msg_userInsert_success","Utilizator inserat cu succes.");
 define("msg_userInsert_failed","Utilizatorul nu a putut fi adaugat. Eroare la query");
@@ -77,6 +82,12 @@ define("msg_deleteRecordAntrnmnt_failed","Antrenamentul nu a putut fi sters");
 
 define("msg_deleteRecordPresentUser_success","User sters cu succes");
 define("msg_deleteRecordPresentUser_failed","Userul nu a putut fi sters");
+
+define("msg_getAntrenamentInfo_succes","Info antrenament fetchuit cu succes");
+define("msg_getAntrenamentInfo_failed","Info antrenament nu a putut fi fetchuit");
+
+define("msg_addUserAntrenament_success","User adaugat cu succes");
+define("msg_addUserAntrenament_failed","Userul nu a putut fi adaugat");
 // CLASSES
 
 class JSON_Response{

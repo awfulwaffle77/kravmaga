@@ -8,6 +8,8 @@ and `composer require hashids/hashids`.
 
 ## MySQL - phpmyadmin
 Table `antrenamente`, row `ID_sala` is UNIQUE. Is it intended? Changed from UNIQUE to INDEX.
+Table `utilizatori_antrenamente`. rows `ID_user` and `ID_sala` are UNIQUE. Is it intended? Changed from UNIQUE to INDEX.
+If they are UNIQUE, I cannot add same user to other trainings.
 
 Created new table `parole_resetare` as such:
      
@@ -43,7 +45,11 @@ Created event to automatically DELETE outdated password links as such:
     
 
 # ISSUES
-* ADD POSIBILITY TO ADD OR REMOVE IN ANTRENAMENT.HTML
+* Select does not work if you click select the second time. Problem at hiding child `td`. It hides the child `input`.
+
+* Delete buttons do not work anymore on antrenament.html . Have to delete with Select button. Removed them
+
+* Edit/Delete buttons sometimes do not show and have to be refreshed
 
 * TODO: Get antrenament.html in place
 

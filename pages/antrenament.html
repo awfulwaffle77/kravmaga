@@ -7,39 +7,66 @@
     <title>Krav Maga - Autoaparare si autocontrol</title>
     <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
     <script type="module" src="../js/js-cookie/js.cookie.js"></script> <!-- https://github.com/js-cookie/js-cookie -->
     <script type="module" src="../js/handler.js"></script>
     <script type="module" src="../js/antrenament.js"></script>
-    <link rel="stylesheet" href="../styles/base.css" />
+    <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/base.css"/>
     <link rel="stylesheet" href="../styles/extended.css">
     <link rel="stylesheet" href="../styles/popup.css">
 </head>
 
 <body>
-<input type="text" id="search" placeholder=" live search">
 
-<div id="tableBox" style="padding-top: 20%"></div>
-<button id="editButton_toggle" style="visibility: hidden; float: right; margin-top: 10px"> Adaugare</button>
-<table id="eventsTable">
-    <tr>
-        <th>Nume</th>
-        <th>Prenume</th>
-    </tr>
-</table>
+
+<h1 class="d-flex justify-content-center" id="titlu"></h1>
+
+
+<div class="container">
+<div class="d-flex justify-content-start mb-2 mt-2 inner-addon left-addon">
+    <i class="fas fa-search"></i>
+    <input autocomplete="off" type="search" id="search" placeholder="Cauta dupa Nume">
+</div>
+
+<div class="container mb-2">
+    <button id="editButton_toggle" class="btn btn-light btn-md"
+            style="visibility: hidden;"><i class="d-flex align-self-center fas fa-user-plus"></i></button>
+    <button id="select_toggle" class="btn btn-light btn-sm" style="display: none;">Select</button>
+</div>
+    <table class="table table-sm table-bordered table-hover" id="eventsTable">
+        <tr>
+            <th style="display: none"></th>
+            <th>Nume</th>
+            <th>Prenume</th>
+        </tr>
+    </table>
+</div>
 
 <div class="form-popup" id="hiddenForm" style="display:none; position: absolute; z-index: 9">
     <div id="hiddenFormHeader">Click here to move</div>
     <form class="form-container">
-        <input id="eventAdd_nume" placeholder="Nume eveniment">
-        <input id="eventAdd_locatie" placeholder="Locatie">
-        <input id="eventAdd_descriere" placeholder="Descriere">
-        <input id="eventAdd_tipEvent" placeholder="Tip eveniment">
-        <input type="date" id="eventAdd_dataStart" placeholder="Tip eveniment">
-        <input type="date" id="eventAdd_dataStop" placeholder="Tip eveniment">
+        <label for="passwd">Nume, Prenume:</label><br>
+        <select class="form-control" id="antrnmnt_dropdownAdd">
+            <option>-- Alegeti un utilizator --</option>
+        </select><br><br>
 
         <label id="eventAdd_label"></label>
-        <button type="submit" id="newEvent_submit">Submit</button>
+        <button class="btn btn-light btn-sm" type="button" id="newEvent_submit">Submit</button>
     </form>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 </html>
