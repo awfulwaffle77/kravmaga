@@ -15,6 +15,10 @@ session_start();
     <script src="../js/windowChanges.js"></script>
     <script type="module" src="../js/fieldChecker.js"></script>
     <script type="module" src="../js/handler.js"></script>
+    <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/base.css" />
     <link rel="stylesheet" href="../styles/extended.css" />
 </head>
@@ -35,13 +39,16 @@ session_start();
 
 <body>
 
-<div class="loginBox">
+<div class="form-group loginBox">
     <form class="loginBox" action="#" method="post">
-        <input placeholder="Username" type="text" id="uname" name="uname"><br>
-        <input placeholder="Password" type="password" id="passwd" name="passwd"><br><br>
+        <input class="form-control" placeholder="Username" type="text" id="uname" name="uname"><br>
+        <input class="form-control" placeholder="Password" type="password" id="passwd" name="passwd"><br><br>
 
         <label id="errMsg"></label>
-        <input type="button" value="Submit" id="loginSubmit">
+        <div class="d-flex justify-content-center flex-column">
+        <input class="btn btn-primary ml-5 mr-5 mb-4" type="button" value="Submit" id="loginSubmit"><br>
+            <a class="align-self-center" href="passwordReset.html">Ai uitat parola?</a>
+        </div>
     </form>
 </div>
 

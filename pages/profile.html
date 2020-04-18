@@ -14,6 +14,10 @@ session_start();
     <script type="module" src="../js/js-cookie/js.cookie.js"></script>
     <script type="module" src="../js/handler.js"></script>
     <script src="../js/windowChanges.js"></script>
+    <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/base.css" />
     <link rel="stylesheet" href="../styles/extended.css" />
 </head>
@@ -34,9 +38,9 @@ session_start();
 
 <body>
 
-<div id="profileBox">
+<div class="container d-flex flex-column mTpercent align-items-center align-self-center ml-5" id="profileBox">
     <br><br>
-<p id="edit_profile"> Edit profile</p>
+<a id="edit_profile"> Editare profil</a>
 <!-- TODO: On click, load info on this page so you can get and edit the fields accessible. Change the class so that it can be beautifully put in a box. -->
 <label for="uname">Nume:</label><br>
     <p id="profile_nume"></p>
