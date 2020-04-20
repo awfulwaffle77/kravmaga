@@ -19,7 +19,7 @@ export let getUrlParameter = function getUrlParameter(sParam) {
 };
 $(document).ready(function(){
     // DECLARING VARIABLES
-    const loginRedirectURL = "https://localhost/kravmaga_v2/";
+    const loginRedirectURL = "https://localhost/kravmaga_v2/pages/profil.html";
     const adminProfileRedirect = "https://localhost/kravmaga_v2/pages/signup.html";
     const regularProfileRedirect = "https://localhost/kravmaga_v2/pages/profile.html"; // Better option would be to use default anchor option (in php?)
     const signupSuccessRedirect = "https://localhost/kravmaga_v2/pages/success.html";
@@ -85,7 +85,7 @@ $(document).ready(function(){
     // PROFILE ANCHOR HANDLING
     if (Cookies.get('logged') === '1') { // If the cookie shows that the user is logged, the Login button is updated
         // Changing the name and href accordingly
-        $("#loginProfile").text('Profil').attr('href', '#').on('click',function (e) {
+        $("#loginProfile").text('Profil').attr('href', 'profile.html').on('click',function (e) {
             // Checking where to redirect
             $.ajax(
                 {
@@ -291,6 +291,7 @@ $(document).ready(function(){
     // PROFILE
     if($("#profileBox").length){ // IF I AM ON PROFILE PAGE
         // FETCH THE DATA REQUIRED TO SHOW
+        let pressed = 0;
         $.ajax({
             url: '../php/dbHandler.php',
             method: 'GET',
@@ -303,6 +304,18 @@ $(document).ready(function(){
             }
         });
 
+        $("#edit_profile").on('click',function () {
+            if(pressed === 0){
+                $("#profile_nume").attr('readonly',false);
+                $("#profile_prenume").attr('readonly',false);
+               pressed = 1;
+            }
+            else if(pressed === 1){
+                $("#profile_nume").attr('readonly',true);
+                $("#profile_prenume").attr('readonly',true);
+                pressed = 0;
+            }
+        });
     }
     // EMAIL RESET
     if($("#emailBox").length){

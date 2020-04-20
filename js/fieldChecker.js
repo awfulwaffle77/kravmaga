@@ -22,9 +22,10 @@ export function signupBoxInfoAdd(jsonResponse) { // ADD ID_SALA AND ID_CENTURA
 
 export function profileBoxInfoAdd(jsonResponse) {
     let parsedResp = JSON.parse(jsonResponse);
-    $("#profile_nume").text(parsedResp.informatii['nume']);
-    $("#profile_prenume").text(parsedResp.informatii['prenume']);
-    $("#profile_username").text(parsedResp.informatii['utilizator']);
+    console.log(parsedResp);
+    $("#profile_nume").val(parsedResp.informatii['nume']);
+    $("#profile_prenume").val(parsedResp.informatii['prenume']);
+    $("#profile_username").val(parsedResp.informatii['utilizator']);
     $("#profile_passwd").text("Resetare parola").attr('href','passwordReset.html');
 }
 

@@ -45,13 +45,16 @@ Created event to automatically DELETE outdated password links as such:
     
 
 # ISSUES
+* profile.html edit button does not submit to php
+
+* `#loginProfile` will not work on index.html due to path `pages/profile.html`. Also redirect to `profile.html`
+does not work on `reset.html` ??
+
 * Select does not work if you click select the second time. Problem at hiding child `td`. It hides the child `input`.
 
 * Delete buttons do not work anymore on antrenament.html . Have to delete with Select button. Removed them
 
 * Edit/Delete buttons sometimes do not show and have to be refreshed
-
-* TODO: Get antrenament.html in place
 
 * antrenamente/evenimente Script is a lot of duplicate code
 

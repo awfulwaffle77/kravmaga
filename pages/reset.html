@@ -15,30 +15,41 @@ include 'php/mailAgent.php';
     <script src="../js/windowChanges.js"></script>
     <script type="module" src="../js/fieldChecker.js"></script>
     <script type="module" src="../js/handler.js"></script>
+    <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/base.css" />
     <link rel="stylesheet" href="../styles/extended.css" />
 </head>
 
 <header>
     <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="../index.html">Home</a></li>
-        <li class="navbar"><a class="navbar active" href="login.html">Login</a></li>
+        <li class="navbar"><a class="navbar" href="../index.html">Evenimente</a></li>
+        <li class="navbar"><a class="navbar active" href="login.html" id="loginProfile">Login</a></li>
         <li><a class="navbar" href="../index.html">
                 <span class="logo_text">Krav</span>
                 <img class="logo_img" src="../img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
                 <span class="logo_text">Maga</span>
             </a></li>
-        <li class="navbar"><a class="navbar" href="contact.asp">Contact</a></li>
-        <li class="navbar"><a class="navbar" href="about.asp">About</a></li>
+        <li class="navbar"><a class="navbar" href="antrenamente.html">Antrenamente</a></li>
+        <li class="navbar"><a class="navbar" href="about.asp">Contact</a></li>
     </ul>
 </header>
 
-<div id="newPasswdBox">
-    <label for="passwd">Parola:</label><br>
-    <input type="password" id="newPasswd" name="passwd" autocomplete="new-password" placeholder="Parola" style="width: auto;">
-    <label id="reset_passwd_err"></label>
-    <input type="button" value="Confirm" id="newPasswdConfirm">
-    <br><br>
+<form>
+<div class="form-row align-items-center pl-4 pr-4 d-flex flex-column justify-content-center" id="emailBox" style="padding-top: 20%">
+    <div class="flex-column">
+        <p> Introdu aici noua parola.</p>
+    </div>
+    <div class="d-flex flex-row">
+        <input class="ml-2 mr-2 w-100 pl-1 form-control" placeholder="Parola" type="text" id="email" name="email">
+        <label id="reset_email_err"></label>
+        <input class="btn btn-primary" type="button" value="Submit" id="newPasswdConfirm">
+    </div>
+    <p id="emailDone"></p>
 </div>
+</form>
+
 
 <body>

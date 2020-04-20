@@ -18,46 +18,63 @@ session_start();
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/base.css" />
-    <link rel="stylesheet" href="../styles/extended.css" />
+    <link rel="stylesheet" href="../styles/base.css"/>
+    <link rel="stylesheet" href="../styles/extended.css"/>
 </head>
 
 <header>
     <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="../index.html">Home</a></li>
+        <li class="navbar"><a class="navbar" href="../index.html">Evenimente</a></li>
         <li class="navbar"><a class="navbar active" href="login.html" id="loginProfile">Login</a></li>
         <li><a class="navbar" href="../index.html">
             <span class="logo_text">Krav</span>
             <img class="logo_img" src="../img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
             <span class="logo_text">Maga</span>
         </a></li>
-        <li class="navbar"><a class="navbar" href="contact.asp">Contact</a></li>
-        <li class="navbar"><a class="navbar" href="about.asp">About</a></li>
+        <li class="navbar"><a class="navbar" href="antrenamente.html">Antrenamente</a></li>
+        <li class="navbar"><a class="navbar" href="about.asp">Contact</a></li>
     </ul>
 </header>
 
 <body>
 
-<div class="container d-flex flex-column mTpercent align-items-center align-self-center ml-5" id="profileBox">
-    <br><br>
-<a id="edit_profile"> Editare profil</a>
-<!-- TODO: On click, load info on this page so you can get and edit the fields accessible. Change the class so that it can be beautifully put in a box. -->
-<label for="uname">Nume:</label><br>
-    <p id="profile_nume"></p>
-<br><br>
+<button class="btn btn-light" style="float: right" type="button" id="edit_profile"><i class="fas fa-edit"></i></button>
+<div class="container">
+    <div class="container d-flex flex-column mTpercent align-items-center" id="profileBox">
+        <br><br>
+        <!-- TODO: On click, load info on this page so you can get and edit the fields accessible. Change the class so that it can be beautifully put in a box. -->
 
-<label for="prenume">Prenume:</label><br>
-    <p id="profile_prenume"></p>
-<br><br>
+        <div class="row">
 
-<label for="username">Utilizator:</label><br>
-    <p id="profile_username"></p>
-<br><br>
+            <div class="d-flex flex-row mb-2">
+                <label class="col-*-6 mr-2 mb-2" for="prenume">Nume</label><br>
+                <input class="col-*-6 form-control align-self-center" id="profile_nume" readonly></input>
+                <br><br>
+            </div>
 
-<label for="passwd">Parola:</label><br>
-    <a id="profile_passwd"></a>
-<br><br>
-
+        </div>
+        <div class="row">
+            <div class="d-flex flex-row mb-2">
+                <label class="col-*-6 mr-2 mb-2" for="prenume">Prenume</label><br>
+                <input class="col-*-6 form-control align-self-center" id="profile_prenume" readonly></input>
+                <br><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex flex-row mb-2">
+                <label class="col-*-6 mr-2 mb-2" for="username">Utilizator</label><br>
+                <input class="col-*-6 form-control" id="profile_username" readonly></input>
+                <br><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex flex-row mb-2">
+                <label class="col-*-6 mr-2 mb-2" for="passwd">Parola</label><br>
+                <a class="col-*-6" id="profile_passwd"></a>
+                <br><br>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
