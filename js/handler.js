@@ -18,8 +18,11 @@ export let getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 $(document).ready(function(){
+
+
+
     // DECLARING VARIABLES
-    const loginRedirectURL = "https://localhost/kravmaga_v2/pages/profil.html";
+    const loginRedirectURL = "https://localhost/kravmaga_v2/pages/profile.html";
     const adminProfileRedirect = "https://localhost/kravmaga_v2/pages/signup.html";
     const regularProfileRedirect = "https://localhost/kravmaga_v2/pages/profile.html"; // Better option would be to use default anchor option (in php?)
     const signupSuccessRedirect = "https://localhost/kravmaga_v2/pages/success.html";

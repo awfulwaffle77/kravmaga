@@ -43,7 +43,8 @@ Created event to automatically DELETE outdated password links as such:
         ) AS P
     )
     
-
+Dropped index `id_user` and `id_centura` from `utilizatori centuri` as I need to have the users' progression, meaning multiple
+`id_user` with different `id_centura`. Also dropped the foreign key restraints, as I cannot keep a historic with these.
 # ISSUES
 * profile.html edit button does not submit to php
 

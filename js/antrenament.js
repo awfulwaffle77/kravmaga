@@ -5,6 +5,10 @@ import {mustCompleteField} from "./fieldChecker.js";
 
 $(document).ready(function () {
 
+    $("#reload").on('click',function(){
+        $('html').load("reset.html");
+    });
+
     let counter = 0;
     let idtkn = getUrlParameter('id');
     const deleteMessage = "Vrei sa stergi acest eveniment?";

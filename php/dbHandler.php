@@ -493,5 +493,26 @@ if (isset($_GET['getAntrenamentInfo'])) { // INFO FOR A SINGLE TRAINING SESSION
     echo(getInfo($sql, msg_getAntrenamentInfo_succes, getAntrenamentInfo_succes, msg_getAntrenamentInfo_failed, getAntrenamentInfo_failed));
 }
 
+if(isset($_GET['getBeltProgress'])){
+    $currentHash = $_COOKIE['currentHash'];
+
+    if(existsInHashArray($currentHash)){
+        $getData_query = "SELECT `ID_user`, `uc`.`ID_centura`, `Data_obtinere`, `Culoare`,`u`.Nume, `u`.Prenume FROM `utilizatori_centuri` as `uc` INNER JOIN `utilizatori` as `u` ON `uc`.ID_user = `u`.ID_utilizator INNER JOIN `centuri` as `c` ON `uc`.ID_centura = `c`.ID_centura ORDER BY `Data_obtinere` ";
+    }
+    else
+        $getData_query = "SELECT `ID_user`, `uc`.`ID_centura`, `Data_obtinere`, `Culoare`, `u`.Nume, `u`.Prenume FROM `utilizatori_centuri` as `uc` INNER JOIN `utilizatori` as `u` ON `uc`.ID_user = `u`.ID_utilizator INNER JOIN `centuri` as `c` ON `uc`.ID_centura = `c`.ID_centura WHERE `u`.hash ='$currentHash' ORDER BY `Data_obtinere` ";
+    $res = mysqli_query($conn,$getData_query);
+
+    $data = array();
+    if($res){
+        while($row = $res->fetch_array(MYSQLI_ASSOC))
+            array_push($data,$row);
+        echo(json_encode($data));
+    }
+    else
+        echo "Doesn't wokrk";
+}
+
+
 
 
