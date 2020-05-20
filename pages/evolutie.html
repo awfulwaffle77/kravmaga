@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <style>
         #chartdiv {
             width: 100%;
             height: 600px;
         }
-    </style>
 
+        .demo-theme-dark .demo-background {
+            background: #000;
+        }
+
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,14 +23,15 @@
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/plugins/timeline.js"></script>
     <script src="https://www.amcharts.com/lib/4/plugins/bullets.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
     <!--  -->
-    <script src="../js/progress.js"></script>
+    <script src="../js/evolutie.js"></script>
 </head>
 <body>
+<select id="choose" style="display: none">
+    <option> -- Alege un utilizator --</option>
+</select><br><br>
 <div id="chartdiv"></div>
-</body>
-</html>
 </body>
 </html>

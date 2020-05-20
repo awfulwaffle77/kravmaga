@@ -513,6 +513,24 @@ if(isset($_GET['getBeltProgress'])){
         echo "Doesn't wokrk";
 }
 
+if(isset($_GET['getEvolutionData'])){
+    $currentHash = $_COOKIE['currentHash'];
+
+    if(existsInHashArray($currentHash))
+        $query = "SELECT `u`.ID_utilizator, `eu`.date_assigned , `goal`, `deadline`,`u`.Nume, `u`.Prenume FROM `evolutie_utilizator` as `eu` INNER JOIN `utilizatori` as `u` ON `u`.ID_utilizator = `eu`.ID_user";
+    else
+        $query = "SELECT `u`.ID_utilizator, `eu`.date_assigned, `goal`, `deadline` FROM `evolutie_utilizator` as `eu` INNER JOIN `utilizatori` as `u` ON `u`.ID_utilizator = `eu`.ID_user WHERE `u`.hash = '$currentHash'";
+    $res = mysqli_query($conn,$query);
+
+    $data = array();
+    if($res){
+        while($row = $res->fetch_array(MYSQLI_ASSOC))
+            array_push($data,$row);
+        echo(json_encode($data));
+    }else
+        echo("Bad query");
+}
+
 
 
 
