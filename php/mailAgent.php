@@ -5,7 +5,7 @@ include 'vars.php';
 //include 'php/connection.php';
 use Hashids\Hashids;
 
-define("redirect","localhost/kravmaga_v2/reset.html");
+define("redirect","localhost/krav_me/pages/reset.html");
 
 $dbServername = 'localhost';
 $dbAdmin = 'root';

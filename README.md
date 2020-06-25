@@ -45,6 +45,22 @@ Created event to automatically DELETE outdated password links as such:
     
 Dropped index `id_user` and `id_centura` from `utilizatori centuri` as I need to have the users' progression, meaning multiple
 `id_user` with different `id_centura`. Also dropped the foreign key restraints, as I cannot keep a historic with these.
+
+Used `ALTER TABLE utilizatori_antrenamente ADD UNIQUE user_antrenament (id_user, ID_antr);` to restrict duplicate in tuple
+(id_user, ID_antr). Sweet!
+
+Used `ALTER TABLE evenimente ADD UNIQUE event_unic (Nume,Locatie ,Data_start_eveniment , Data_stop_eveniment)` to
+restrict duplicates in tuple (nume, locatie, data_start_event, data_stop_event).
+
+Dropped indexes in `cotizatii`.
+
+I get this when trying to add cotizatie:
+
+      MySQL said: Documentation
+      #1452 - Cannot add or update a child row: 
+      a foreign key constraint fails (`kravmaga_accounts`.`cotizatii`, CONSTRAINT `cotizatii_ibfk_1` FOREIGN KEY (`ID_user`) REFERENCES `utilizatori` (`ID_utilizator`)) 
+     
+
 # ISSUES
 * profile.html edit button does not submit to php
 

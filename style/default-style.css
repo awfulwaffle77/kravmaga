@@ -1,0 +1,462 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins";
+    font-weight: lighter;
+}
+
+body {
+    background-color: rgb(46, 43, 43);
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.title {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+    font-size: x-large;
+    font-weight: lighter;
+    justify-content: flex-start;
+    margin: auto;
+}
+
+nav ul li {
+    position: relative;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: whitesmoke;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    justify-items: center;
+}
+
+nav ul li ul {
+    display: none;
+    margin-top: 20%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 22vh;
+    height: 21vh;
+    z-index: 0;
+}
+
+nav ul li h1 {
+    display: flex;
+    background-color: transparent;
+    font-family: "Poppins";
+    font-size: 2vh;
+    cursor: pointer;
+    height: 3vh;
+    width: 21vh;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: whitesmoke;
+    justify-content: center;
+    justify-items: center;
+}
+
+nav ul li h1:hover ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    transform: translateY(2.99vh);
+    margin: auto;
+    width: 21vh;
+}
+
+nav>ul>li>h1:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 21vh;
+}
+
+nav ul li ul li {
+    display: flex;
+    cursor: pointer;
+    padding-top: 1vh;
+    width: 25vh;
+    background-color: rgb(221, 114, 67);
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    justify-items: center;
+    font-size: 2vh;
+    height: 5vh;
+}
+
+nav ul li ul li a {
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    position: relative;
+}
+
+nav ul li a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+nav ul li a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+nav ul li ul li:hover {
+    cursor: pointer;
+    width: 21vh;
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+title {
+    background: rgb(46, 43, 43);
+}
+
+.fade-in {
+    font-size: 10vh;
+    letter-spacing: 0.1vh;
+    margin-left: 20vh;
+    color: #fff;
+    background: linear-gradient(90deg, rgb(46, 43, 43), #fff, rgb(46, 43, 43));
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: animate 3s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, .1);
+}
+
+@keyframes animate {
+    0% {
+        background-position: -500%;
+    }
+    100% {
+        background-position: 500%;
+    }
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    /* background-color:rgb(221, 73, 10) ; */
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+nav:hover {
+    background-color: rgb(221, 73, 10);
+    animation: navefect 0.5s;
+}
+
+.central-logo {
+    display: none;
+}
+
+.logo {
+    display: flex;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 3vh;
+    align-items: center;
+    background: transparent;
+    width: 20%;
+}
+
+.logo a {
+    background: transparent;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    /*animation: navefect 1s;*/
+    align-items: center;
+}
+
+.poza {
+    height: 6vh;
+    background: transparent;
+}
+
+.nav-links a {
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: whitesmoke;
+    background: transparent;
+}
+
+.nav-links li {
+    list-style: none;
+    background: transparent;
+}
+
+.nav-links img {
+    background: transparent;
+}
+
+nav a {
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+nav h5 {
+    background: transparent;
+}
+
+.burger {
+    display: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.burger div {
+    height: 3px;
+    width: 25px;
+    background-color: whitesmoke;
+    margin: 5px;
+}
+
+.nav-links-side {
+    display: none;
+}
+
+.text-div {
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+}
+
+footer {
+    background: linear-gradient(to bottom, rgb(46, 43, 43) 1%, black 100%);
+}
+
+.container {
+    width: 70%;
+    height: 40vh;
+    display: flex;
+    background-color: inherit;
+    margin: auto;
+    margin-top: 20vh;
+    justify-content: space-around;
+}
+
+.container a {
+    background: inherit;
+}
+
+.container img {
+    height: 5vh;
+    width: 5vh;
+    margin-top: 10vh;
+}
+
+@keyframes linkAnime {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}
+
+@keyframes navefect {
+    from {
+        background: transparent;
+    }
+    to {
+        background: rgb(221, 73, 10);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    input,
+    textarea {
+        border-width: 3px;
+    }
+}
+
+@media screen and (max-width:1400px) {
+    body {
+        background-color: rgb(46, 43, 43);
+        overflow-x: hidden;
+    }
+    html {
+        overflow-x: hidden;
+    }
+    .fade-in {
+        font-size: 6vh;
+        margin-top: 20vh;
+        margin-left: -10vh;
+        letter-spacing: 0.1vh;
+        margin-left: 20vh;
+        color: #fff;
+        background: linear-gradient(90deg, rgb(46, 43, 43), #fff, rgb(46, 43, 43));
+        background-repeat: no-repeat;
+        background-size: 80%;
+        animation: animate 3s linear infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255, 255, 255, .1);
+        transform: translateX(-10vh);
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        height: 30vh;
+        align-items: center;
+        width: 80%;
+        margin: auto;
+    }
+    .nav-links li {
+        display: none;
+    }
+    .nav-links-side {
+        display: flex;
+        position: absolute;
+        list-style: none;
+        right: 0px;
+        height: 50vh;
+        top: 6vh;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 20vh;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        background: rgb(221, 73, 10);
+    }
+    .nav-links-side>li>ul>li:hover {
+        background-color: black;
+        border-radius: 0;
+        width: 25vh;
+    }
+    .nav-links-side>li>ul>li {
+        border-radius: 0;
+        height: 6vh;
+        background-color: rgba(221, 73, 10, 0.5);
+        color: whitesmoke;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .nav-links-side>li {
+        display: flex;
+        background-color: rgb(221, 73, 10);
+        color: whitesmoke;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        border: none;
+        outline: none;
+        letter-spacing: 2.7px;
+        font-weight: bold;
+        font-family: "Poppins";
+        font-size: 2.6vh;
+        height: 10vh;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .nav-links-side>li:hover>a {
+        background-color: black;
+        color: rgb(221, 73, 10);
+    }
+    .nav-links-side li ul li a {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .nav-links-side li ul {
+        background-color: white;
+        display: none;
+        transform: translate(-24vh, 2vh);
+        border-width: 0;
+        background: space;
+    }
+    nav ul li:hover ul {
+        display: block;
+    }
+    .nav-links-side li {
+        font-size: 2vh;
+    }
+    .nav-links-side a {
+        background-color: rgb(221, 73, 10);
+        font-size: 2vh;
+        color: whitesmoke;
+        justify-content: center;
+    }
+    .nav-link:hover {
+        background-color: black;
+        color: rgb(221, 73, 10);
+    }
+    .nav-links-side li ul li:hover a {
+        background-color: black;
+        color: rgb(221, 73, 10);
+    }
+    .nav-links {
+        color: whitesmoke;
+        font-family: 'Poppins';
+    }
+    .central-logo {
+        margin-left: 3vh;
+        display: block;
+        opacity: 1;
+        background: transparent;
+    }
+    .central-logo img {
+        background: transparent;
+    }
+    .burger {
+        display: block;
+        margin-right: 15%;
+        background-color: transparent;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+.nav-active2 {
+    display: none;
+}

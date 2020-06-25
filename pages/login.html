@@ -1,56 +1,60 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Krav Maga - Autoaparare si autocontrol</title>
-    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+    <link rel="shortcut icon" type="image/png" href="../img/logo.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module" src="../js/js-cookie/js.cookie.js"></script>
     <script src="../js/windowChanges.js"></script>
     <script type="module" src="../js/fieldChecker.js"></script>
     <script type="module" src="../js/handler.js"></script>
-    <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
-    <!-- Font Awesome icons -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/base.css" />
-    <link rel="stylesheet" href="../styles/extended.css" />
+
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style/Login.css" />
+
 </head>
 
 <header>
-    <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="evenimente.html">Evenimente</a></li>
-        <li class="navbar"><a class="navbar active" href="login.html">Login</a></li>
-        <li><a class="navbar" href="../index.html">
-            <span class="logo_text">Krav</span>
-            <img class="logo_img" src="../img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
-            <span class="logo_text">Maga</span>
-        </a></li>
-        <li class="navbar"><a class="navbar" href="antrenamente.html">Antrenamente</a></li>
-        <li class="navbar"><a class="navbar" href="about.asp">Contact</a></li>
-    </ul>
+    <div class="login_title">
+        <h1>KRAV</h1>
+
+        <img class="poza2" src="../img/unnamed.png">
+        <h1>MAGA</h1>
+    </div>
 </header>
 
 <body>
 
-<div class="form-group loginBox">
-    <form class="loginBox" action="#" method="post">
-        <input class="form-control" placeholder="Username" type="text" id="uname" name="uname"><br>
-        <input class="form-control" placeholder="Password" type="password" id="passwd" name="passwd"><br><br>
+    <section class="forms">
+        <div class="form-group loginBox">
+            <form class="loginBox" action="#" method="post">
+                <input class="form-control" placeholder="Username" type="text" id="uname" name="uname"><br>
+                <input class="form-control" placeholder="Password" type="password" id="passwd" name="passwd"><br><br>
 
-        <label id="errMsg"></label>
-        <div class="d-flex justify-content-center flex-column">
-        <input class="btn btn-primary ml-5 mr-5 mb-4" type="button" value="Submit" id="loginSubmit"><br>
-            <a class="align-self-center" href="passwordReset.html">Ai uitat parola?</a>
+                <label id="errMsg"></label>
+                <div class="d-flex justify-content-center flex-column">
+                    <input class="btn btn-primary ml-5 mr-5 mb-4" type="button" value="Submit" id="loginSubmit"><br>
+                    <a class="align-self-center" href="passwordReset.html">Ai uitat parola?</a>
+                </div>
+
+
+
+            </form>
         </div>
-    </form>
-</div>
 
+    </section>
+    <script src="../js/handler.js" type="module"></script>
 </body>
+
+
+
 </html>

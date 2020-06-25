@@ -32,7 +32,8 @@ $(document).ready(function () {
                                 });
                             });
                             drawGraph(createDataset(dataForSelectedUser));
-                        })
+                        });
+                        initForm(getDBInfo());
                     } else
                         drawGraph(createDataset(userData));
                 },
@@ -40,6 +41,58 @@ $(document).ready(function () {
             });
     }
 
+    function getDBInfo() {
+        let resp;
+        $.ajax(
+            {
+                url: '../php/dbHandler.php',
+                method: 'GET',
+                data: {
+                    getProgressInfo: 1,
+                },
+                complete: function (response) { // success is not working; using complete as alternative
+                    resp = response.responseJSON;
+                },
+                dataType: 'json',
+                async: false
+            });
+        return resp;
+    }
+
+    function initForm(jsonData) {
+        for (let i = 0; i < jsonData['utilizatori'].length; i++) {
+            let opt = new Option(jsonData['utilizatori'][i]['utilizator'], jsonData['utilizatori'][i]['id_utilizator']);
+            $(opt).html(jsonData['utilizatori'][i]['utilizator']);
+            $("#form_username").append(opt);
+        }
+        $("#hiddenForm").show();
+        $("#form_submit").on('click',function () {
+            let username = $("#form_username").val();
+            let goal = $("#form_task").val();
+            if(goal.length > 50)
+                $("#task_err").text("Maxim 50 caractere!");
+            let date = $("#form_data").val();
+            let date_start = $("#form_data_start").val();
+
+            $.ajax(
+                {
+                    url: '../php/dbHandler.php',
+                    method: 'POST',
+                    data: {
+                        updateEvolutieTasks: 1,
+                        username: username,
+                        goal: goal,
+                        date: date,
+                        today: date_start
+                    },
+                    complete: function (response) { // success is not working; using complete as alternative
+                        location.reload();
+                    },
+                    dataType: 'text'
+                });
+        });
+    }
+    
     function createDataset(data) {
         var colorSet = new am4core.ColorSet();
         let dataset = [];
@@ -58,10 +111,10 @@ $(document).ready(function () {
     }
 
     function drawGraph(userData) {
-        am4core.ready(function () {
+        am4core.ready(function() {
 
 // Themes begin
-            am4core.useTheme(am4themes_kelly);
+            am4core.useTheme(am4themes_dark);
             am4core.useTheme(am4themes_animated);
 // Themes end
 
@@ -91,7 +144,7 @@ $(document).ready(function () {
 
             var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
             dateAxis.renderer.minGridDistance = 70;
-            dateAxis.baseInterval = {count: 1, timeUnit: "day"};
+            dateAxis.baseInterval = { count: 1, timeUnit: "day" };
             dateAxis.renderer.tooltipLocation = 0;
             dateAxis.startLocation = -0.5;
             dateAxis.renderer.line.strokeDasharray = "1,4";

@@ -1,0 +1,73 @@
+#chartdiv {
+    color: whitesmoke;
+    height: 60vh;
+}
+
+#hiddenForm {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    margin: auto;
+    height: 50vh;
+    margin-bottom: 10vh;
+    align-items: center;
+    height: 2vh;
+    justify-content: center;
+}
+
+#hiddenForm input,
+select,
+button {
+    border: ridge;
+    border-color: tomato;
+    background-color: transparent;
+    color: whitesmoke;
+    margin-right: 2vh;
+    min-width: 5vh;
+}
+
+#hiddenForm option {
+    border-color: tomato;
+    background-color: rgb(46, 43, 43);
+    color: whitesmoke;
+}
+
+label {
+    margin-right: 1vh;
+    color: whitesmoke;
+}
+
+#hiddenForm button {
+    font-size: 10px;
+    width: 10vh;
+    height: 4vh;
+}
+
+#hiddenForm button:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+}
+
+#hiddenForm button:hover {
+    cursor: pointer;
+}
+
+@media screen and(max-width:768px) {
+    #hiddenForm {
+        display: flex;
+        flex-direction: column;
+    }
+    #chartdiv {
+        font-size: 7px;
+        margin-top: 20vh;
+        transform: translateY(-20vh);
+    }
+    .title {
+        margin-bottom: 20vh;
+    }
+    label,
+    input {
+        margin-top: 2vh;
+    }
+}

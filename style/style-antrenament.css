@@ -1,0 +1,194 @@
+ * {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+     font-family: "Poppins";
+     font-weight: lighter;
+ }
+ 
+ input:focus,
+ select:focus,
+ textarea:focus,
+ button:focus {
+     outline: none;
+ }
+ 
+ button:hover {
+     cursor: pointer;
+ }
+ 
+ button:active {
+     transform: translateY(1px);
+     background-color: tomato;
+     border-color: whitesmoke;
+     color: whitesmoke;
+ }
+ 
+ .container {
+     width: 80%;
+     margin: auto;
+ }
+ 
+ #exterior {
+     display: flex;
+     justify-content: space-evenly;
+ }
+ 
+ .interior {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .container img {
+     width: 40vh;
+     height: 40vh;
+ }
+ 
+ #cont1 {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ #cont1 i {
+     width: 4vh;
+     height: 4vh;
+     padding-left: 1.2vh;
+     padding-top: 0.85vh;
+ }
+ 
+ #cont1 input {
+     width: 30vh;
+     height: 4vh;
+     border-style: ridge;
+     border-color: tomato;
+     background-color: transparent;
+     color: whitesmoke;
+     background-color: transparent;
+ }
+ 
+ #cont2 {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ #cont2 button {
+     width: 7vh;
+     height: 4vh;
+     border-style: ridge;
+     border-color: tomato;
+     color: whitesmoke;
+     background-color: transparent;
+ }
+ 
+ table {
+     border-color: tomato;
+     border-style: ridge;
+     border-left: none;
+     border-right: none;
+     border-top: none;
+     width: 50vh;
+     align-self: center;
+ }
+ 
+ footer {
+     background: linear-gradient(to bottom, rgb(46, 43, 43) 1%, black 100%);
+ }
+ 
+ #antrnmnt_dropdownAdd {
+     background-color: transparent;
+ }
+ 
+ .container2 {
+     width: 70%;
+     height: 40vh;
+     display: flex;
+     background-color: inherit;
+     margin: auto;
+     margin-top: 20vh;
+     justify-content: space-around;
+ }
+ 
+ .container2 a {
+     background: inherit;
+ }
+ 
+ .container2 img {
+     height: 5vh;
+     width: 5vh;
+ }
+ 
+ table th {
+     border-bottom: ridge;
+     border-color: whitesmoke;
+     color: tomato;
+ }
+ 
+ table td {
+     color: whitesmoke;
+ }
+ 
+ #hiddenForm {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-top: 10vh;
+ }
+ 
+ #hiddenFormHeader {
+     visibility: collapse;
+ }
+ 
+ .form-container {
+     display: flex;
+     flex-direction: column;
+     padding-right: 10vh;
+     justify-content: space-around;
+     align-items: center;
+ }
+ 
+ .form-container button {
+     background-color: transparent;
+ }
+ 
+ .form-container select {
+     width: 30vh;
+     height: 4vh;
+     border-style: ridge;
+     border-color: tomato;
+     color: whitesmoke;
+ }
+ 
+ .form-container option {
+     background-color: rgb(46, 43, 43);
+ }
+ 
+ label {
+     display: flex;
+     align-self: center;
+     color: whitesmoke;
+     font-size: 2vh;
+ }
+ 
+ #newEvent_submit {
+     display: flex;
+     width: 15vh;
+     align-self: center;
+     border-color: tomato;
+     border-style: ridge;
+     color: whitesmoke;
+     justify-content: center;
+ }
+ 
+ #img2 {
+     height: 50vh;
+     width: 50vh;
+ }
+ 
+ @media screen and (max-width:758px) {
+     #img2,
+     #img1 {
+         display: none;
+     }
+ }

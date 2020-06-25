@@ -1,0 +1,109 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: rgb(46, 43, 43);
+    font-family: "Poppins";
+    font-weight: lighter;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.reset_title {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+    font-size: x-large;
+    font-weight: lighter;
+    justify-content: flex-start;
+    animation: fadeIn 1s;
+    margin: auto;
+    width: 80%;
+    color: rgb(216, 82, 29);
+    background: radial-gradient( rgb(216, 82, 29) 2%, rgb(46, 43, 43) 60%);
+    justify-content: center;
+}
+
+.reset_title h1 {
+    font-family: 'Rock Salt', cursive;
+    letter-spacing: 10px;
+    background-color: transparent;
+    color: rgb(46, 43, 43);
+}
+
+.poza2 {
+    height: 10vh;
+    background: transparent;
+}
+
+.cont {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+    align-items: center;
+}
+
+.cont p {
+    font-family: "Poppins";
+    font-size: 25px;
+    color: whitesmoke;
+    margin-left: 3vh;
+}
+
+.cont form {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    border-style: ridge;
+    border-color: tomato;
+    border-width: 2px;
+    color: whitesmoke;
+    width: 25vh;
+    height: 4vh;
+    font-size: 14px;
+}
+
+#email {
+    align-self: center;
+}
+
+#newPasswdConfirm {
+    width: 15vh;
+    margin-top: 3vh;
+    cursor: pointer;
+    align-self: center;
+}
+
+#newPasswdConfirm:active {
+    transform: translateY(2px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: black;
+}
+
+@media screen and (max-width:768px) {
+    .reset_title h1 {
+        font-size: 3vh;
+        color: rgb(31, 29, 29);
+        font-weight: bold;
+    }
+    .cont p {
+        font-size: 15px;
+        align-self: center;
+        margin-bottom: 2vh;
+        ;
+    }
+}

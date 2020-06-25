@@ -1,0 +1,250 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins";
+    font-weight: lighter;
+}
+
+body {
+    height: 190vh;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+#submit:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+#submit:active h1 {
+    background-color: tomato;
+}
+
+.formular {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    align-items: center;
+    width: 20vh;
+    justify-content: space-around;
+    margin: auto;
+    color: whitesmoke;
+}
+
+form input {
+    width: 50vh;
+    height: 5vh;
+    font-size: 20px;
+    text-overflow: ellipsis;
+}
+
+.formular label {
+    font-size: 3vh;
+}
+
+.text-div {
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+}
+
+.mail {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.sub {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub input {
+    width: 70vh;
+    height: 7vh;
+    background-color: inherit;
+    border-style: ridge;
+    border-color: tomato;
+}
+
+.mail input {
+    width: 70vh;
+    height: 7vh;
+    background-color: inherit;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+}
+
+#subj {
+    font-size: 30px;
+    color: whitesmoke;
+    outline: none;
+}
+
+#email {
+    font-size: 30px;
+    color: whitesmoke;
+    outline: none;
+}
+
+form {
+    margin-top: 5vh;
+}
+
+#text {
+    height: 40vh;
+    width: 70vh;
+    text-align: justify;
+    font-weight: 2px;
+    background-color: inherit;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+    outline: none;
+    text-size-adjust: 15px;
+}
+
+.buton_ {
+    display: flex;
+    align-items: center;
+}
+
+.buton_ button {
+    height: 7vh;
+    width: 15vh;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+    border-style: ridge;
+    border-color: tomato;
+}
+
+.buton_ h1 {
+    font-size: 3vh;
+    color: whitesmoke;
+}
+
+.date {
+    display: flex;
+    width: 70%;
+    margin: auto;
+}
+
+.date p {
+    color: whitesmoke;
+    font-size: 2vh;
+}
+
+footer {
+    background: linear-gradient(to bottom, rgb(46, 43, 43) 1%, black 100%);
+}
+
+.container {
+    width: 70%;
+    height: 40vh;
+    display: flex;
+    background-color: inherit;
+    margin: auto;
+    margin-top: 20vh;
+    justify-content: space-around;
+}
+
+.container a {
+    background: inherit;
+}
+
+.container img {
+    margin-top: 10vh;
+    height: 5vh;
+    width: 5vh;
+}
+
+@keyframes linkAnime {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}
+
+@keyframes navefect {
+    from {
+        background: rgb(46, 43, 43);
+    }
+    to {
+        background: rgb(221, 73, 10);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width:768px) {
+    body {
+        overflow-x: hidden;
+    }
+    html {
+        overflow-x: hidden;
+    }
+    .fade-in {
+        font-size: 7vh;
+        margin-left: 0;
+        margin-left: 14vh;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        height: 30vh;
+        justify-content: center;
+    }
+    .date p {
+        color: whitesmoke;
+        font-size: 1.3vh;
+    }
+    .mail,
+    .sub {
+        width: 37vh;
+        height: 9vh;
+        margin: auto;
+    }
+    .sub {
+        margin-top: 10px;
+    }
+    .sub input {
+        width: 37vh;
+    }
+    #Email {
+        width: 37vh;
+        margin: auto;
+    }
+    .text-div {
+        margin-top: 3vh;
+    }
+    #text {
+        width: 100%;
+        margin: auto;
+    }
+}

@@ -5,12 +5,12 @@ export function signupBoxInfoAdd(jsonResponse) { // ADD ID_SALA AND ID_CENTURA
         let parsed = JSON.parse(jsonResponse);
 
         for (let i = 0; i < parsed['sali'].length; i++) {
-            let opt = new Option(parsed.sali[i].NUME + ', ' + parsed.sali[i].ADRESA, i);
+            let opt = new Option(parsed.sali[i].NUME + ', ' + parsed.sali[i].ADRESA, parsed.sali[i]['ID_SALA']);
             $(opt).html(parsed.sali[i].NUME + ', ' + parsed.sali[i].ADRESA);
             $("#signup_sala").append(opt);
         }
         for (let i = 0; i < parsed.centuri.length; i++) {
-            let opt = new Option(parsed.centuri[i].CULOARE, i);
+            let opt = new Option(parsed.centuri[i].CULOARE, parsed.centuri[i]['ID_CENTURA']);
             $(opt).html(parsed.centuri[i].CULOARE);
             $("#signup_centura").append(opt);
         }
@@ -54,7 +54,7 @@ export function setFieldsToDefault() {
 }
 
 export function mustCompleteField(fieldName) { // APPEND "_err" AND SHOW THE ERROR MESSAGE
-    console.log("New field who dis" + fieldName);
+    console.log("New field who dis" + fieldName.attr('id'));
     // TODO: THIS FUNCTION
     let errLabel = fieldName + "_err";
     $(errLabel).text("Acest camp trebuie completat");

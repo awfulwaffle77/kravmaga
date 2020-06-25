@@ -1,0 +1,111 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: rgb(46, 43, 43);
+    font-family: "Poppins";
+    font-weight: lighter;
+}
+
+.signup_title {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+    font-size: x-large;
+    font-weight: lighter;
+    justify-content: flex-start;
+    animation: fadeIn 1s;
+    margin: auto;
+    width: 80%;
+    color: rgb(216, 82, 29);
+    background: radial-gradient( rgb(216, 82, 29) 2%, rgb(46, 43, 43) 60%);
+    justify-content: center;
+}
+
+.signup_title h1 {
+    font-family: 'Rock Salt', cursive;
+    letter-spacing: 10px;
+    background-color: transparent;
+    color: rgb(46, 43, 43);
+}
+
+.poza2 {
+    height: 10vh;
+    background: transparent;
+}
+
+#signupBox {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+}
+
+label {
+    font-size: 2vh;
+    color: whitesmoke;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input {
+    width: 30vh;
+    height: 4vh;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+span {
+    color: whitesmoke;
+    font-size: 4vh;
+}
+
+select {
+    border-style: ridge;
+    border-color: tomato;
+    width: 20vh;
+    height: 4vh;
+    color: whitesmoke;
+}
+
+.space {
+    height: 30vh;
+}
+
+#signupConfirm,
+#signup_data,
+select:hover {
+    cursor: pointer;
+}
+
+#signupConfirm:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+}
+
+@media screen and (max-width:768px) {
+    .signup_title h1 {
+        font-size: 3vh;
+        color: rgb(31, 29, 29);
+        font-weight: bold;
+    }
+}

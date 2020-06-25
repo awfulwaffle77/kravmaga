@@ -1,0 +1,68 @@
+.centuri {
+    width: 80%;
+    height: 20vh;
+    margin: auto;
+    background-color: violet;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+.centuridiv {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#centuri {
+    min-width: 80%;
+}
+
+#centuri th {
+    font-size: 3vh;
+    color: whitesmoke;
+    border-style: ridge;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-color: gray;
+    text-align: center;
+}
+
+#centuri td {
+    font-size: 2vh;
+    text-align: center;
+    color: whitesmoke;
+    border-style: ridge;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-color: tomato;
+    border-width: 1px;
+    height: 4vh;
+    max-width: 20vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+#centuri a {
+    text-decoration: none;
+    color: tomato;
+}

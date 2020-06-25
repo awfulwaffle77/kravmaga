@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/default-style.css">
+    <link rel="stylesheet" href="../style/style-contact.css">
+    <link rel="shortcut icon" type="image/png" href="../img/logo.png" />
+    <meta http-equiv="Cache-control" content="no-cache">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module" src="../js/js-cookie/js.cookie.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <title>Cursuri autoaparare</title>
+    <nav>
+        <div class="central-logo">
+            <a href="#top">
+                <div class="logo">
+                    <h5>Krav</h5>
+                    <img class="poza" src="../img/unnamed.png">
+                    <h5>Maga</h5>
+                </div>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-link">
+                <h1>Categorii</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/Evenimente.html">Evenimente</a></li>
+                        <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                        <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                        <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                    </ul>
+            </li>
+            <li class="nav-link">
+                <a href="/krav_me/pages/About.html">
+                    <h1>Despre noi</h1>
+                </a>
+            </li>
+
+            <li class="poza-li">
+                <a href="../index.html">
+                    <div class="logo">
+                        <h5>Krav</h5>
+                        <img class="poza" src="../img/unnamed.png">
+                        <h5>Maga</h5>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="/krav_me/pages/Contact.html">
+                    <h1>Contact</h1>
+                </a>
+            </li>
+            <li id="loginProfile" class="nav-link">
+                <h1>Contul meu</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                        <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                        <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                        <li><a id="logout" href="#">Log out</a></li>
+                    </ul>
+            </li>
+        </ul>
+
+        <ul class="nav-links-side">
+            <li class="nav-link">
+                <h1>Categorii</h1>
+                <ul clas="side-list">
+                    <li><a href="/krav_me/pages/evenimente.html">Evenimente</a></li>
+                    <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                    <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                    <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                </ul>
+            </li>
+            <li id="loginProfile_burger" class="nav-link">
+                <h1>Contul meu</h1>
+                <ul class="side-list">
+                    <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                    <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                    <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                    <li><a id="logout_burger" href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="nav-link"><a href="/krav_me/pages/About.html">Despre noi</a></li>
+            <li class="nav-link"><a href="/krav_me/pages/Contact.html">Contact</a></li>
+
+        </ul>
+
+
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+</head>
+
+<body>
+
+
+
+
+    <main>
+        <section>
+            <div class="title">
+                <h1 class="fade-in">Contact</h1>
+            </div>
+            <div class="date">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis consequuntur, quidem laborum fugiat quisquam tenetur aut quod expedita quae officia asperiores reprehenderit accusamus? Doloremque, porro. Ipsum a recusandae expedita numquam!Lorem
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate maxime dignissimos cumque ea aut, dolore magnam recusandae rerum corrupti laboriosam ipsam sint vel, perspiciatis quod libero reiciendis id accusamus. Dicta? Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Quisquam tempora pariatur odio repellendus. Numquam nam repudiandae, ducimus perferendis corrupti doloremque accusantium non eius, illum, temporibus quibusdam cum quidem atque ipsa?
+
+                </p>
+            </div>
+            <div class="formular">
+                <form method="POST" action="../php/mail-contact.php">
+
+                    <div class="mail">
+                        <label for="Email">Email:</label>
+                        <input type="email" id="Email" name="Email"><br></div>
+
+                    <div class="sub">
+                        <label for="subj">
+        Subiect:
+      </label>
+                        <input type="text" id="subj" name="subj"><br>
+                    </div>
+                    <div class="text-div">
+                        <label for="text" id="text-label">Mesaj:</label>
+                        <textarea id="text" name="text" rows="6" cols="30"></textarea><br></div>
+
+                    <div class="buton_">
+                        <button type="submit" id="submit" value="Send"><h1>Send</h1></button></div>
+
+
+                </form>
+            </div>
+        </section>
+
+
+
+    </main>
+
+
+    <script src="../js/handler.js" type="module"></script>
+</body>
+<footer>
+    <div class="container">
+        <a href="https://www.facebook.com/"><img src="../img/facebook.png"></a>
+        <a href="https://instagram.com/"><img src="../img/instagram.png"></a>
+        <a href="/https://twitter.com/"><img src="../img/twitter.png"></a>
+        <a href="/https://youtube.com/"><img src="../img/youtube.png"></a>
+    </div>
+</footer>
+
+</html>

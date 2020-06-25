@@ -39,7 +39,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Hashids\\": "hashids/hashids/src/"
+                    "Hashids\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",

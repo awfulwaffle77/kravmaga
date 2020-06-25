@@ -1,0 +1,104 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: rgb(46, 43, 43);
+    font-family: "Poppins";
+    font-weight: lighter;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+button,
+#emailReset_confirm:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+#emailReset_confirm:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+.pw_title {
+    display: flex;
+    height: 40vh;
+    align-items: center;
+    font-size: x-large;
+    font-weight: lighter;
+    justify-content: flex-start;
+    animation: fadeIn 1s;
+    margin: auto;
+    width: 80%;
+    color: rgb(216, 82, 29);
+    background: radial-gradient( rgb(216, 82, 29) 2%, rgb(46, 43, 43) 60%);
+    justify-content: center;
+}
+
+.pw_title h1 {
+    font-family: 'Rock Salt', cursive;
+    letter-spacing: 10px;
+    background-color: transparent;
+    color: rgb(46, 43, 43);
+}
+
+.poza2 {
+    height: 10vh;
+    background: transparent;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    align-items: center;
+}
+
+.flex-column p {
+    font-size: 3vh;
+    color: whitesmoke;
+    align-items: center;
+    justify-items: center;
+}
+
+#email {
+    height: 4vh;
+    width: 30vh;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+}
+
+#emailReset_confirm {
+    height: 4vh;
+    width: 10vh;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+}
+
+@media screen and (max-width:768px) {
+    .pw_title h1 {
+        font-size: 3vh;
+        color: rgb(31, 29, 29);
+        font-weight: bold;
+    }
+    .flex-column p {
+        font-size: 2vh;
+        color: whitesmoke;
+    }
+}

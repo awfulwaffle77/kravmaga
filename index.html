@@ -1,83 +1,157 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="img/logo.png" />
+    <link rel="stylesheet" href="style/default-style.css">
+    <link rel="stylesheet" href="style/index-style.css">
 
-    <title>Krav Maga - Autoaparare si autocontrol</title>
-    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="module" src="js/js-cookie/js.cookie.js"></script> <!-- https://github.com/js-cookie/js-cookie -->
+    <script type="module" src="js/js-cookie/js.cookie.js"></script>
     <script type="module" src="js/handler.js"></script>
-    <script src="js/windowChanges.js"></script>
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/extended.css">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <title>Cursuri autoaparare</title>
+
+
+    <nav>
+        <div class="central-logo">
+            <a href="#top">
+                <div class="logo">
+                    <h5>Krav</h5>
+                    <img class="poza" src="img/unnamed.png">
+                    <h5>Maga</h5>
+                </div>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-link">
+                <h1>Categorii</h>
+                    <ul>
+                        <li><a href="../krav_me/pages/Evenimente.html">Evenimente</a></li>
+                        <li><a href="../krav_me/pages/Centuri.html">Centuri</a></li>
+                        <li><a href="../krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                        <li><a href="../krav_me/pages/Materiale.html">Materiale utile</a></li>
+                    </ul>
+            </li>
+            <li class="nav-link">
+                <a href="../krav_me/pages/About.html">
+                    <h1>Despre noi</h1>
+                </a>
+            </li>
+
+            <li class="poza-li">
+                <a href="#top">
+                    <div class="logo">
+                        <h5>Krav</h5>
+                        <img class="poza" src="img/unnamed.png">
+                        <h5>Maga</h5>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="../krav_me/pages/Contact.html">
+                    <h1>Contact</h1>
+                </a>
+            </li>
+            <li id="loginProfile" class="nav-link">
+                <h1>Contul meu</h>
+                    <ul>
+                        <li><a href="../krav_me/pages/profile.html">Editare</a></li>
+                        <li><a href="../krav_me/pages/progress.html">Evolutie centuri</a></li>
+                        <li><a href="../krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                        <li><a id="logout" href="#">Log out</a></li>
+                    </ul>
+            </li>
+        </ul>
+
+        <ul class="nav-links-side">
+            <li class="nav-link">
+                <h1>Categorii</h1>
+                <ul clas="side-list">
+                    <li><a href="../krav_me/pages/evenimente.html">Evenimente</a></li>
+                    <li><a href="../krav_me/pages/Centuri.html">Centuri</a></li>
+                    <li><a href="../krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                    <li><a href="../krav_me/pages/Materiale.html">Materiale utile</a></li>
+                </ul>
+            </li>
+            <li id="loginProfile_burger" class="nav-link">
+                <h1>Contul meu</h1>
+                <ul class="side-list">
+                    <li><a href="../krav_me/pages/profile.html">Editare</a></li>
+                    <li><a href="../krav_me/pages/progress.html">Evolutie centuri</a></li>
+                    <li><a href="../krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                    <li><a id="logout_burger" href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="nav-link"><a href="../krav_me/pages/About.html">Despre noi</a></li>
+            <li class="nav-link"><a href="../krav_me/pages/Contact.html">Contact</a></li>
+
+        </ul>
+
+
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
 </head>
 
-<header>
-    <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="pages/evenimente.html">Evenimente</a></li>
-        <li class="navbar"><a class="navbar" href="pages/login.html" id="loginProfile">Login</a></li>
-        <li class="navbar"><a class="active" href="index.html">
-            <span class="logo_text">Krav</span>
-            <img class="logo_img" src="img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
-            <span class="logo_text">Maga</span>
-        </a></li>
-        <li class="navbar"><a class="navbar" href="pages/antrenamente.html">Antrenamente</a></li>
-        <li class="navbar"><a class="navbar" href="pages/reset.html">Contact</a></li>
-    </ul>
-</header>
+<body>
 
-<body class="withVid">
 
-<video id="vid" class="video" autoplay muted loop>
+    <video id="vid" autoplay muted loop>
     <source src="video/KM_Family.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+
 </video>
 
-<div class="wrapper" id="divWrap"></div> <!-- A wrapper to keep the page black even when the text is hidden -->
-<div class="intro" id="divToShowHide">
-    <h1> LOREM IPSUM</h1>
-    <p id="firstText"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel tempor neque. Ut gravida, est rutrum
-        accumsan placerat, libero massa posuere justo, eget rhoncus sapien nisi id orci. Praesent ultrices nisi in
-        justo semper suscipit. Aenean et tincidunt sapien. Suspendisse posuere leo quis elit ultricies, id suscipit
-        magna euismod. Nullam interdum, augue vitae feugiat faucibus, odio risus euismod orci, vel ultrices ligula
-        nisi posuere turpis. Vestibulum vitae purus rhoncus, ornare nulla a, lobortis nunc. Proin quis feugiat diam.
-        Cras imperdiet odio eu rhoncus efficitur. Morbi et gravida elit. In elementum lacinia leo et faucibus. Morbi
-        eu rhoncus nisl.
-        <br><br>
-        In feugiat tempus neque, quis congue est. Nam ut felis sed felis cursus sodales vitae ac elit. Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In suscipit et risus vel
-        iaculis. Nulla vitae neque elementum, maximus nunc ac, facilisis felis. Interdum et malesuada fames ac ante
-        ipsum primis in faucibus. Etiam mi diam, vehicula sed turpis sit amet, commodo ultricies nisi. Donec gravida
-        rutrum pharetra. Nunc vel neque sapien. Aenean aliquet, nunc nec ornare pellentesque, ligula urna tristique nunc
-        , id convallis enim diam quis quam. Morbi in sem ac justo placerat molestie. Phasellus non nulla at lectus aliquam
-        convallis nec ut magna. Sed eu rutrum tellus, nec pellentesque orci. </p>
 
-</div>
+    <main>
+        <section>
+            <div class="title">
+                <h1 class="fade-in">Tehnici autoaparare</h1>
+            </div>
+            <div class="date">
+                <p>
 
-<div class="intro" id="divToShowHide2">
-    <h1> LOREM IPSUM</h1>
-    <p id="firstText2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel tempor neque. Ut gravida, est rutrum
-        accumsan placerat, libero massa posuere justo, eget rhoncus sapien nisi id orci. Praesent ultrices nisi in
-        justo semper suscipit. Aenean et tincidunt sapien. Suspendisse posuere leo quis elit ultricies, id suscipit
-        magna euismod. Nullam interdum, augue vitae feugiat faucibus, odio risus euismod orci, vel ultrices ligula
-        nisi posuere turpis. Vestibulum vitae purus rhoncus, ornare nulla a, lobortis nunc. Proin quis feugiat diam.
-        Cras imperdiet odio eu rhoncus efficitur. Morbi et gravida elit. In elementum lacinia leo et faucibus. Morbi
-        eu rhoncus nisl.
-        <br><br>
-        In feugiat tempus neque, quis congue est. Nam ut felis sed felis cursus sodales vitae ac elit. Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In suscipit et risus vel
-        iaculis. Nulla vitae neque elementum, maximus nunc ac, facilisis felis. Interdum et malesuada fames ac ante
-        ipsum primis in faucibus. Etiam mi diam, vehicula sed turpis sit amet, commodo ultricies nisi. Donec gravida
-        rutrum pharetra. Nunc vel neque sapien. Aenean aliquet, nunc nec ornare pellentesque, ligula urna tristique nunc
-        , id convallis enim diam quis quam. Morbi in sem ac justo placerat molestie. Phasellus non nulla at lectus aliquam
-        convallis nec ut magna. Sed eu rutrum tellus, nec pellentesque orci. </p>
+                </p>
+            </div>
 
-</div>
+        </section>
+        <div class="moto">
+            <p>"Despre autoapărare, autocontrol și despre familia noastră"</p>
+        </div>
+
+        <div id="evenimente">
+
+
+
+
+        </div>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <div class="container2">
+            <a href="https://www.facebook.com/"><img src="img/facebook.png"></a>
+            <a href="https://instagram.com/"><img src="img/instagram.png"></a>
+            <a href="/https://twitter.com/"><img src="img/twitter.png"></a>
+            <a href="/https://youtube.com/"><img src="img/youtube.png"></a>
+        </div>
+    </footer>
+    <script src="js/nav.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/handler.js" type="module"></script>
 
 </body>
+
 </html>

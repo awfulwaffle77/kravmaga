@@ -1,5 +1,15 @@
-import {handleUserAvailable, handleUserUnavailable, signupBoxInfoAdd, mustCompleteField, isFieldCompleted, handlePasswordsNotMatch,
-setFieldsToDefault, handlePasswordsMatch, profileBoxInfoAdd, checkEmailPattern } from "./fieldChecker.js";
+import {
+    handleUserAvailable,
+    handleUserUnavailable,
+    signupBoxInfoAdd,
+    mustCompleteField,
+    isFieldCompleted,
+    handlePasswordsNotMatch,
+    setFieldsToDefault,
+    handlePasswordsMatch,
+    profileBoxInfoAdd,
+    checkEmailPattern
+} from "./fieldChecker.js";
 
 export const code_isAdmin = 100;
 
@@ -17,16 +27,13 @@ export let getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-$(document).ready(function(){
-
-
-
+$(document).ready(function () {
     // DECLARING VARIABLES
-    const loginRedirectURL = "https://localhost/kravmaga_v2/pages/profile.html";
-    const adminProfileRedirect = "https://localhost/kravmaga_v2/pages/signup.html";
-    const regularProfileRedirect = "https://localhost/kravmaga_v2/pages/profile.html"; // Better option would be to use default anchor option (in php?)
-    const signupSuccessRedirect = "https://localhost/kravmaga_v2/pages/success.html";
-    const successRedirect = "https://localhost/kravmaga_v2/pages/success.html";
+    const loginRedirectURL = "https://localhost/krav_me/pages/profile.html";
+    const adminProfileRedirect = "https://localhost/krav_me/pages/signup.html";
+    const regularProfileRedirect = "https://localhost/krav_me/pages/profile.html"; // Better option would be to use default anchor option (in php?)
+    const signupSuccessRedirect = "https://localhost/krav_me/pages/success.html";
+    const successRedirect = "https://localhost/krav_me/pages/success.html";
     // TODO: Check if it possible to use default anchor. It is. Change this to getting the page with php
 
     // DECLARING LOGIN CODES (class JSON_Response from dbHandler.php has message and code)
@@ -60,13 +67,12 @@ $(document).ready(function(){
                 default:
                     break;
             }
-        }
-        catch (e) {
-           console.log(e.message());
+        } catch (e) {
+            console.log(e.message());
         }
     }
 
-    function eventFire(el, etype){
+    function eventFire(el, etype) {
         if (el.fireEvent) {
             el.fireEvent('on' + etype);
         } else {
@@ -75,87 +81,93 @@ $(document).ready(function(){
             el.dispatchEvent(evObj);
         }
     }
+
     // MAIN CODE
     // HANDLE ENTER PRESS
     $(document).on('keypress', function (e) {
         // ON ENTER PRESS, DEPENDING ON PAGE, SUBMIT FORM
-        if($("#signupConfirm").length) // IF ELEMENT EXISTS
+        if ($("#signupConfirm").length) // IF ELEMENT EXISTS
         {
-            if(e.which == 13) // IF ENTER IS PRESSED
+            if (e.which == 13) // IF ENTER IS PRESSED
                 $("#signupConfirm").click(); // CLICK THE CONFIRM BUTTON
         }
     });
     // PROFILE ANCHOR HANDLING
-    if (Cookies.get('logged') === '1') { // If the cookie shows that the user is logged, the Login button is updated
-        // Changing the name and href accordingly
-        $("#loginProfile").text('Profil').attr('href', 'profile.html').on('click',function (e) {
-            // Checking where to redirect
-            $.ajax(
-                {
-                    url: '../php/dbHandler.php',
-                    method: 'POST',
-                    data: {
-                        checkPrivilege: 1,
-                    },
-                    complete: function (response) { // success is not working; using complete as alternative
-                        //console.log(response.responseText);
-                        interpretResponse(JSON.parse(response.responseText));
-                    },
-                    dataType: 'text'
-                });
+    console.log(typeof Cookies.get('currentHash'));
+    if (typeof Cookies.get('currentHash') !== "string") {
+        let pathname = (window.location.pathname).split('/');
+        console.log(pathname);
+        let path = 'Login.html';
+        if (pathname[pathname.length - 1] === 'index.html') {
+            path = "pages/" + path;
+        }
+        console.log("Not logged in on " + pathname);
+        let burgerRedir = "<li class=\"nav-link\"><a href=\"" + path + "\">Login</a></li>";
+        let redir = "<li class=\"nav-link\">\n" +
+            "                <a href=\"" + path + "\">\n" +
+            "                    <h1>Login</h1>\n" +
+            "                </a>\n" +
+            "            </li>";
+        $("#loginProfile").replaceWith(redir);
+        $("#loginProfile_burger").replaceWith(burgerRedir);
+        //$("#loginProfile").replaceWith()
+    } else {
+        $("#logout").on('click', function () {
+            Cookies.remove('currentHash');
+            Cookies.remove('logged');
+            location.reload();
+        });
+        $("#logout_burger").on('click', function () {
+            Cookies.remove('currentHash');
+            Cookies.remove('logged');
+            location.reload();
         });
     }
     // SIGNUP CONFIRM BUTTON CLICK
-    $("#signupConfirm").on('click',function (e) {
+    $("#signupConfirm").on('click', function (e) {
         e.preventDefault();
         // CHECKING FIELDS TO BE COMPLTED
         let nume, username, email, passwd, id_centura, id_sala;
         setFieldsToDefault();
 
-        if(!isFieldCompleted("#signup_nume")) {
+        if (!isFieldCompleted("#signup_nume")) {
             mustCompleteField("#signup_nume");
             return;
-        }
-        else
+        } else
             nume = $("#signup_nume").val();
 
-        let prenume= $("#signup_prenume").val();
+        let prenume = $("#signup_prenume").val();
 
-        if(!isFieldCompleted("#signup_username")) {
+        if (!isFieldCompleted("#signup_username")) {
             mustCompleteField("#signup_username");
             return;
-        }
-        else
-           username = $("#signup_username").val();
+        } else
+            username = $("#signup_username").val();
 
-        if(!isFieldCompleted("#signup_email")){
+        if (!isFieldCompleted("#signup_email")) {
             mustCompleteField("#signup_email");
             return;
-        }
-        else
+        } else
             email = $("#signup_email").val();
 
-        if(!isFieldCompleted("#signup_passwd")) {
+        if (!isFieldCompleted("#signup_passwd")) {
             mustCompleteField("#signup_passwd");
             return;
-        }
-        else
+        } else
             passwd = $("#signup_passwd").val();
 
         let data = $("#signup_data").val();
 
-        if($("#signup_sala").val === "-- Alegeti o sala --") {
+        if ($("#signup_sala").val === "-- Alegeti o sala --") {
             mustCompleteField("#signup_sala");
             return;
-        }
-        else
+        } else
             id_sala = $("#signup_sala option:selected").text();
 
-        if($("#signup_centura").val() === "-- Alegeti o centura --") {
+        if ($("#signup_centura").val() === "-- Alegeti o centura --") {
             mustCompleteField("#signup_centura");
             return;
-        }
-        else
+        } else
             id_centura = $("#signup_centura option:selected").text();
 
 
@@ -179,8 +191,7 @@ $(document).ready(function(){
                     //console.log(response.responseText);
                     try {
                         interpretResponse(JSON.parse(response.responseText));
-                    }
-                    catch(e) {
+                    } catch (e) {
                         console.log(response.responseText);
                     }
                 },
@@ -188,12 +199,12 @@ $(document).ready(function(){
             })
     });
     // LOGIN SUBMIT BUTTON CLICK
-    $("#loginSubmit").on('click',function (e) {
+    $("#loginSubmit").on('click', function (e) {
         e.preventDefault();
         let username = $("#uname").val();
         let passwd = $("#passwd").val();
 
-        if (username === ""|| passwd === "")
+        if (username === "" || passwd === "")
             console.log("Credentials are not correct");
         else {
             $.ajax(
@@ -209,8 +220,7 @@ $(document).ready(function(){
                         //console.log(response.responseText);
                         try {
                             interpretResponse(JSON.parse(response.responseText));
-                        }
-                        catch(e){
+                        } catch (e) {
                             console.log(response.responseText);
                         }
                     },
@@ -220,12 +230,12 @@ $(document).ready(function(){
         }
     });
     // SIGNUP
-    if($("#signupBox").length){ // If element exists on page; If I am on signup.html
+    if ($("#signupBox").length) { // If element exists on page; If I am on signup.html
         // DO SQL FETCH OF ID_SALA AND ID_CENTURA
         $.ajax({
             url: '../php/dbHandler.php',
             method: 'GET',
-            data:{
+            data: {
                 getSignupInfo: 1
             },
             complete: function (response) {
@@ -240,14 +250,14 @@ $(document).ready(function(){
         let month = dateToday.getMonth() + 1;
         let day = dateToday.getDate();
 
-        if(month < 10)
+        if (month < 10)
             month = '0' + month.toString();
-        if(day < 10)
+        if (day < 10)
             day = '0' + day.toString();
 
-        let minDate= year + '-' + month + '-' + day;
+        let minDate = year + '-' + month + '-' + day;
 
-        $("#signup_data").attr('max',minDate).val(minDate);
+        $("#signup_data").attr('max', minDate).val(minDate);
     }
     // CHECK IF USERNAME IS AVAILABLE
     $("#signup_username").change(function () { // CHECK IF CURRENT USERNAME IS AVAILABLE
@@ -256,7 +266,7 @@ $(document).ready(function(){
         $.ajax({
             url: '../php/dbHandler.php',
             method: 'POST',
-            cahce:false,
+            cahce: false,
             data: {
                 checkUsernameAvailable: 1,
                 username: username
@@ -264,11 +274,11 @@ $(document).ready(function(){
             complete: function (response) { // success is not working; using complete as alternative
                 // TELL ME ABOUT THAT USERNAME. IS IT AVAILABLE?
                 let parsedResponse = JSON.parse(response.responseText);
-                if(parsedResponse.code === usernameUnavailable)
+                if (parsedResponse.code === usernameUnavailable)
                     handleUserUnavailable();
-                else if(parsedResponse.code === usernameAvailable)
+                else if (parsedResponse.code === usernameAvailable)
                     handleUserAvailable();
-                else{
+                else {
                     console.log(response.responseText);
                 }
             },
@@ -277,28 +287,27 @@ $(document).ready(function(){
     });
     // CHECK IF PASSWORD HAS AT LEAST 4 CHARACTERS
     $("#signup_passwd").change(function () {
-       let pattern = /[0-9a-bA-b]{4}/i;
+        let pattern = /[0-9a-bA-b]{4}/i;
         let x = $(this).val();
-        if(!pattern.test($(this).val()))
+        if (!pattern.test($(this).val()))
             $("#signup_passwd_err").text("Parola trebuie sa continta cel putin 4 caractere");
         else
             $("#signup_passwd_err").text("");
     });
     // CHECK IF PASSWORDS MATCH
     $("#signup_passwdCheck").change(function () {
-        if($("#signup_passwd").val() !== $("#signup_passwdCheck").val())
+        if ($("#signup_passwd").val() !== $("#signup_passwdCheck").val())
             handlePasswordsNotMatch();
         else
             handlePasswordsMatch();
     });
+
     // PROFILE
-    if($("#profileBox").length){ // IF I AM ON PROFILE PAGE
-        // FETCH THE DATA REQUIRED TO SHOW
-        let pressed = 0;
+    function loadProfileBox() {
         $.ajax({
             url: '../php/dbHandler.php',
             method: 'GET',
-            data:{
+            data: {
                 getProfileInfo: 1,
                 currentHash: Cookies.get('currentHash')
             },
@@ -306,46 +315,73 @@ $(document).ready(function(){
                 profileBoxInfoAdd(response.responseText);
             }
         });
+    }
 
-        $("#edit_profile").on('click',function () {
-            if(pressed === 0){
-                $("#profile_nume").attr('readonly',false);
-                $("#profile_prenume").attr('readonly',false);
-               pressed = 1;
-            }
-            else if(pressed === 1){
-                $("#profile_nume").attr('readonly',true);
-                $("#profile_prenume").attr('readonly',true);
+    if ($("#profileBox").length) { // IF I AM ON PROFILE PAGE
+        // FETCH THE DATA REQUIRED TO SHOW
+        let pressed = 0;
+        loadProfileBox();
+
+        $("#edit_profile").on('click', function () {
+            if (pressed === 0) {
+                $("#profile_nume").attr('readonly', false);
+                $("#profile_prenume").attr('readonly', false);
+                $("#profile_email").val();
+                $("#submit_edit_profile").show();
+                pressed = 1;
+            } else if (pressed === 1) {
+                $("#profile_nume").attr('readonly', true);
+                $("#profile_prenume").attr('readonly', true);
+                $("#profile_email").val();
+                $("#submit_edit_profile").hide();
                 pressed = 0;
             }
         });
     }
+    // PROFILE EDIT SUBMIT BUTTON
+    $("#submit_edit_profile").on('click', function () {
+        $.ajax({
+            url: '../php/dbHandler.php',
+            method: 'POST',
+            data: {
+                updateProfileInfo: 1,
+                nume: $("#profile_nume").val(),
+                prenume: $("#profile_prenume").val(),
+            },
+            complete: function (response) {
+                loadProfileBox();
+                console.log(response.responseText);
+                $("#edit_profile").click();
+            }
+        })
+    });
+
     // EMAIL RESET
-    if($("#emailBox").length){
-        $("#emailReset_confirm").on('click',function () {
+    if ($("#emailBox").length) {
+        $("#emailReset_confirm").on('click', function () {
             let email = $("#email").val();
-            if(!checkEmailPattern(email)) { // IF WE TRY TO SUBMIT A BAD EMAIL
+            if (!checkEmailPattern(email)) { // IF WE TRY TO SUBMIT A BAD EMAIL
                 $("#reset_email_err").text("Nu este o adresa de email valida");
                 return;
             }
             $.ajax({
                 url: '../php/mailAgent.php',
                 method: 'POST',
-                data:{
+                data: {
                     sendResetPasswordEmail: 1,
                     email: email
                 },
                 complete: function (response) {
+                    console.log(response.responseText);
                     $("#emailDone").text("Un email cu instructiuni a fost trimis la adresa " + email);
-                    window.location.replace()
+                    // window.location.replace()
                 }
             });
         });
-        $("#email").on('change',function () {
-            if(!checkEmailPattern($("#email").val())){
+        $("#email").on('change', function () {
+            if (!checkEmailPattern($("#email").val())) {
                 $("#reset_email_err").text("Nu este o adresa de email valida");
-            }
-            else{
+            } else {
                 $("#reset_email_err").text("");
             }
 
@@ -353,24 +389,23 @@ $(document).ready(function(){
 
     }
     // NEW PASSWORD IN EMAIL URL
-    if($("#newPasswdBox").length){
-        $("#newPasswdConfirm").on('click',function () {
-            let newPasswd = $("#newPasswd").val();
-            let token = getUrlParameter('tkn');
+    $("#newPasswdConfirm").on('click', function () {
+        let newPasswd = $("#newPasswd").val();
+        let token = getUrlParameter('tkn');
 
-            $.ajax({
-                url: '../php/mailAgent.php',
-                method: 'POST',
-                data:{
-                    sendPasswordReset: 1,
-                    newPasswd: newPasswd,
-                    tkn: token
-                },
-                complete: function (response) {
-                    console.log(response.responseText);
-                }
-            });
-        })
-    }
+        $.ajax({
+            url: '../php/mailAgent.php',
+            method: 'POST',
+            data: {
+                sendPasswordReset: 1,
+                newPasswd: newPasswd,
+                tkn: token
+            },
+            complete: function (response) {
+                console.log(response.responseText);
+                window.location.replace(regularProfileRedirect);
+            }
+        });
+    })
 });
 

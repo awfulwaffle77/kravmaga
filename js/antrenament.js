@@ -5,10 +5,6 @@ import {mustCompleteField} from "./fieldChecker.js";
 
 $(document).ready(function () {
 
-    $("#reload").on('click',function(){
-        $('html').load("reset.html");
-    });
-
     let counter = 0;
     let idtkn = getUrlParameter('id');
     const deleteMessage = "Vrei sa stergi acest eveniment?";
@@ -84,6 +80,7 @@ $(document).ready(function () {
 
     function initTable() {
         // TABLE AJAX
+       $("#eventsTable").find("tr:gt(0)").remove();
         $.ajax(
             {
                 url: '../php/dbHandler.php',
@@ -155,8 +152,9 @@ $(document).ready(function () {
                 });
                 sel.html("Select");
             } else if (sel.html() === 'Select') {
+                $("th").first().show();
                 $("input[id^='checkBox_']").parents("table").find('td').show();
-                $("input[id^='checkBox_']").parents("table").find('th').show();
+                $("table").find('td:first-child').children().first().show();
                 sel.html('Submit');
             }
         });
@@ -245,7 +243,7 @@ $(document).ready(function () {
                     prenume: prenume
                 },
                 complete: function (response) { // success is not working; using complete as alternative
-                    init();
+                 //   init();
                     initTable();
                     initDropdown();
                 },

@@ -211,7 +211,7 @@ if (isset($_POST['signup'])) {
             $username = $_POST['username'];
             $email = $_POST['email'];
             $prenume = $_POST['prenume'];
-            $passwd = password_hash($_POST['passwd'], PASSWORD_DEFAULT);
+            $passwd = hash('sha256',$_POST['passwd']);
             $date = $_POST['date'];
             $id_sala = "'" . $_POST['id_sala'] . "'";
             $id_centura = "'" . $_POST['id_centura'] . "'";
@@ -266,7 +266,7 @@ if (isset($_POST['addEvent'])) {
         $data_start = $_POST['data_start'];
         $data_stop = $_POST['data_stop'];
 
-        $sql = "INSERT INTO `evenimente`(`ID_eveniment`, `Nume`, `Locatie`, `Descriere`, `Tip_eveniment`, `Data_start_eveniment`, `Data_stop_eveniment`) VALUES ('$nume','$locatie','$descriere','$tip_event','$data_start','$data_stop')";
+        $sql = "INSERT INTO `evenimente`( `Nume`, `Locatie`, `Descriere`, `Tip_eveniment`, `Data_start_eveniment`, `Data_stop_eveniment`) VALUES ('$nume','$locatie','$descriere','$tip_event',DATE('$data_start'),DATE('$data_stop'))";
         $result = mysqli_query($conn, $sql);
 
         if ($result->num_rows != 1) {
@@ -288,7 +288,7 @@ if (isset($_POST['addEvent'])) {
 }
 
 if (isset($_POST['updateEvent'])) {
-    $id = $_POST['updateEvent'] + 2; // BECAUSE ID IS OFFSETed BY 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BAD IMPLETMENTATION
+    $id = $_POST['updateEvent']; // Changed here from +2 to nothing. Might have unexpected results
     $info = $_POST['updatedInfo'];
     $nume = $info[0];
     $locatie = $info[1];
@@ -303,9 +303,9 @@ if (isset($_POST['updateEvent'])) {
 
 if (isset($_POST['deleteRecordEvent'])) {
     $id = $_POST['id'];
-    $sql = "DELETE FROM `evenimente` WHERE `id`='$id'";
+    $sql = "DELETE FROM `evenimente` WHERE `id_eveniment`=$id";
 
-    basicUpdateDeleteInsert($sqlcode, msg_deleteRecord_success, deleteRecord_success, msg_deleteRecord_failed, deleteRecord_failed);
+    basicUpdateDeleteInsert($sql, msg_deleteRecord_success, deleteRecord_success, msg_deleteRecord_failed, deleteRecord_failed);
 }
 
 if (isset($_POST['updateAntrenamente'])) {
@@ -339,19 +339,11 @@ if (isset($_POST['addUserAntrenament'])) {
     $prenume = $_POST['prenume'];
     $id_antr = $_POST['id_antr'];
 
-    $sql = "INSERT INTO utilizatori_antrenamente(ID_user) SELECT ID_Utilizator FROM utilizatori WHERE nume='$nume' AND prenume='$prenume'";
-    $sql2 = "UPDATE utilizatori_antrenamente as a
-            INNER JOIN utilizatori as b ON a.ID_user = b.ID_utilizator
-            SET a.ID_antr = $id_antr
-            WHERE b.Nume='$nume' AND b.Prenume='$prenume'";
+    $sql = "INSERT INTO utilizatori_antrenamente(ID_user, ID_antr) SELECT ID_Utilizator, $id_antr FROM utilizatori WHERE nume='$nume' AND prenume='$prenume'";
 
     $result = mysqli_query($conn, $sql);
     if (!$result)
         throw new  Exception(msg_addUserAntrenament_failed);
-
-    $result = mysqli_query($conn, $sql2);
-     if (!$result)
-         throw new  Exception(msg_addUserAntrenament_failed);
 
      $resp = new JSON_Response();
      $resp->message = msg_addUserAntrenament_success;
@@ -365,6 +357,115 @@ if (isset($_POST['addUserAntrenament'])) {
         $resp->message = $e->getMessage();
         echo(json_encode($resp));
     }
+}
+
+if ( isset($_POST['updateProfileInfo'])){
+    $nume = $_POST['nume'];
+    $prenume = $_POST['prenume'];
+    $email = $_POST['email'];
+    $currentHash = $_COOKIE['currentHash'];
+
+    $sql = "UPDATE `utilizatori` SET `nume` = '$nume', `Prenume` = '$prenume' , `email` = '$email' WHERE hash = '$currentHash'";
+    $res = mysqli_query($conn,$sql);
+
+    if($res){
+        echo("Info updated sucessfully");
+    }
+}
+
+if(isset($_POST['addProgressInfo'])){
+    $username_id = $_POST['username'];
+    $centura_id = $_POST['centura'];
+    $data = $_POST['data'];
+
+    $sql = "INSERT INTO `utilizatori_centuri`(`ID_user`, `ID_centura`, `Data_obtinere`) VALUES ($username_id, $centura_id, DATE('$data'))";
+    $res = mysqli_query($conn,$sql);
+
+    echo("ok");
+}
+
+if(isset($_POST['updateEvolutieTasks'])){
+    $currentDate = $_POST['today'];
+    $deadline = $_POST['date'];
+    $idUser = $_POST['username'];
+    $goal = $_POST['goal'];
+
+    $sql = "INSERT INTO `evolutie_utilizator`(`ID_user`, `goal`, `deadline`, `date_assigned`) VALUES ($idUser, '$goal', DATE('$deadline'), DATE('$currentDate'))";
+    $res = mysqli_query($conn,$sql);
+
+    if($res){
+        echo("ok");
+    }
+
+}
+
+if(isset($_POST['addAntrenament'])){
+    $nume = $_POST['nume'];
+    $locatie = $_POST['locatie'];
+    $instructor = $_POST['instructor'];
+    $data = $_POST['data'];
+
+    $sql = "INSERT INTO antrenamente(ID_sala, Data_antrenament, Instructori) SELECT ID_sala, DATE('$data'),'$instructor' FROM sali WHERE nume='$nume' and adresa='$locatie'";
+    $res = mysqli_query($conn,$sql);
+
+    if($res)
+        echo("OK");
+    else
+        echo("Not OK for insert");
+}
+
+if(isset($_POST['addCotizatie'])){
+    $user = $_POST['username'];
+    $cotizatie = $_POST['cotizatie'];
+    $data = $_POST['data'];
+    $sala = $_POST['sala'];
+    $adresa = $_POST['adresa'];
+
+    $sql = "SELECT id_sala FROM sali WHERE nume = '$sala' AND adresa = '$adresa'";
+    $res = mysqli_query($conn,$sql);
+    while($row = $res->fetch_array(MYSQLI_ASSOC))
+        $id_sala = $row['id_sala'];
+
+    unset($array);
+    $array = array();
+
+    $sql = "SELECT Id_utilizator FROM utilizatori WHERE utilizator = '$user'";
+    $res = mysqli_query($conn,$sql);
+    while($row = $res->fetch_array(MYSQLI_ASSOC))
+        $id_user = $row['Id_utilizator'];
+
+    $sql = "INSERT INTO `cotizatii`( `Cuantum`, `Data_cotizatie`, `ID_user`, `ID_sala`) VALUES($cotizatie, DATE('$data'), $id_user,$id_sala) ";
+    mysqli_query($conn,$sql);
+    echo "Ok";
+}
+
+if(isset($_POST['updateUser'])){
+   $info = $_POST['updatedInfo'];
+   $nume = $info[0];
+   $prenume = $info[1];
+   $user = $info[2];
+   $email = $info[3];
+   $data_inrolare = $info[4];
+   $nume_sala = explode(", ", $info[5])[0];
+   $locatie = explode(", ", $info[5])[1];
+   $culoare = $info[6];
+
+   $sql = "UPDATE `utilizatori` SET nume = '$nume',prenume = '$prenume',email = '$email',data_inrolare = DATE('$data_inrolare'),ID_centura = (SELECT c.id_centura from centuri as c WHERE c.Culoare = '$culoare'), ID_sala = (SELECT s.id_sala FROM sali as s  WHERE s.Nume = '$nume_sala' AND s.Adresa = '$locatie') WHERE utilizatori.Utilizator = '$user'";
+   $res = mysqli_query($conn,$sql);
+
+   if($res){
+       echo "Ok";
+   }
+   else
+       echo "Could not update";
+}
+
+if(isset($_POST['deleteUser'])){
+    $hash = $_COOKIE['currentHash'];
+
+    $sql = "DELETE FROM `utilizatori` WHERE hash = '$hash'";
+    $res = mysqli_query($conn, $sql);
+
 }
 
 // GET METHODS
@@ -381,7 +482,7 @@ if (isset($_GET['getSignupInfo'])) {
         if ($result->num_rows == 0)
             throw new Exception(msg_getSignupInfo_failed);
 
-        $sqlcode = "SELECT NUME, ADRESA FROM sali";
+        $sqlcode = "SELECT ID_SALA, NUME, ADRESA FROM sali";
         $result = mysqli_query($conn, $sqlcode);
         while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
             array_push($resp->sali, $row);
@@ -398,7 +499,7 @@ if (isset($_GET['getSignupInfo'])) {
 if (isset($_GET['getProfileInfo'])) {
     try {
         $currentHash = $_COOKIE['currentHash'];
-        $sql = "SELECT nume, prenume, utilizator FROM utilizatori WHERE hash='$currentHash'";
+        $sql = "SELECT nume, prenume, utilizator, email FROM utilizatori WHERE hash='$currentHash'";
         $result = mysqli_query($conn, $sql);
 
         if ($result->num_rows == 0)
@@ -442,7 +543,7 @@ if (isset($_GET['getEventsInfo'])) {
 
 if (isset($_GET['getAntrenamenteInfo'])) {
     //try {
-    $sql = "SELECT an.id_antrenament as 'ID_Antrenament' , s.nume as 'Nume' , s.adresa as 'Adresa' , an.instructori as 'Instructori', an.Data_Antrenament as 'Data' FROM `antrenamente` as an INNER JOIN `sali` as s ON an.id_sala = s.id_sala ";
+    $sql = "SELECT an.id_antrenament as 'ID_Antrenament' , s.nume as 'Nume' , s.adresa as 'Adresa' , an.instructori as 'Instructori', an.Data_Antrenament as 'Data' FROM `antrenamente` as an INNER JOIN `sali` as s ON an.id_sala = s.id_sala ORDER BY an.Data_Antrenament desc";
     echo(getInfo($sql, msg_antrnmntInfo_success, antrntmnt_success, msg_antrnmntInfo_failed, antrnmnt_failed));
 
     //    $result = mysqli_query($conn, $sql);
@@ -471,7 +572,7 @@ if (isset($_GET['getAntrenamenteInfo'])) {
 if (isset($_GET['getAntrenament']) && isset($_GET['id'])) {
 
     $id = $_GET['id'];
-    $sql = "SELECT ua.id_utilizator_antrenament, u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament";
+    $sql = "SELECT ua.id_utilizator_antrenament, u.Nume, u.Prenume FROM `utilizatori_antrenamente` as ua JOIN utilizatori as u ON u.id_utilizator = ua.id_user JOIN antrenamente as a ON ua.id_antr = a.id_antrenament WHERE id_antr = $id";
     echo(getInfo($sql, msg_antrnmntUserInfo_success, antrnmntUserInfo_success, msg_antrnmntUserInfo_failed, antnmntUserInfo_failed));
 }
 
@@ -531,6 +632,69 @@ if(isset($_GET['getEvolutionData'])){
         echo("Bad query");
 }
 
+if(isset($_GET['getProgressInfo'])){
+    $array = array("utilizatori"=> array(),"centuri"=>array());
 
+    $sql = "SELECT id_utilizator, utilizator FROM `utilizatori`";
+    $res = mysqli_query($conn,$sql);
+
+    while($row = $res->fetch_array(MYSQLI_ASSOC)){
+        array_push($array["utilizatori"],$row);
+    }
+
+    $sql = "SELECT ID_centura, culoare FROM `centuri`";
+    $res = mysqli_query($conn,$sql);
+
+    while($row = $res->fetch_array(MYSQLI_ASSOC)){
+        array_push($array["centuri"],$row);
+    }
+
+    echo(json_encode($array));
+}
+
+if(isset($_GET['getCenturi'])){
+
+    $sql = "SELECT culoare, denumire, semnificatie, cost, documentatie FROM centuri";
+    $res = mysqli_query($conn,$sql);
+
+    $array = array();
+    if($res){
+        while($row = $res->fetch_array(MYSQLI_ASSOC))
+            array_push($array,$row);
+        echo(json_encode($array));
+    }
+}
+
+if(isset($_GET['getCotizatii'])){
+
+    $hash = $_COOKIE['currentHash'];
+    if(existsInHashArray($_COOKIE['currentHash'])){
+       $sql = "SELECT `c`.`cuantum`, `c`.`data_cotizatie`, `u`.`utilizator`, `s`.`nume`, `s`.`adresa` FROM `cotizatii` as `c` INNER JOIN `utilizatori` as `u` ON `u`.`ID_utilizator`=`c`.`ID_user` INNER JOIN `sali` as `s` ON `s`.`ID_Sala` = `c`.`ID_sala`";
+    }
+    else{
+        $sql = "SELECT `c`.`cuantum`, `c`.`data_cotizatie`, `u`.`utilizator`, `s`.`nume`, `s`.`adresa` FROM `cotizatii` as `c` INNER JOIN `utilizatori` as `u` ON `u`.`ID_utilizator`=`c`.`ID_user` INNER JOIN `sali` as `s` ON `s`.`ID_Sala` = `c`.`ID_sala` WHERE `u`.`hash` = '$hash'";
+    }
+    $res = mysqli_query($conn,$sql);
+
+    $array = array();
+    while($row = $res->fetch_array(MYSQLI_ASSOC))
+        array_push($array,$row);
+
+    echo(json_encode($array));
+}
+
+if(isset($_GET['getUsers'])){
+    $sql = "SELECT u.id_utilizator, u.nume, u.prenume, u.utilizator, u.email, u.data_inrolare, s.nume as `nume_sala`, s.adresa, c.culoare FROM utilizatori as u INNER JOIN sali as s ON s.ID_Sala = u.ID_sala INNER JOIN centuri as c ON c.ID_centura = u.id_centura";
+    $res = mysqli_query($conn,$sql);
+
+    if($res){
+      $array = array();
+      while($row = $res->fetch_array(MYSQLI_ASSOC))
+          array_push($array, $row);
+      echo(json_encode($array));
+    }
+    else
+        echo("Could not get users.");
+}
 
 

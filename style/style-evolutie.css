@@ -1,0 +1,61 @@
+     #hiddenform {
+         display: flex;
+         flex-direction: column;
+         align-self: center;
+         margin: auto;
+         justify-self: center;
+         justify-content: center;
+         align-items: center;
+         align-content: center;
+     }
+     
+     .why {
+         display: flex;
+         flex-direction: column;
+         align-self: center;
+         margin: auto;
+         align-items: center;
+     }
+     
+     input,
+     select,
+     button,
+     option {
+         border-style: ridge;
+         border-color: tomato;
+         width: 35vh;
+         height: 6vh;
+         background-color: rgb(46, 43, 43);
+         color: whitesmoke;
+         margin-bottom: 3vh;
+     }
+     
+     .fadeIn {
+         margin-bottom: 10vh;
+     }
+     
+     .why2 {
+         display: flex;
+         flex-direction: column;
+         align-self: center;
+         margin: auto;
+         align-items: center;
+     }
+     
+     label {
+         color: whitesmoke;
+         margin-top: 10vh;
+     }
+     
+     select {
+         margin-bottom: 2vh;
+     }
+     
+     button {
+         margin-top: 5vh;
+     }
+     
+     .why>option {
+         margin-top: 20vh;
+         width: 35vh;
+     }

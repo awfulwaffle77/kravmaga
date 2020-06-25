@@ -1,0 +1,160 @@
+#tableBox {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+#eventsTable input {
+    display: flex;
+    width: 10vh;
+    align-self: center;
+}
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+#editButton_toggle {
+    width: 15vh;
+    height: 3vh;
+    align-self: center;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+    background-color: rgb(46, 43, 43);
+    margin-top: 5vh;
+}
+
+#editButton_toggle:active {
+    background-color: tomato;
+}
+
+.clasatabel {
+    display: flex;
+    overflow-x: auto;
+    width: 80%;
+    margin: auto;
+    overflow-y: auto;
+    max-height: 40vh;
+}
+
+#eventsTable th {
+    border-bottom: ridge;
+    border-width: 2px;
+    border-spacing: 4px;
+    min-width: 26.2vh;
+}
+
+#eventsTable {
+    display: flex;
+    flex-direction: column;
+    border-style: ridge;
+    border-color: tomato;
+    border: none;
+    line-height: 2;
+    color: tomato;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#eventsTable td {
+    display: table-cell;
+    min-width: 15vh;
+    padding-top: 2vh;
+    padding-right: 3vh;
+    max-width: 15vh;
+    word-wrap: break-word;
+    justify-content: center;
+    color: whitesmoke;
+}
+
+#search {
+    width: 80%;
+    margin: auto;
+    border-style: ridge;
+    border-color: tomato;
+    height: 4vh;
+    font-size: 16px;
+    color: whitesmoke;
+    background-color: transparent;
+}
+
+#hiddenForm {
+    display: block;
+    flex-direction: column;
+    align-self: center;
+    margin: auto;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+    z-index: 9;
+    background-color: transparent;
+    width: auto;
+    position: absolute;
+}
+
+#hiddenForm input {
+    display: block;
+    min-width: 24vh;
+    max-width: 24vh;
+    height: 3.5vh;
+    text-overflow: clip;
+    font-size: 13px;
+    color: whitesmoke;
+    border-style: ridge;
+    justify-content: center;
+    background-color: transparent;
+}
+
+#newEvent_submit {
+    width: 12vh;
+    height: 3.5vh;
+    color: black;
+    background-color: gray;
+    border: ridge;
+    font-size: 20;
+    border-color: black;
+    margin-left: 5vh;
+}
+
+#div_but {
+    display: flex;
+}
+
+#evenimente_client {
+    display: flex;
+    flex-direction: column;
+}
+
+#hiddenFormHeader {
+    display: block;
+    color: gray;
+    font-size: 20px;
+    letter-spacing: 2px;
+    cursor: move;
+}

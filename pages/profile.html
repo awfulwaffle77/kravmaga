@@ -1,81 +1,255 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Krav Maga - Autoaparare si autocontrol</title>
-    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+    <link rel="shortcut icon" type="image/png" href="../img/logo.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module" src="../js/js-cookie/js.cookie.js"></script>
     <script type="module" src="../js/handler.js"></script>
-    <script src="../js/windowChanges.js"></script>
+    <script type="module" src="../js/cotizatii.js"></script>
+    <script type="module" src="../js/userManager.js"></script>
+    <script type="module" src="../js/profile.js"></script>
     <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
     <!-- Font Awesome icons -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/base.css"/>
-    <link rel="stylesheet" href="../styles/extended.css"/>
-</head>
 
-<header>
-    <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="../index.html">Evenimente</a></li>
-        <li class="navbar"><a class="navbar active" href="login.html" id="loginProfile">Login</a></li>
-        <li><a class="navbar" href="../index.html">
-            <span class="logo_text">Krav</span>
-            <img class="logo_img" src="../img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
-            <span class="logo_text">Maga</span>
-        </a></li>
-        <li class="navbar"><a class="navbar" href="antrenamente.html">Antrenamente</a></li>
-        <li class="navbar"><a class="navbar" href="about.asp">Contact</a></li>
-    </ul>
-</header>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style/default-style.css">
+    <link rel="stylesheet" href="../style/style-profile.css">
+    <nav>
+        <div class="central-logo">
+            <a href="../index.html">
+                <div class="logo">
+                    <h5>Krav</h5>
+                    <img class="poza" src="../img/unnamed.png">
+                    <h5>Maga</h5>
+                </div>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-link">
+                <h1>Categorii</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/Evenimente.html">Evenimente</a></li>
+                        <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                        <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                        <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                    </ul>
+            </li>
+            <li class="nav-link">
+                <a href="/krav_me/pages/About.html">
+                    <h1>Despre noi</h1>
+                </a>
+            </li>
+
+            <li class="poza-li">
+                <a href="../index.html">
+                    <div class="logo">
+                        <h5>Krav</h5>
+                        <img class="poza" src="../img/unnamed.png">
+                        <h5>Maga</h5>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="/krav_me/pages/Contact.html">
+                    <h1>Contact</h1>
+                </a>
+            </li>
+            <li id="loginProfile" class="nav-link">
+                <h1>Contul meu</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                        <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                        <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                        <li><a id="logout" href="#">Log out</a></li>
+                    </ul>
+            </li>
+        </ul>
+
+        <ul class="nav-links-side">
+            <li class="nav-link">
+                <h1>Categorii</h1>
+                <ul clas="side-list">
+                    <li><a href="/krav_me/pages/evenimente.html">Evenimente</a></li>
+                    <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                    <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                    <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                </ul>
+            </li>
+            <li id="loginProfile_burger" class="nav-link">
+                <h1>Contul meu</h1>
+                <ul class="side-list">
+                    <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                    <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                    <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                    <li><a id="logout_burger" href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="nav-link"><a href="/krav_me/pages/About.html">Despre noi</a></li>
+            <li class="nav-link"><a href="/krav_me/pages/Contact.html">Contact</a></li>
+
+        </ul>
+
+
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+
+</head>
 
 <body>
 
-<button class="btn btn-light" style="float: right" type="button" id="edit_profile"><i class="fas fa-edit"></i></button>
-<div class="container">
-    <div class="container d-flex flex-column mTpercent align-items-center" id="profileBox">
-        <br><br>
-        <!-- TODO: On click, load info on this page so you can get and edit the fields accessible. Change the class so that it can be beautifully put in a box. -->
 
-        <div class="row">
+    <main>
+        <section>
+            <div class="title">
+                <h1 class="fade-in">Profil</h1>
+            </div>
+            <div class="date">
+                <p>
 
-            <div class="d-flex flex-row mb-2">
-                <label class="col-*-6 mr-2 mb-2" for="prenume">Nume</label><br>
-                <input class="col-*-6 form-control align-self-center" id="profile_nume" readonly></input>
-                <br><br>
+                </p>
             </div>
 
-        </div>
-        <div class="row">
-            <div class="d-flex flex-row mb-2">
-                <label class="col-*-6 mr-2 mb-2" for="prenume">Prenume</label><br>
-                <input class="col-*-6 form-control align-self-center" id="profile_prenume" readonly></input>
-                <br><br>
+        </section>
+
+
+        <div class="user_data">
+
+
+            <div class="profil_util" id="thisone">
+                <div class="container d-flex flex-column mTpercent align-items-center" id="profileBox">
+
+                    <!-- TODO: On click, load info on this page so you can get and edit the fields accessible. Change the class so that it can be beautifully put in a box. -->
+                    <div class="butoane">
+
+
+                        <button class="btn btn-light" type="button" id="edit_profile"><i class="fas fa-edit"></i></button>
+                        <button type="button" id="submit_edit_profile" style="display: none">Submit</button>
+                    </div>
+                    <div class="row">
+
+                        <div class="d-flex flex-row mb-2">
+                            <label class="col-*-6 mr-2 mb-2" for="prenume">Nume</label>
+                            <input class="col-*-6 form-control align-self-center" id="profile_nume" readonly></input>
+
+                        </div>
+
+                    </div>
+                    <div class="row" id="prenume">
+                        <div class="d-flex flex-row mb-2">
+                            <label class="col-*-6 mr-2 mb-2" for="profile_prenume">Prenume</label>
+                            <input class="col-*-6 form-control align-self-center" id="profile_prenume" readonly></input>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex flex-row mb-2">
+                            <label class="col-*-6 mr-2 mb-2" for="username">Utilizator</label>
+                            <input class="col-*-6 form-control" id="profile_username" readonly></input>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-flex flex-row mb-2">
+                            <label class="col-*-6 mr-2 mb-2" for="passwd">Parola</label>
+                            <a class="col-*-6" id="profile_passwd"></a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <a id="signup_redirect" style="display: none" href="signup.html"> Înscriere </a>
+            </div>
+            <div class="clasacuantum">
+                <form id="hiddenForm" style="display: none">
+                    <input id="form_username" placeholder="Username">
+                    <input id="form_cotizatie" placeholder="Cotizatie">
+                    <input id="form_sala" placeholder="Nume sala">
+                    <input id="form_adresa" placeholder="Adresa">
+                    <label for="form_data">Data cotizatie:</label>
+                    <input id="form_data" type="date">
+
+                    <button type="button" id="form_submit">Submit</button>
+                </form>
+
+
+
+
+
+
+
+
+                <div class="class-header">
+
+
+                    <table id="cotizatii">
+                        <tr>
+                            <th>Cuantum</th>
+                            <th>Data_Cotizatie</th>
+                            <th>User</th>
+                            <th>Sala</th>
+                        </tr>
+              
+                    </table>
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="tableclass">
+
+
+                <table id="users">
+
+                    <tr>
+                        <th>Nume</th>
+                        <th>Prenume</th>
+                        <th>Utilizator</th>
+                        <th>Email</th>
+                        <th>Data Inrolare</th>
+                        <th>Sala</th>
+                        <th>Centura</th>
+                    </tr>
+
+                </table>
             </div>
         </div>
-        <div class="row">
-            <div class="d-flex flex-row mb-2">
-                <label class="col-*-6 mr-2 mb-2" for="username">Utilizator</label><br>
-                <input class="col-*-6 form-control" id="profile_username" readonly></input>
-                <br><br>
-            </div>
-        </div>
-        <div class="row">
-            <div class="d-flex flex-row mb-2">
-                <label class="col-*-6 mr-2 mb-2" for="passwd">Parola</label><br>
-                <a class="col-*-6" id="profile_passwd"></a>
-                <br><br>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="../js/nav.js"></script>
+
 
 </body>
+
+<footer>
+    <div class="container">
+        <a href="https://www.facebook.com/"><img src="../img/facebook.png"></a>
+        <a href="https://instagram.com/"><img src="../img/instagram.png"></a>
+        <a href="/https://twitter.com/"><img src="../img/twitter.png"></a>
+        <a href="/https://youtube.com/"><img src="../img/youtube.png"></a>
+    </div>
+    <script src="../js/handler.js" type="module"></script>
+</footer>
+
 </html>

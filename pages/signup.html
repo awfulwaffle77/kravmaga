@@ -2,90 +2,96 @@
 session_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <title>Krav Maga - Autoaparare si autocontrol</title>
-    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="module" src="../js/js-cookie/js.cookie.js"></script>
-    <script type="module" src="../js/fieldChecker.js"></script>
-    <script type="module" src="../js/handler.js"></script>
-    <link rel="stylesheet" href="../styles/base.css" />
-    <link rel="stylesheet" href="../styles/extended.css" />
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<header>
-    <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="evenimente.html">Evenimente</a></li>
-        <li class="navbar"><a class="navbar active" href="login.html" id="loginProfile">Login</a></li>
-        <li><a class="navbar" href="../index.html">
-            <span class="logo_text">Krav</span>
-            <img class="logo_img" src="../img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
-            <span class="logo_text">Maga</span>
-        </a></li>
-        <li class="navbar"><a class="navbar" href="antrenamente.html">Antrenamente</a></li>
-        <li class="navbar"><a class="navbar" href="about.asp">Contact</a></li>
-    </ul>
-</header>
+        <title>Krav Maga - Autoaparare si autocontrol</title>
+        <link rel="shortcut icon" type="image/png" href="../img/logo.png" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="module" src="../js/js-cookie/js.cookie.js"></script>
+        <script type="module" src="../js/fieldChecker.js"></script>
+        <script type="module" src="../js/handler.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../style/style-signup.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    </head>
 
-<body>
+    <header>
+        <div class="signup_title">
+            <h1>KRAV</h1>
 
-<div id="signupBox">
-    <!-- User type="search" due to browsers not taking into account autocomplete-->
-    <form class="loginBox" action="#" method="post" autocomplete="off">
+            <img class="poza2" src="../img/unnamed.png">
+            <h1>MAGA</h1>
+        </div>
+    </header>
 
-        <span> SIGN UP NOW</span><br><br>
-        <label for="uname">Nume:</label><br>
-        <input type="search" id="signup_nume" name="nume" placeholder="Nume">
-        <label id="signup_nume_err"></label>
-        <br><br>
+    <body>
+        <main>
 
-        <label for="prenume">Prenume:</label><br>
-        <input type="search" id="signup_prenume" name="prenume" placeholder="Prenume">
-        <label id="signup_nume_err"></label>
-       <br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="search" id="signup_email" name="email" placeholder="Email">
-        <label id="signup_email_err"></label>
-        <br><br>
+            </section>
 
-        <label for="date">Data inrolare:</label><br>
-        <input type="date" id="signup_data" name="data">
-        <br><br>
+            <div id="signupBox">
+                <!-- User type="search" due to browsers not taking into account autocomplete-->
+                <form class="loginBox" action="#" method="post" autocomplete="off">
 
-        <label for="username">Utilizator:</label><br>
-        <input type="search" id="signup_username" name="username" autocomplete="off" placeholder="Username">
-        <label id="signup_username_err"></label>
-        <br><br>
+                    <span> SIGN UP NOW</span><br><br>
+                    <label for="uname">Nume:</label><br>
+                    <input type="search" id="signup_nume" name="nume" placeholder="Nume">
+                    <label id="signup_nume_err"></label>
+                    <br><br>
 
-        <label for="passwd">Parola:</label><br>
-        <input type="password" id="signup_passwd" name="passwd" autocomplete="new-password" placeholder="Parola" style="width: auto;">
-        <label id="signup_passwd_err"></label>
-        <br><br>
+                    <label for="prenume">Prenume:</label><br>
+                    <input type="search" id="signup_prenume" name="prenume" placeholder="Prenume">
+                    <label id="signup_nume_err"></label>
+                    <br><br>
 
-        <label for="passwd">Check Parola:</label><br>
-        <input type="password" id="signup_passwdCheck" name="passwd" placeholder="Reintroduceti parola" style="width: auto">
-        <label id="signup_passwdCheck_err"></label>
-        <br><br>
+                    <label for="email">Email:</label><br>
+                    <input type="search" id="signup_email" name="email" placeholder="Email">
+                    <label id="signup_email_err"></label>
+                    <br><br>
 
-        <label for="passwd">ID Sala:</label><br>
-        <select id="signup_sala">
-            <option>-- Alegeti o sala --</option>
-        </select><br><br>
+                    <label for="date">Data inrolare:</label><br>
+                    <input type="date" id="signup_data" name="data">
+                    <br><br>
 
-        <label for="passwd">ID Centura:</label><br>
-        <select id="signup_centura">
-            <option> -- Alegeti o centura --</option>
-        </select><br><br>
+                    <label for="username">Utilizator:</label><br>
+                    <input type="search" id="signup_username" name="username" autocomplete="off" placeholder="Username">
+                    <label id="signup_username_err"></label>
+                    <br><br>
 
-        <input type="button" value="Confirm" id="signupConfirm">
-    </form>
-</div>
+                    <label for="passwd">Parola:</label><br>
+                    <input type="password" id="signup_passwd" name="passwd" autocomplete="new-password" placeholder="Parola" style="width: auto;">
+                    <label id="signup_passwd_err"></label>
+                    <br><br>
 
-</body>
-</html>
+                    <label for="passwd">Check Parola:</label><br>
+                    <input type="password" id="signup_passwdCheck" name="passwd" placeholder="Reintroduceti parola" style="width: auto">
+                    <label id="signup_passwdCheck_err"></label>
+                    <br><br>
+
+                    <label for="passwd">Sala:</label><br>
+                    <select id="signup_sala">
+                    <option>-- Alegeti o sala --</option>
+                </select><br><br>
+
+                    <label for="passwd">Centura:</label><br>
+                    <select id="signup_centura">
+                    <option> -- Alegeti o centura --</option>
+                </select><br><br>
+
+                    <input type="button" value="Confirm" id="signupConfirm">
+                </form>
+            </div>
+            <script src="../js/handler.js" type="module"></script>
+    </body>
+    <footer>
+        <div class="space"></div>
+    </footer>
+
+    </html>

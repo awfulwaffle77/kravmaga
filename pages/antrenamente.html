@@ -1,65 +1,171 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Krav Maga - Autoaparare si autocontrol</title>
-    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+    <link rel="stylesheet" href="../style/default-style.css">
+    <link rel="stylesheet" href="../style/style-antrenamente.css">
+    <link rel="stylesheet" href="../style/style-antrenamenteTable.css">
+    <meta http-equiv="Cache-control" content="no-cache">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="module" src="../js/js-cookie/js.cookie.js"></script> <!-- https://github.com/js-cookie/js-cookie -->
+    <script type="module" src="../js/js-cookie/js.cookie.js"></script>
+    <!-- https://github.com/js-cookie/js-cookie -->
     <script type="module" src="../js/handler.js"></script>
     <script type="module" src="../js/antrenamenteScript.js"></script>
-    <link rel="stylesheet" href="../styles/base.css" />
-    <link rel="stylesheet" href="../styles/extended.css">
-    <link rel="stylesheet" href="../styles/popup.css">
-    <link rel="stylesheet" href="../styles/tableLink.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <title>Cursuri autoaparare</title>
+
+    <nav>
+        <div class="central-logo">
+            <a href="#top">
+                <div class="logo">
+                    <h5>Krav</h5>
+                    <img class="poza" src="../img/unnamed.png">
+                    <h5>Maga</h5>
+                </div>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-link">
+                <h1>Categorii</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/Evenimente.html">Evenimente</a></li>
+                        <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                        <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                        <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                    </ul>
+            </li>
+            <li class="nav-link">
+                <a href="/krav_me/pages/About.html">
+                    <h1>Despre noi</h1>
+                </a>
+            </li>
+
+            <li class="poza-li">
+                <a href="../index.html">
+                    <div class="logo">
+                        <h5>Krav</h5>
+                        <img class="poza" src="../img/unnamed.png">
+                        <h5>Maga</h5>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="/krav_me/pages/Contact.html">
+                    <h1>Contact</h1>
+                </a>
+            </li>
+            <li id="loginProfile" class="nav-link">
+                <h1>Contul meu</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                        <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                        <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                        <li><a id="logout" href="#">Log out</a></li>
+                    </ul>
+            </li>
+        </ul>
+
+        <ul class="nav-links-side">
+            <li class="nav-link">
+                <h1>Categorii</h1>
+                <ul clas="side-list">
+                    <li><a href="/krav_me/pages/evenimente.html">Evenimente</a></li>
+                    <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                    <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                    <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                </ul>
+            </li>
+            <li id="loginProfile_burger" class="nav-link">
+                <h1>Contul meu</h1>
+                <ul class="side-list">
+                    <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                    <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                    <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                    <li><a id="logout_burger" href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="nav-link"><a href="/krav_me/pages/About.html">Despre noi</a></li>
+            <li class="nav-link"><a href="/krav_me/pages/Contact.html">Contact</a></li>
+
+        </ul>
+
+
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
 </head>
 
-<header>
-    <ul class="navbar sticky">
-        <li class="navbar"><a class="navbar" href="#">Evenimente</a></li>
-        <li class="navbar"><a class="navbar" href="login.html" id="loginProfile">Login</a></li>
-        <li class="navbar"><a class="active" href="../index.html">
-            <span class="logo_text">Krav</span>
-            <img class="logo_img" src="../img/logo_kravmaga.png" alt="Imagine indisponibila." title="Home">
-            <span class="logo_text">Maga</span>
-        </a></li>
-        <li class="navbar"><a class="navbar" href="antrenamente.html">Antrenamente</a></li>
-        <li class="navbar"><a class="navbar" href="reset.html">About</a></li>
-    </ul>
-</header>
 <body>
 
-<div id="tableBox" style="padding-top: 20%"></div>
-<button id="editButton_toggle" style="visibility: hidden; float: right; margin-top: 10px"> Adaugare</button>
-<table id="antrnmntTable">
-    <tr>
-        <th>Nume</th>
-        <th>Adresa</th>
-        <th>Instructori</th>
-        <th>Data</th>
-    </tr>
-</table>
 
-<div class="form-popup" id="hiddenForm" style="display:none; position: absolute; z-index: 9">
-    <div id="hiddenFormHeader">Click here to move</div>
-    <form class="form-container">
-        <input id="eventAdd_nume" placeholder="Nume eveniment">
-        <input id="eventAdd_locatie" placeholder="Locatie">
-        <input id="eventAdd_descriere" placeholder="Descriere">
-        <input id="eventAdd_tipEvent" placeholder="Tip eveniment">
-        <input type="date" id="eventAdd_dataStart" placeholder="Tip eveniment">
-        <input type="date" id="eventAdd_dataStop" placeholder="Tip eveniment">
 
-        <label id="eventAdd_label"></label>
-        <button type="submit" id="newEvent_submit">Submit</button>
-    </form>
-</div>
+
+
+    <main>
+        <section>
+            <div class="title">
+                <h1 class="fade-in">Antrenamente</h1>
+            </div>
+            <div class="date">
+                <p>
+
+                </p>
+            </div>
+
+        </section>
+
+
+        <div class="antr">
+
+            <div id="tableBox"></div>
+
+
+            <table id="antrnmntTable">
+                <tr>
+                    <th>Nume</th>
+                    <th>Adresa</th>
+                    <th>Instructori</th>
+                    <th>Data</th>
+                </tr>
+
+            </table>
+
+            <button class="editButton_toggle" id="editButton_toggle" style="visibility: hidden; float: right; margin-top: 10px"> Adaugare</button>
+                <form class="form-container" id="hiddenForm" style="display:none" >
+
+                    <input id="antr_nume" placeholder="Nume sala" type="text">
+                    <input id="antr_locatie" placeholder="Adresa sala">
+                    <input id="antr_instructor" placeholder="Instuctor">
+                    <input type="date" id="antr_dataStart">
+
+                    <button type="submit" id="newAntr_submit">Submit</button>
+                </form>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="../js/nav.js"></script>
+    <script src="../js/handler.js" type="module"></script>
 
 </body>
 
+<footer>
+    <div class="container">
+        <a href="https://www.facebook.com/"><img src="../img/facebook.png"></a>
+        <a href="https://instagram.com/"><img src="../img/instagram.png"></a>
+        <a href="/https://twitter.com/"><img src="../img/twitter.png"></a>
+        <a href="/https://youtube.com/"><img src="../img/youtube.png"></a>
+    </div>
+</footer>
 
+</html>

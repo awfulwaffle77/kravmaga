@@ -1,9 +1,9 @@
 {
     "require": {
         "hashids/hashids": "^4.0",
-        "ext-json" : "*",
+        "ext-json": "*",
         "ext-mysqli": "*",
-        "ext-mbstring":"*",
+        "ext-mbstring": "*",
         "ext-bcmath": "*"
     },
     "autoload": {

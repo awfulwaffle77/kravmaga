@@ -1,37 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style/style-evolutie.css">
     <style>
         #chartdiv {
             width: 100%;
             height: 600px;
         }
-
+        
         .demo-theme-dark .demo-background {
             background: #000;
         }
-
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="../style/default-style.css">
     <title>Krav Maga - Autoaparare si autocontrol</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script> <!-- https://momentjs.com/ for time format -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="../js/js-cookie/js.cookie.js"></script>
+    <script src="../js/handler.js" type="module"></script>
+    <script src="../js/evolutie.js"></script>
+    <!-- https://momentjs.com/ for time format -->
     <!-- Charts -->
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/plugins/timeline.js"></script>
     <script src="https://www.amcharts.com/lib/4/plugins/bullets.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
     <!--  -->
-    <script src="../js/evolutie.js"></script>
+
+
+    <nav>
+        <div class="central-logo">
+            <a href="../index.html">
+                <div class="logo">
+                    <h5>Krav</h5>
+                    <img class="poza" src="../img/unnamed.png">
+                    <h5>Maga</h5>
+                </div>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-link">
+                <h1>Categorii</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/Evenimente.html">Evenimente</a></li>
+                        <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                        <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                        <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                    </ul>
+            </li>
+            <li class="nav-link">
+                <a href="/krav_me/pages/About.html">
+                    <h1>Despre noi</h1>
+                </a>
+            </li>
+
+            <li class="poza-li">
+                <a href="../index.html">
+                    <div class="logo">
+                        <h5>Krav</h5>
+                        <img class="poza" src="../img/unnamed.png">
+                        <h5>Maga</h5>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="/krav_me/pages/Contact.html">
+                    <h1>Contact</h1>
+                </a>
+            </li>
+            <li id="loginProfile" class="nav-link">
+                <h1>Contul meu</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                        <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                        <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                        <li><a id="logout" href="#">Log out</a></li>
+                    </ul>
+            </li>
+        </ul>
+
+        <ul class="nav-links-side">
+            <li class="nav-link">
+                <h1>Categorii</h1>
+                <ul clas="side-list">
+                    <li><a href="/krav_me/pages/evenimente.html">Evenimente</a></li>
+                    <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                    <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                    <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                </ul>
+            </li>
+            <li id="loginProfile_burger" class="nav-link">
+                <h1>Contul meu</h1>
+                <ul class="side-list">
+                    <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                    <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                    <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                    <li><a id="logout_burger" href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="nav-link"><a href="/krav_me/pages/About.html">Despre noi</a></li>
+            <li class="nav-link"><a href="/krav_me/pages/Contact.html">Contact</a></li>
+
+        </ul>
+
+
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
 </head>
+
 <body>
-<select id="choose" style="display: none">
+    <section>
+        <div class="title">
+            <h1 class="fade-in">Evolutie</h1>
+        </div>
+        <div class="date">
+            <p>
+
+            </p>
+        </div>
+
+    </section>
+
+    <div class="sel">
+
+    </div>
+    <div class="why">
+        <select id="choose" style="display: none">
     <option> -- Alege un utilizator --</option>
 </select><br><br>
-<div id="chartdiv"></div>
+        <div id="chartdiv"></div>
+    </div>
+    <div class="why2">
+        <form id="hiddenForm" style="display: none">
+            <select id="form_username"></select>
+            <p id="task_err"></p>
+            <input id="form_task" placeholder="Task(max. 50 caractere)"><br>
+
+            <label for="form_data_start">Data start task</label><br>
+            <input id="form_data_start" type="date"><br>
+
+            <label for="form_data">Deadline</label><br>
+            <input id="form_data" type="date"><br>
+
+            <button type="button" id="form_submit">Submit</button>
+        </form>
+    </div>
+    </div>
+    <script src="../js/handler.js" type="module"></script>
+    <script src="../js/nav.js"></script>
 </body>
+
+
+<footer>
+    <div class="container">
+        <a href="https://www.facebook.com/"><img src="../img/facebook.png"></a>
+        <a href="https://instagram.com/"><img src="../img/instagram.png"></a>
+        <a href="/https://twitter.com/"><img src="../img/twitter.png"></a>
+        <a href="/https://youtube.com/"><img src="../img/youtube.png"></a>
+    </div>
+</footer>
+
 </html>

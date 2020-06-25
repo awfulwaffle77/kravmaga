@@ -1,0 +1,102 @@
+ * {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+     background-color: rgb(46, 43, 43);
+     font-family: "Poppins";
+     font-weight: lighter;
+ }
+ 
+ .login_title {
+     display: flex;
+     height: 40vh;
+     align-items: center;
+     font-size: x-large;
+     font-weight: lighter;
+     justify-content: flex-start;
+     animation: fadeIn 1s;
+     margin: auto;
+     width: 80%;
+     color: rgb(216, 82, 29);
+     background: radial-gradient( rgb(216, 82, 29) 2%, rgb(46, 43, 43) 60%);
+     justify-content: center;
+ }
+ 
+ input:focus,
+ select:focus,
+ textarea:focus,
+ button:focus {
+     outline: none;
+ }
+ 
+ #signupSubmit {
+     margin-top: 4vh;
+ }
+ 
+ .login_title h1 {
+     font-family: 'Rock Salt', cursive;
+     letter-spacing: 10px;
+     background-color: transparent;
+     color: rgb(46, 43, 43);
+ }
+ 
+ .poza2 {
+     height: 10vh;
+     background: transparent;
+ }
+ 
+ .forms {
+     display: flex;
+     align-content: center;
+     width: 50%;
+     margin: auto;
+     height: 50vh;
+     justify-content: center;
+     justify-items: center;
+ }
+ 
+ .loginBox {
+     width: vh;
+ }
+ 
+ .form-control {
+     width: 50vh;
+     border-color: tomato;
+     margin-top: 3vh;
+     height: 6vh;
+     color: whitesmoke;
+     font-family: "Poppins";
+ }
+ 
+ #loginSubmit {
+     height: 7vh;
+     width: 15vh;
+     color: tomato;
+     cursor: pointer;
+     border-style: ridge;
+     border-color: tomato;
+ }
+ 
+ .form-group-loginBox {
+     display: flex;
+     background-color: red;
+     justify-content: center;
+     justify-items: center;
+ }
+ 
+ .forms a {
+     text-decoration: none;
+     letter-spacing: 3px;
+     font-weight: bold;
+     color: whitesmoke;
+     background: transparent;
+     font-size: 12px;
+ }
+ 
+ @media screen and (max-width:768px) {
+     .login_title h1 {
+         font-size: 3vh;
+         color: rgb(31, 29, 29);
+         font-weight: bold;
+     }
+ }

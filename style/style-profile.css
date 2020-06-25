@@ -1,0 +1,242 @@
+ input:focus,
+ select:focus,
+ textarea:focus,
+ button:focus {
+     outline: none;
+ }
+ 
+ .user_data {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .profil_util {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     height: auto;
+     transform: translateY(-20vh);
+ }
+ 
+ .profil_util input {
+     width: 30vh;
+     height: 3vh;
+     background: transparent;
+     border-style: ridge;
+     border-color: tomato;
+     color: whitesmoke;
+     font-size: 2vh;
+     align-content: center;
+     text-align: center;
+ }
+ 
+ .profil_util label {
+     color: whitesmoke;
+ }
+ 
+ .profil_util a {
+     text-decoration: none;
+     color: whitesmoke;
+     background-color: whitesmoke;
+     color: black;
+     border-radius: 2px;
+     border-style: none;
+     border-color: tomato;
+     width: 20vh;
+     height: 3vh;
+     cursor: pointer;
+     text-align: center;
+ }
+ 
+ #signup_redirect {
+     align-self: center;
+     margin-top: 2vh;
+ }
+ 
+ .butoane {
+     display: flex;
+ }
+ 
+ #edit_profile {
+     width: 5vh;
+     height: 5vh;
+     align-self: center;
+     cursor: pointer;
+     background-color: whitesmoke;
+     color: black;
+     border-style: none;
+     border-radius: 2px;
+ }
+ 
+ #submit_edit_profile {
+     width: 5vh;
+     height: 5vh;
+     align-self: center;
+     cursor: pointer;
+     background-color: whitesmoke;
+     color: black;
+     border-style: none;
+     border-radius: 2px;
+     margin-left: 1vh;
+ }
+ 
+ .d-flex {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+ 
+ input {
+     width: 30vh;
+ }
+ 
+ label {
+     width: 30vh;
+ }
+ 
+ .row {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ #profileBox {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ #prenume {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .row {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ #cotizatii,
+ #users {
+     margin-top: 5vh;
+     align-self: center;
+     border-collapse: collapse;
+ }
+ 
+ .class-header {
+     display: flex;
+     flex-direction: column;
+     overflow-x: auto;
+     overflow-y: auto;
+     height: 50vh;
+ }
+ 
+ #cotizatii th {
+     width: 30vh;
+     min-width: auto;
+     height: 3vh;
+     font-size: 2vh;
+     color: white;
+     border-bottom: whitesmoke;
+     border-style: ridge;
+     border-top: none;
+     border-right: none;
+     border-left: none;
+     justify-content: space-around;
+ }
+ 
+ .clasacuantum,
+ .tableclass {
+     display: flex;
+     flex-direction: column;
+     margin: auto;
+     overflow-x: auto;
+ }
+ 
+ #users th {
+     width: 20vh;
+     min-width: 10vh;
+     height: 3vh;
+     font-size: 2vh;
+     color: whitesmoke;
+     border-style: ridge;
+     border-top: none;
+     border-right: none;
+     border-left: none;
+ }
+ 
+ #users td {
+     width: 20vh;
+     min-width: 10vh;
+     height: 3vh;
+     font-size: 1.7vh;
+     color: whitesmoke;
+     text-align: center;
+ }
+ 
+ #cotizatii td {
+     width: 30vh;
+     min-width: 10vh;
+     height: 3vh;
+     font-size: 2vh;
+     color: white;
+     text-align: center;
+ }
+ 
+ #profile_passwd {
+     font-size: auto;
+     text-decoration: none;
+ }
+ 
+ #hiddenForm {
+     display: flex;
+     flex-direction: column;
+     align-self: center;
+ }
+ 
+ #hiddenForm input {
+     width: 30vh;
+     min-width: auto;
+     height: 3vh;
+     border-style: none;
+     color: black;
+     margin-top: 0.5vh;
+ }
+ 
+ #hiddenForm label {
+     width: 30vh;
+     min-width: auto;
+     height: 3vh;
+     border-style: none;
+     color: whitesmoke;
+     margin-top: 0.5vh;
+ }
+ 
+ #form_submit {
+     width: 15vh;
+     height: 4vh;
+     color: black;
+     background-color: whitesmoke;
+     margin-top: 1vh;
+     border-style: none;
+     border-radius: 2px;
+     cursor: pointer;
+     align-self: center;
+ }
+ 
+ @media screen and(max-width:568px) {
+     #profile_passwd {
+         font-size: 4px;
+         text-decoration: none;
+     }
+     #submit_edit_profile {
+         font-size: 5px;
+         width: 8vh;
+     }
+     .clasacuantum {
+         height: 100vh;
+         display: flex;
+         flex-direction: column;
+     }
+     #cotizatii th {
+         font-size: 1vh;
+     }
+ }

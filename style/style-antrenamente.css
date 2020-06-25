@@ -1,0 +1,126 @@
+.editButton_toggle {
+    height: 5vh;
+    width: 40vh;
+    margin-top: 10vh;
+    border-style: ridge;
+    border-color: rgb(221, 73, 10);
+    color: rgb(221, 73, 10);
+    font-family: "Poppins";
+    font-size: 2vh;
+    background-color: transparent;
+}
+
+button:active {
+    transform: translateY(1px);
+    background: whitesmoke;
+    color: tomato;
+}
+
+.antr {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    border-collapse: collapse;
+}
+
+.form-container input {
+    display: block;
+    width: 24vh;
+    min-width: 15vh;
+    height: 5vh;
+    background-color: transparent;
+    border-style: ridge;
+    border-color: tomato;
+    color: whitesmoke;
+}
+
+table th {
+    min-width: 10vh;
+    color: whitesmoke;
+    background-color: brown;
+    min-width: 15vh;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+table td {
+    min-width: 10vh;
+}
+
+table a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+#antrnmntTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+form button {
+    width: 15vh;
+    height: 5vh;
+    border-style: ridge;
+    border-color: rgb(221, 73, 10);
+    color: rgb(221, 73, 10);
+    font-family: "Poppins";
+    font-size: 2vh;
+    background-color: transparent;
+}
+
+.form-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(1px);
+    background-color: tomato;
+    border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+.form-popup button {
+    background-color: transparent;
+}
+
+@media screen and(max-width:768px) {
+    .antr {
+        transform: translateX(-10vh);
+    }
+}

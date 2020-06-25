@@ -1,72 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Krav Maga - Autoaparare si autocontrol</title>
-    <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+    <link rel="shortcut icon" type="image/png" href="../img/logo.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script type="module" src="../js/js-cookie/js.cookie.js"></script> <!-- https://github.com/js-cookie/js-cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script type="module" src="../js/js-cookie/js.cookie.js"></script>
+    <!-- https://github.com/js-cookie/js-cookie -->
     <script type="module" src="../js/handler.js"></script>
     <script type="module" src="../js/antrenament.js"></script>
     <script src="https://kit.fontawesome.com/edf9408abd.js" crossorigin="anonymous"></script>
     <!-- Font Awesome icons -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/base.css"/>
-    <link rel="stylesheet" href="../styles/extended.css">
-    <link rel="stylesheet" href="../styles/popup.css">
+
+    <link rel="stylesheet" href="../style/default-style.css">
+    <link rel="stylesheet" href="../style/style-antrenament.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <nav>
+        <div class="central-logo">
+            <a href="#top">
+                <div class="logo">
+                    <h5>Krav</h5>
+                    <img class="poza" src="../img/unnamed.png">
+                    <h5>Maga</h5>
+                </div>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-link">
+                <h1>Categorii</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/Evenimente.html">Evenimente</a></li>
+                        <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                        <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                        <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                    </ul>
+            </li>
+            <li class="nav-link">
+                <a href="/krav_me/pages/About.html">
+                    <h1>Despre noi</h1>
+                </a>
+            </li>
+
+            <li class="poza-li">
+                <a href="../index.html">
+                    <div class="logo">
+                        <h5>Krav</h5>
+                        <img class="poza" src="../img/unnamed.png">
+                        <h5>Maga</h5>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="/krav_me/pages/Contact.html">
+                    <h1>Contact</h1>
+                </a>
+            </li>
+            <li id="loginProfile" class="nav-link">
+                <h1>Contul meu</h>
+                    <ul>
+                        <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                        <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                        <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                        <li><a id="logout" href="#">Log out</a></li>
+                    </ul>
+            </li>
+        </ul>
+
+        <ul class="nav-links-side">
+            <li class="nav-link">
+                <h1>Categorii</h1>
+                <ul clas="side-list">
+                    <li><a href="/krav_me/pages/evenimente.html">Evenimente</a></li>
+                    <li><a href="/krav_me/pages/Centuri.html">Centuri</a></li>
+                    <li><a href="/krav_me/pages/Antrenamente.html">Antrenamente</a></li>
+                    <li><a href="/krav_me/pages/Materiale.html">Materiale utile</a></li>
+                </ul>
+            </li>
+            <li id="loginProfile_burger" class="nav-link">
+                <h1>Contul meu</h1>
+                <ul class="side-list">
+                    <li><a href="/krav_me/pages/profile.html">Editare</a></li>
+                    <li><a href="/krav_me/pages/progress.html">Evolutie centuri</a></li>
+                    <li><a href="/krav_me/pages/evolutie.html">Profil pregătire</a></li>
+                    <li><a id="logout_burger" href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="nav-link"><a href="/krav_me/pages/About.html">Despre noi</a></li>
+            <li class="nav-link"><a href="/krav_me/pages/Contact.html">Contact</a></li>
+
+        </ul>
+
+
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+
 </head>
 
 <body>
-<button id="reload"></button>
-
-<h1 class="d-flex justify-content-center" id="titlu"></h1>
 
 
-<div class="container">
-<div class="d-flex justify-content-start mb-2 mt-2 inner-addon left-addon">
-    <i class="fas fa-search"></i>
-    <input autocomplete="off" type="search" id="search" placeholder="Cauta dupa Nume">
-</div>
-
-<div class="container mb-2">
-    <button id="editButton_toggle" class="btn btn-light btn-md"
-            style="display: none;"><i class="d-flex align-self-center fas fa-user-plus"></i></button>
-    <button id="select_toggle" class="btn btn-light btn-sm" style="display: none;">Select</button>
-</div>
-    <table class="table table-sm table-bordered table-hover" id="eventsTable">
-        <tr>
-            <th style="display: none"></th>
-            <th>Nume</th>
-            <th>Prenume</th>
-        </tr>
-    </table>
-</div>
-
-<div class="form-popup" id="hiddenForm" style="display:none; position: absolute; z-index: 9">
-    <div id="hiddenFormHeader">Click here to move</div>
-    <form class="form-container">
-        <label for="passwd">Nume, Prenume:</label><br>
-        <select class="form-control" id="antrnmnt_dropdownAdd">
-            <option>-- Alegeti un utilizator --</option>
-        </select><br><br>
-
-        <label id="eventAdd_label"></label>
-        <button class="btn btn-light btn-sm" type="button" id="newEvent_submit">Submit</button>
-    </form>
-</div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+
+    <section>
+        <div class="title">
+            <h1 class="fade-in">Antrenament</h1>
+        </div>
+        <div class="date">
+            <p>
+
+            </p>
+        </div>
+
+    </section>
+
+
+
+
+
+
+    <div class="container" id="exterior">
+        <img id="img1" src="../img/pozapuna2.png">
+
+        <div class="interior">
+            <div class="d-flex justify-content-start mb-2 mt-2 inner-addon left-addon" id="cont1">
+                <i class="fas fa-search"></i>
+                <input autocomplete="off" type="search" id="search" placeholder="Cauta dupa Nume">
+            </div>
+
+            <div class="  mb-2" id="cont2">
+
+                <button id="editButton_toggle" style="visibility: hidden;" class="btn btn-light btn-md"><i class="d-flex align-self-center fas fa-user-plus"></i></button>
+                <button id="select_toggle" class="btn btn-light btn-sm" style="display: none;">Select</button>
+            </div>
+            <table class="table table-sm table-bordered table-hover" id="eventsTable">
+                <tr>
+                    <th style="display: none"></th>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                </tr>
+                </tr>
+            </table>
+
+
+            <div class="form-popup" id="hiddenForm" style="display: none;">
+                <div id="hiddenFormHeader">Click here to move</div>
+                <form class="form-container">
+                    <label for="passwd">Nume, Prenume:</label><br>
+                    <select class="form-control" id="antrnmnt_dropdownAdd">
+        <option>-- Alegeti un utilizator --</option>
+        <option>-- 2 --</option>
+        <option>-- 3 --</option>
+        <option>-- 4--</option>
+    </select><br><br>
+
+                    <label id="eventAdd_label"></label>
+                    <button class="btn btn-light btn-sm" type="button" id="newEvent_submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <img src="../img/pozapuna2.png" id="img2">
+    </div>
+
+
+    <script src="../js/handler.js" type="module"></script>
+    <script src="../js/nav.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
+<footer>
+    <div class="container2">
+        <a href="https://www.facebook.com/"><img src="../img/facebook.png"></a>
+        <a href="https://instagram.com/"><img src="../img/instagram.png"></a>
+        <a href="/https://twitter.com/"><img src="../img/twitter.png"></a>
+        <a href="/https://youtube.com/"><img src="../img/youtube.png"></a>
+    </div>
+</footer>
+
 </html>
